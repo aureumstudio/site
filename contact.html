@@ -7,7 +7,7 @@
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
     <script type="text/javascript">
         (function() {
-            emailjs.init("TON_PUBLIC_KEY");
+            emailjs.init("XtRKYh8VCdPh2_kVn");
         })();
     </script>
     <script src="https://cdn.tailwindcss.com"></script>
@@ -489,8 +489,18 @@
         // Gestion du formulaire principal de la page
         document.getElementById('mainContactForm').addEventListener('submit', function(e) {
             e.preventDefault();
-            alert('Merci ! Votre message a bien été envoyé. Nous vous recontacterons sous 24h.');
-            this.reset();
+            const templateParams = {
+                from_name: this.name.value,
+                from_email: this.email.value,
+                message: `Site: ${this.website.value} \nMessage: ${this.message.value}`,
+                service_type: "Contact Direct"
+            };
+
+            emailjs.send("service_xg36okr", "template_n7weua9", templateParams)
+                .then(() => {
+                    alert('Merci ! Votre message a bien été envoyé. Nous vous recontacterons sous 24h.');
+                    this.reset();
+                }, () => alert('Erreur lors de l\'envoi.'));
         });
 
         // Fonctions du Modal (Identiques aux autres pages)

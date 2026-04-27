@@ -7,7 +7,7 @@
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
     <script type="text/javascript">
         (function() {
-            emailjs.init("TON_PUBLIC_KEY"); // Remplace par ta PUBLIC_KEY EmailJS
+            emailjs.init("XtRKYh8VCdPh2_kVn"); // Remplace par ta PUBLIC_KEY EmailJS
         })();
     </script>
     <script src="https://cdn.tailwindcss.com"></script>
@@ -869,7 +869,7 @@
             const styleBoutique = form.querySelector('select[name="style_boutique"]')?.value || '';
             const couleurs = form.querySelector('input[name="couleurs"]')?.value || '';
             const references = form.querySelector('textarea[name="references"]')?.value || '';
-            const budget = form.querySelector('select[name="budget"]')?.value || '';
+            const budget = form.elements['budget_boutique']?.value || '';
             const delai = form.querySelector('select[name="delai"]')?.value || '';
             const autres = form.querySelector('textarea[name="autres"]')?.value || '';
             
@@ -909,7 +909,7 @@ Informations complémentaires: ${autres}
             const style = form.querySelector('select[name="style"]')?.value || '';
             const couleurs = form.querySelector('input[name="couleurs"]')?.value || '';
             const concurrents = form.querySelector('textarea[name="concurrents"]')?.value || '';
-            const budget = form.querySelector('select[name="budget"]')?.value || '';
+            const budget = form.elements['budget_vitrine']?.value || '';
             const delai = form.querySelector('select[name="delai"]')?.value || '';
             const autres = form.querySelector('textarea[name="autres"]')?.value || '';
             
@@ -937,11 +937,10 @@ Informations complémentaires: ${autres}
             from_email: email,
             from_phone: phone,
             service_type: 'Site web - ' + siteType,
-            message: message,
-            to_email: "ton-email@domaine.com"
+            message: message
         };
         
-        emailjs.send("TON_SERVICE_ID", "TON_TEMPLATE_ID", templateParams)
+        emailjs.send("service_xg36okr", "template_n7weua9", templateParams)
             .then(function() {
                 alert('Merci ! Votre demande a été envoyée. Un expert vous contactera sous 24h pour discuter de votre projet.');
                 closeSiteModal();
@@ -957,23 +956,20 @@ Informations complémentaires: ${autres}
         
         // Récupérer les données du formulaire
         const form = e.target;
-        const name = form.querySelector('input[name="name"]')?.value || form.querySelector('input[type="text"]')?.value || 'Client';
-        const email = form.querySelector('input[name="email"]')?.value || form.querySelector('input[type="email"]')?.value || '';
-        const phone = form.querySelector('input[name="phone"]')?.value || '';
-        const service = form.querySelector('select[name="service"]')?.value || 'Non spécifié';
-        const message = form.querySelector('textarea[name="message"]')?.value || '';
+        const name = form.elements['name']?.value || 'Client';
+        const email = form.elements['email']?.value || '';
+        const phone = form.elements['phone']?.value || 'Non précisé';
+        const message = form.elements['message']?.value || '';
         
         // Envoyer avec EmailJS
         const templateParams = {
             from_name: name,
             from_email: email,
-            from_phone: phone,
-            service_type: service,
-            message: message,
-            to_email: "ton-email@domaine.com" // Remplace par ton email de réception
+            message: `Tél: ${phone}\n\n${message}`,
+            service_type: "Contact Modal SiteWeb"
         };
         
-        emailjs.send("TON_SERVICE_ID", "TON_TEMPLATE_ID", templateParams)
+        emailjs.send("service_xg36okr", "template_n7weua9", templateParams)
             .then(function() {
                 alert('Merci ! Votre demande a été envoyée. Un expert vous contactera sous 24h.');
                 closeModal();

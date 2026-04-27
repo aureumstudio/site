@@ -7,7 +7,7 @@
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
     <script type="text/javascript">
         (function() {
-            emailjs.init("TON_PUBLIC_KEY");
+            emailjs.init("XtRKYh8VCdPh2_kVn");
         })();
     </script>
     <script src="https://cdn.tailwindcss.com"></script>
@@ -522,7 +522,7 @@
             <div class="card-body">
                 <div style="display: flex; justify-content: space-between; align-items: baseline;">
                     <span class="category">Optimisation web</span>
-                    <span class="date">19 novembre 2025</span>
+                    <span class="date">1 janvier 2026</span>
                 </div>
                 <h3 class="card-title">Pourquoi avoir un site web en 2026 ?</h3>
                 <p class="card-text">Découvrez pourquoi un site web est devenu essentiel pour développer votre présence en ligne.</p>
@@ -701,7 +701,7 @@
         'article-2': {
             title: 'Pourquoi avoir un site web en 2026 ?',
             category: 'Optimisation web',
-            date: '19 novembre 2025',
+            date: '1 janvier 2026',
             content: `
                 <p style="font-size: 14px; line-height: 1.6; margin-bottom: 16px;">Aujourd'hui, la majorité des personnes recherchent des informations sur internet avant de choisir un service ou un produit. Ne pas avoir de site web, c'est risquer de ne pas exister aux yeux de nombreux clients potentiels.</p>
                 
@@ -849,11 +849,10 @@
             from_name: e.target.name.value,
             from_email: e.target.email.value,
             message: e.target.message.value,
-            service_type: services.join(', ') || 'Non précisé',
-            to_email: "contact@aureumstudio.fr"
+            service_type: "Blog Modal - " + (services.join(', ') || 'Non précisé')
         };
 
-        emailjs.send("service_default", "template_contact", templateParams)
+        emailjs.send("service_xg36okr", "template_n7weua9", templateParams)
             .then(function() {
                 alert('Merci ! Votre demande a été envoyée. Un expert vous contactera sous 24h.');
                 closeModal();

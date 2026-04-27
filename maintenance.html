@@ -7,7 +7,7 @@
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
     <script type="text/javascript">
         (function() {
-            emailjs.init("TON_PUBLIC_KEY"); // Remplace par ta PUBLIC_KEY EmailJS
+            emailjs.init("XtRKYh8VCdPh2_kVn"); // Remplace par ta PUBLIC_KEY EmailJS
         })();
     </script>
     <script src="https://cdn.tailwindcss.com"></script>
@@ -485,10 +485,10 @@
             from_phone: phone,
             service_type: service,
             message: message,
-            to_email: "ton-email@domaine.com" // Remplace par ton email de réception
+            to_email: "contact@aureumstudio.fr" // Remplace par ton email de réception
         };
         
-        emailjs.send("TON_SERVICE_ID", "TON_TEMPLATE_ID", templateParams)
+        emailjs.send("service_xg36okr", "template_n7weua9", templateParams)
             .then(function() {
                 alert('Merci ! Votre demande a été envoyée. Un expert vous contactera sous 24h.');
                 closeModal();
@@ -1019,7 +1019,7 @@
 <div class="seo-table-v11-check"><svg><use href="#check"/></svg></div>
 </div>
 
-<div class="seo-table-v11-title">Corrections & bugs</div>
+<div class="seo-table-v11-title">Correction & bug</div>
 
 <div class="seo-table-v11-row"><div class="seo-table-v11-label-wrap">Correction de bugs techniques<span class="seo-table-v11-info">i<span class="seo-table-v11-tooltip">Résolution des erreurs techniques critiques qui affectent le fonctionnement du site.</span></span></div><div class="seo-table-v11-check"><svg><use href="#cross"/></svg></div><div class="seo-table-v11-check"><svg><use href="#cross"/></svg></div><div class="seo-table-v11-check"><svg><use href="#check"/></svg></div></div>
 
@@ -1138,12 +1138,10 @@ document.getElementById('maintenanceForm').addEventListener('submit', function(e
     const templateParams = {
         from_name: formData.get('name'),
         from_email: formData.get('email'),
-        phone: formData.get('phone'),
-        website: formData.get('website'),
-        message: formData.get('message'),
-        plan: document.getElementById('maintenancePlan').textContent
+        message: "Site: " + formData.get('website') + " | Tél: " + formData.get('phone') + "\n\nMessage: " + formData.get('message'),
+        service_type: "Maintenance - " + document.getElementById('maintenancePlan').textContent
     };
-    emailjs.send('service_default', 'template_maintenance', templateParams)
+    emailjs.send('service_xg36okr', 'template_n7weua9', templateParams)
         .then(() => { alert('Message envoyé !'); closeMaintenanceModal(); this.reset(); })
         .catch(() => alert('Erreur lors de l\'envoi'));
 });

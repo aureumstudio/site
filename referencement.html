@@ -7,7 +7,7 @@
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
     <script type="text/javascript">
         (function() {
-            emailjs.init("TON_PUBLIC_KEY"); // Remplace par ta PUBLIC_KEY EmailJS
+            emailjs.init("XtRKYh8VCdPh2_kVn"); // Remplace par ta PUBLIC_KEY EmailJS
         })();
     </script>
     <script src="https://cdn.tailwindcss.com"></script>
@@ -484,13 +484,11 @@
         const templateParams = {
             from_name: name,
             from_email: email,
-            from_phone: phone,
-            service_type: service,
-            message: message,
-            to_email: "ton-email@domaine.com" // Remplace par ton email de réception
+            message: `Tél: ${phone}\n\n${message}`,
+            service_type: "Modal Referencement"
         };
         
-        emailjs.send("TON_SERVICE_ID", "TON_TEMPLATE_ID", templateParams)
+        emailjs.send("service_xg36okr", "template_n7weua9", templateParams)
             .then(function() {
                 alert('Merci ! Votre demande a été envoyée. Un expert vous contactera sous 24h.');
                 closeModal();
@@ -1130,9 +1128,19 @@ function closeSEOModal() {
 }
 document.getElementById('seoForm').addEventListener('submit', function(e) {
     e.preventDefault();
-    alert('Demande envoyée ! Un expert SEO analysera ' + this.website.value + ' et vous contactera sous 24h.');
-    closeSEOModal();
-    this.reset();
+    const templateParams = {
+        from_name: this.name.value,
+        from_email: this.email.value,
+        message: "Analyse du site : " + this.website.value,
+        service_type: "SEO - " + document.getElementById('seoPlan').textContent
+    };
+
+    emailjs.send("service_xg36okr", "template_n7weua9", templateParams)
+        .then(() => {
+            alert('Demande envoyée ! Un expert SEO vous contactera sous 24h.');
+            closeSEOModal();
+            this.reset();
+        }, () => alert('Erreur lors de l\'envoi.'));
 });
 </script>
 
