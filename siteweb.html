@@ -1,0 +1,1113 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aureum - Expert SEO</title>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <script type="text/javascript">
+        (function() {
+            emailjs.init("TON_PUBLIC_KEY"); // Remplace par ta PUBLIC_KEY EmailJS
+        })();
+    </script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+        
+        body { 
+            font-family: 'Inter', sans-serif; 
+            background-color: #ffffff; 
+            color: #111; 
+        }
+
+        /* Spécifications Logo */
+        .logo-text {
+            font-family: 'Inter', sans-serif;
+            font-weight: 500; /* Medium */
+            font-size: 16.92px;
+            letter-spacing: -0.02em;
+            color: #000;
+            margin-top: 5px;
+        }
+
+        /* Logogram */
+        .logogram {
+            width: 24px;
+            height: 21px;
+            flex: none;
+            order: 0;
+            flex-grow: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Info icon */
+        .info-icon {
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            line-height: 16px;
+            text-align: center;
+            font-size: 10px;
+            font-weight: 600;
+            background: #e5e7eb;
+            color: #666;
+            border-radius: 50%;
+            margin-left: 6px;
+            cursor: help;
+            vertical-align: middle;
+            position: relative;
+        }
+        .info-icon:hover::after,
+        .info-icon.active::after {
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #F3F4F6;
+            font-size: 11px;
+            font-weight: 400;
+            padding: 6px 10px;
+            border-radius: 6px;
+            white-space: nowrap;
+            margin-bottom: 6px;
+            z-index: 100;
+            pointer-events: none;
+        }
+        .info-icon:hover::before,
+        .info-icon.active::before {
+            content: "";
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            border: 5px solid transparent;
+            margin-bottom: -4px;
+            z-index: 100;
+        }
+        
+
+        /* Bouton "Passer à l'action" avec triple ombre */
+        .btn-action {
+            margin-top: 2px;
+            background-color: #000;
+            color: #fff;
+            border: none;
+            border-radius: 16px;
+            padding: 8px 20px;
+            font-size: 12px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        .btn-action:hover {
+            background-color: #333;
+        }
+        /* Dropdown Services */
+        .dropdown { position: relative; margin-top: -1px; }
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            min-width: 160px;
+            padding: 8px 0;
+            z-index: 50;
+        }
+        .dropdown:hover .dropdown-menu { display: block; }
+        .dropdown-item {
+            display: block;
+            padding: 10px 16px;
+            color: #000;
+            font-size: 14px;
+            text-decoration: none;
+            transition: background 0.2s;
+        }
+        .dropdown-item:hover { background: #f3f4f6; }
+        .dropdown-item:first-child { border-radius: 8px 8px 0 0; }
+        .dropdown-item:last-child { border-radius: 0 0 8px 8px; }
+
+        /* Modal Contact */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.5);
+            z-index: 100;
+            align-items: center;
+            justify-content: center;
+        }
+        .modal-overlay.active { display: flex; }
+        .modal-content {
+            background: white;
+            border-radius: 12px;
+            padding: 24px;
+            max-width: 520px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+            scrollbar-width: none;
+            position: relative;
+            animation: modalIn 0.3s ease;
+        }
+        .modal-content::-webkit-scrollbar {
+            display: none;
+        }
+        @keyframes modalIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .modal-close {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: #666;
+        }
+        .form-group { margin-bottom: 16px; }
+        .form-group label {
+            display: block;
+            font-size: 14px;
+            font-weight: 500;
+            margin-bottom: 6px;
+            color: #111;
+        }
+        /* Checkbox alignment */
+        .checkbox-group {
+            display: flex !important;
+            flex-direction: column !important;
+            gap: 12px !important;
+        }
+        .checkbox-group label {
+            display: flex !important;
+            align-items: center !important;
+            gap: 12px !important;
+            font-weight: 400 !important;
+            font-size: 14px !important;
+            cursor: pointer !important;
+            margin-bottom: 0 !important;
+        }
+        .checkbox-group input[type="checkbox"] {
+            width: 18px !important;
+            height: 18px !important;
+            margin: 0 !important;
+            cursor: pointer;
+        }
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            font-size: 14px;
+            font-family: inherit;
+        }
+        .form-group textarea { resize: vertical; min-height: 100px; }
+        .form-submit {
+            width: 100%;
+            background: #000;
+            color: white;
+            border: none;
+            padding: 14px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .form-submit:hover { background: #333; }
+        .modal-note {
+            font-size: 12px;
+            color: #666;
+            margin-top: 12px;
+            text-align: center;
+        }
+
+        /* Menu de navigation */
+        .nav-link { color: #000; font-size: 14px; transition: color 0.2s; }
+        .nav-link.active { color: #000; font-weight: 600; }
+
+        /* Cartes et Tableaux */
+        .pricing-card { border: 1px solid #e5e7eb; border-radius: 12px; background-color: #fff; }
+        .recommended-card { background-color: #000; color: #fff; transform: scale(1.05); z-index: 10; }
+        .table-active-col { background-color: #000; color: #fff; }
+
+        /* Animation de défilement */
+        .scrolling-banner {
+            overflow: hidden;
+            background-color: #fefefe;
+            padding: 40px 0 20px 0;
+            width: 100%;
+        }
+
+        .scrolling-content {
+            display: flex;
+            animation: scroll-left 30s linear infinite;
+            gap: 60px;
+            padding-right: 40px;
+        }
+
+        .scrolling-content:hover {
+            animation-play-state: paused;
+        }
+
+        .tech-item {
+            white-space: nowrap;
+            font-size: 16px;
+            font-weight: 500;
+            color: #666;
+        }
+
+        @keyframes scroll-left {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(-50%);
+            }
+        }
+
+        footer {
+            background: #f9fafb;
+            padding: 60px 0 40px;
+            margin-top: auto;
+        }
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 48px;
+        }
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        .footer-brand p {
+            font-size: 14px;
+            color: #666;
+            margin-top: 12px;
+            max-width: 300px;
+        }
+        .footer-title {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 16px;
+        }
+        .footer-links {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        .footer-links a {
+            font-size: 14px;
+            color: #666;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        .footer-links a:hover { color: #000; }
+        .footer-bottom {
+            border-top: 1px solid #e5e7eb;
+            padding-top: 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .footer-copyright {
+            font-size: 12px;
+            color: #666;
+        }
+        .footer-social {
+            display: flex;
+            gap: 16px;
+        }
+        .footer-social a {
+            color: #666;
+            font-size: 18px;
+            transition: color 0.2s;
+        }
+        .footer-social a:hover { color: #000; }
+    </style>
+</head>
+<body class="antialiased">
+
+    <header class="flex justify-between items-center px-12 py-8 max-w-7xl mx-auto">
+        <div class="flex items-center gap-2">
+            <div class="logogram">
+                <svg width="24" height="21" viewBox="0 0 24 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21.0499 2.33172e-08L23.6857 4.54943L21.0499 9.09886H15.7784L13.1426 4.54943L15.7784 0L21.0499 2.33172e-08Z" fill="black"/>
+                    <path d="M7.90734 2.33172e-08L17.0784 15.8147L14.4426 20.3641H9.17107L0 4.54943L2.63578 0L7.90734 2.33172e-08Z" fill="black"/>
+                </svg>
+            </div>
+            <span class="logo-text">Aureum</span>
+        </div>
+        
+        <nav class="hidden md:flex gap-8">
+            <a href="accueil.html" class="nav-link">Accueil</a>
+            <a href="avantages.html" class="nav-link">Avantages</a>
+            <div class="dropdown">
+                <a href="#" class="nav-link active">Services ▾</a>
+                <div class="dropdown-menu">
+                    <a href="maintenance.html" class="dropdown-item">Maintenance</a>
+                    <a href="siteweb.html" class="dropdown-item">Site web</a>
+                    <a href="referencement.html" class="dropdown-item">Référencement</a>
+                </div>
+            </div>
+            <a href="blog.html" class="nav-link">Blog</a>
+        </nav>
+
+        <button class="btn-action" onclick="openModal()">
+            Passer à l'action
+        </button>
+    </header>
+<stop stop-color="white" stop-opacity="0.2"/>
+<stop offset="1" stop-color="white" stop-opacity="0.07"/>
+</linearGradient>
+</defs>
+</svg>
+
+
+        </button>
+    </header>
+
+    <!-- Modal Contact -->
+    <div class="modal-overlay" id="contactModal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal()">&times;</button>
+            <h2 style="font-size: 20px; font-weight: 600; margin-bottom: 8px;">Contactez un expert</h2>
+            <p style="font-size: 14px; color: #666; margin-bottom: 24px;">
+                Une réponse sous 24h garantie
+            </p>
+            
+            <div class="contact-options">
+                <a href="https://instagram.com/aureumstudio.officiel" target="_blank" class="contact-option">
+                    <div class="contact-icon"><i class="fa-brands fa-instagram"></i></div>
+                    <div class="contact-info">
+                        <span class="contact-title">Instagram</span>
+                        <span class="contact-desc">Envoyer un message direct</span>
+                    </div>
+                </a>
+                
+                <div class="contact-option" onclick="showWhatsAppForm()">
+                    <div class="contact-icon"><i class="fa-brands fa-whatsapp"></i></div>
+                    <div class="contact-info">
+                        <span class="contact-title">WhatsApp</span>
+                        <span class="contact-desc">Laisser votre numéro</span>
+                    </div>
+                </div>
+                
+                <a href="mailto:contact@aureumstudio.fr" class="contact-option">
+                    <div class="contact-icon"><i class="fa-solid fa-envelope"></i></div>
+                    <div class="contact-info">
+                        <span class="contact-title">Email</span>
+                        <span class="contact-desc">Envoyer un mail</span>
+                    </div>
+                </a>
+                
+                <a href="contact.html" class="contact-option">
+                    <div class="contact-icon"><i class="fa-solid fa-file-lines"></i></div>
+                    <div class="contact-info">
+                        <span class="contact-title">Formulaire</span>
+                        <span class="contact-desc">Parlez-nous de votre projet</span>
+                    </div>
+                </a>
+            </div>
+            
+            <div id="whatsappForm" style="display: none;">
+                <div class="form-group">
+                    <label>Votre numéro WhatsApp</label>
+                    <input type="tel" id="whatsappNumber" placeholder="+33 6 12 34 56 78">
+                </div>
+                <div class="form-group">
+                    <label>Message (optionnel)</label>
+                    <textarea id="whatsappMessage" placeholder="Bonjour, je souhaite être contacté sur WhatsApp..."></textarea>
+                </div>
+                <button type="button" class="form-submit" onclick="sendViaWhatsApp()">Envoyer</button>
+                <button type="button" style="background:none;border:none;color:#666;margin-top:8px;cursor:pointer;" onclick="showContactOptions()">Retour</button>
+            </div>
+            
+            <div id="contactForm" style="display: none;">
+                <form onsubmit="submitForm(event)">
+                    <div class="form-group">
+                        <label>Nom complet</label>
+                        <input type="text" name="name" required placeholder="John Doe">
+                    </div>
+                    <div class="form-group">
+                        <label>Email</label>
+                        <input type="email" name="email" required placeholder="john@exemple.com">
+                    </div>
+                    <div class="form-group">
+                        <label>Message</label>
+                        <textarea name="message" required placeholder="Décrivez votre projet..."></textarea>
+                    </div>
+                    <button type="submit" class="form-submit">Envoyer</button>
+                </form>
+                <button type="button" style="background:none;border:none;color:#666;margin-top:8px;cursor:pointer;" onclick="showContactOptions()">Retour</button>
+            </div>
+            
+            <p class="modal-note"> </p>
+        </div>
+    </div>
+
+    <!-- Modal Site Web -->
+    <div class="modal-overlay" id="siteModal">
+        <div class="modal-content" style="max-width: 600px; overflow-y: auto; scrollbar-width: none;">
+            <button class="modal-close" onclick="closeSiteModal()">&times;</button>
+            <h2 style="font-size: 20px; font-weight: 600; margin-bottom: 8px;" id="siteModalTitle">Site vitrine - 800€</h2>
+            
+            <form onsubmit="submitSiteForm(event)">
+                <input type="hidden" name="site_type" id="siteTypeInput">
+                
+                <!-- Formulaire Site Vitrine -->
+                <div id="formVitrine">
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+                        <div class="form-group">
+                            <label>Nom complet *</label>
+                            <input type="text" name="name" required placeholder="Votre nom">
+                        </div>
+                        <div class="form-group">
+                            <label>Email *</label>
+                            <input type="email" name="email" required placeholder="vous@exemple.com">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Téléphone</label>
+                        <input type="tel" name="phone" placeholder="+33 6 12 34 56 78">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Objectifs du site *</label>
+                        <div class="checkbox-group">
+                            <label>
+                                <input type="checkbox" name="objectifs" value="Présenter mon activité"> Présenter mon activité
+                            </label>
+                            <label>
+                                <input type="checkbox" name="objectifs" value="Générer des leads"> Générer des leads
+                            </label>
+                            <label>
+                                <input type="checkbox" name="objectifs" value="Informer mes clients"> Informer mes clients
+                            </label>
+                            <label>
+                                <input type="checkbox" name="objectifs" value="Collecter des témoignages"> Collecter des témoignages
+                            </label>
+                            <label id="autreLabel">
+                                <input type="checkbox" name="objectifs" value="Autre" onchange="toggleAutreField()"> Autre
+                            </label>
+                            <div id="autreField" style="display: none; margin-left: 30px;">
+                                <input type="text" name="autre_objectifs" placeholder="Précisez votre objectif..." style="width: 100%; padding: 10px; border: 1px solid #e5e7eb; border-radius: 8px; font-size: 14px;">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+                        <div class="form-group">
+                            <label>Nombre de pages</label>
+                            <select name="nb_pages">
+                                <option value="">Sélectionner</option>
+                                <option value="1 page">1 page (one-page)</option>
+                                <option value="3-5 pages">3 à 5 pages</option>
+                                <option value="5-10 pages">5 à 10 pages</option>
+                                <option value="10+ pages">Plus de 10 pages</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Style visuel</label>
+                            <select name="style">
+                                <option value="">Sélectionner</option>
+                                <option value="Moderne et minimaliste">Moderne et minimaliste</option>
+                                <option value="Corporate et professionnel">Corporate et professionnel</option>
+                                <option value="Créatif et audacieux">Créatif et audacieux</option>
+                                <option value="Classique et élégant">Classique et élégant</option>
+                                <option value="Jeune et dynamique">Jeune et dynamique</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Couleurs préférées (optionnel)</label>
+                        <input type="text" name="couleurs" placeholder="Ex: Bleu et blanc, tons verts...">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Concurrents ou sites de référence</label>
+                        <textarea name="concurrents" placeholder="Listez des sites que vous appréciez ou vos principaux concurrents..." style="min-height: 60px;"></textarea>
+                    </div>
+                </div>
+                
+                <!-- Formulaire Boutique en ligne -->
+                <div id="formBoutique" style="display: none;">
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+                        <div class="form-group">
+                            <label>Nom complet *</label>
+                            <input type="text" name="name" required placeholder="Votre nom">
+                        </div>
+                        <div class="form-group">
+                            <label>Email *</label>
+                            <input type="email" name="email" required placeholder="vous@exemple.com">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Téléphone</label>
+                        <input type="tel" name="phone" placeholder="+33 6 12 34 56 78">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Nombre de produits à vendre *</label>
+                        <select name="nb_produits" required>
+                            <option value="">Sélectionner</option>
+                            <option value="1-10 produits">1 à 10 produits</option>
+                            <option value="10-50 produits">10 à 50 produits</option>
+                            <option value="50-100 produits">50 à 100 produits</option>
+                            <option value="100-500 produits">100 à 500 produits</option>
+                            <option value="500+ produits">Plus de 500 produits</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Types de produits</label>
+                        <div class="checkbox-group">
+                            <label>
+                                <input type="checkbox" name="type_produits" value="Produits physiques"> Produits physiques
+                            </label>
+                            <label>
+                                <input type="checkbox" name="type_produits" value="Services"> Services
+                            </label>
+                            <label>
+                                <input type="checkbox" name="type_produits" value="Produits numériques"> Produits numériques (téléchargement)
+                            </label>
+                            <label>
+                                <input type="checkbox" name="type_produits" value="Abonnements"> Abonnements
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Moyen de paiement souhaité</label>
+                        <div class="checkbox-group">
+                            <label>
+                                <input type="checkbox" name="paiement" value="Carte bancaire"> Carte bancaire (CB, Visa, Mastercard)
+                            </label>
+                            <label>
+                                <input type="checkbox" name="paiement" value="PayPal"> PayPal
+                            </label>
+                            <label>
+                                <input type="checkbox" name="paiement" value="Virement bancaire"> Virement bancaire
+                            </label>
+                            <label>
+                                <input type="checkbox" name="paiement" value="Paiement 4x sans frais"> Paiement 4x sans frais
+                            </label>
+                            <label>
+                                <input type="checkbox" name="paiement" value="Crypto-devises"> Crypto-devises
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Options de livraison</label>
+                        <div class="checkbox-group">
+                            <label>
+                                <input type="checkbox" name="livraison" value="Retrait en magasin"> Retrait en magasin
+                            </label>
+                            <label>
+                                <input type="checkbox" name="livraison" value="Livraison à domicile"> Livraison à domicile
+                            </label>
+                            <label>
+                                <input type="checkbox" name="livraison" value="Point relais"> Point relais
+                            </label>
+                            <label>
+                                <input type="checkbox" name="livraison" value="Livraison internationale"> Livraison internationale
+                            </label>
+                        </div>
+                    </div>
+                    
+                    
+                    <div class="form-group">
+                        <label>Style visuel souhaité</label>
+                        <select name="style_boutique">
+                            <option value="">Sélectionner</option>
+                            <option value="Moderne et minimaliste">Moderne et minimaliste</option>
+                            <option value="Corporate et professionnel">Corporate et professionnel</option>
+                            <option value="Créatif et audacieux">Créatif et audacieux</option>
+                            <option value="Classique et élégant">Classique et élégant</option>
+                            <option value="Jeune et dynamique">Jeune et dynamique</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Couleurs préférées (optionnel)</label>
+                        <input type="text" name="couleurs" placeholder="Ex: Bleu et blanc, tons verts...">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Exemples de boutiques appréciées</label>
+                        <textarea name="references" placeholder="Listez des boutiques en ligne que vous appréciez..." style="min-height: 60px;"></textarea>
+                    </div>
+                </div>
+                
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;" id="budgetDelaiFields">
+                    <!-- Budget Site Vitrine -->
+                    <div class="form-group" id="budgetVitrineGroup">
+                        <label>Budget</label>
+                        <select name="budget_vitrine">
+                            <option value="">Sélectionner</option>
+                            <option value="800€ - 1000€">800€ - 1000€</option>
+                            <option value="1000€ - 1200€">1000€ - 1200€</option>
+                            <option value="1200€ - 1400€">1200€ - 1400€</option>
+                            <option value="Plus de 1400€">Plus de 1400€</option>
+                        </select>
+                    </div>
+                    <!-- Budget Boutique en ligne -->
+                    <div class="form-group" id="budgetBoutiqueGroup" style="display: none;">
+                        <label>Budget</label>
+                        <select name="budget_boutique">
+                            <option value="">Sélectionner</option>
+                            <option value="1200€ - 1400€">1200€ - 1400€</option>
+                            <option value="1400€ - 1600€">1400€ - 1600€</option>
+                            <option value="1600€ - 2000€">1600€ - 2000€</option>
+                            <option value="Plus de 2000€">Plus de 2000€</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Délai souhaité</label>
+                        <select name="delai">
+                            <option value="">Sélectionner</option>
+                            <option value="Le plus tôt possible">Le plus tôt possible</option>
+                            <option value="Dans 1 mois">Dans 1 mois</option>
+                            <option value="Dans 2-3 mois">Dans 2-3 mois</option>
+                            <option value="Dans 6 mois">Dans 6 mois</option>
+                            <option value="Pas de urgence">Pas d'urgence</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label>Autres informations (optionnel)</label>
+                    <textarea name="autres" placeholder="Détails supplémentaires, contraintes spécifiques, fonctionnalités souhaitées..." style="min-height: 60px;"></textarea>
+                </div>
+                
+                <button type="submit" class="form-submit">Envoyer ma demande</button>
+                <button type="button" style="background:none;border:none;color:#666;margin-top:8px;cursor:pointer;width:100%;" onclick="closeSiteModal()">Annuler</button>
+            </form>
+        </div>
+    </div>
+
+    <style>
+    .contact-options { display: flex; flex-direction: column; gap: 12px; }
+    .contact-option {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        padding: 16px;
+        border: 1px solid #e5e7eb;
+        border-radius: 10px;
+        text-decoration: none;
+        color: inherit;
+        cursor: pointer;
+        transition: all 0.2s;
+    }
+    .contact-option:hover { border-color: #000; background: #fafafa; }
+    .contact-icon {
+        width: 44px;
+        height: 44px;
+        background: #f3f4f6;
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 20px;
+    }
+    .contact-info { display: flex; flex-direction: column; }
+    .contact-title { font-weight: 600; font-size: 15px; }
+    .contact-desc { font-size: 13px; color: #666; }
+    </style>
+
+    <script>
+    // Modal principal de contact
+    function openModal() {
+        document.getElementById('contactModal').classList.add('active');
+        document.body.style.overflow = 'hidden';
+        showContactOptions();
+    }
+    function closeModal() {
+        document.getElementById('contactModal').classList.remove('active');
+        document.body.style.overflow = '';
+    }
+    document.getElementById('contactModal').addEventListener('click', function(e) {
+        if (e.target === this) closeModal();
+    });
+    function showContactOptions() {
+        document.getElementById('whatsappForm').style.display = 'none';
+        document.getElementById('contactForm').style.display = 'none';
+        document.querySelector('.contact-options').style.display = 'flex';
+    }
+    function showWhatsAppForm() {
+        document.querySelector('.contact-options').style.display = 'none';
+        document.getElementById('whatsappForm').style.display = 'block';
+    }
+    function showContactForm() {
+        document.querySelector('.contact-options').style.display = 'none';
+        document.getElementById('contactForm').style.display = 'block';
+    }
+    function sendViaWhatsApp() {
+        const phone = document.getElementById('whatsappNumber').value;
+        const msg = document.getElementById('whatsappMessage').value;
+        if (!phone) { alert('Veuillez entrer votre numéro WhatsApp'); return; }
+        const text = encodeURIComponent('Bonjour, je souhaite être contacté sur WhatsApp.' + (msg ? '\n\nMessage: ' + msg : ''));
+        window.open('https://wa.me/33' + phone.replace(/\s/g,'').replace(/^0/,'') + '?text=' + text, '_blank');
+        closeModal();
+    }
+    
+    // Modal spécifique pour les demandes de site web
+    function openSiteModal(type) {
+        const modal = document.getElementById('siteModal');
+        const titleEl = document.getElementById('siteModalTitle');
+        const formVitrine = document.getElementById('formVitrine');
+        const formBoutique = document.getElementById('formBoutique');
+        
+        const siteInfo = {
+            'vitrine': {
+                title: 'Site vitrine'
+            },
+            'boutique': {
+                title: 'Boutique en ligne'
+            },
+            'unique': {
+                title: 'Page unique - 500€'
+            }
+        };
+        
+        titleEl.textContent = siteInfo[type].title;
+        document.getElementById('siteTypeInput').value = type === 'vitrine' ? 'Site vitrine (800€)' : type === 'boutique' ? 'Boutique en ligne (1200€)' : 'Page unique (500€)';
+        
+        // Afficher le formulaire approprié
+        if (type === 'boutique') {
+            formVitrine.style.display = 'none';
+            formBoutique.style.display = 'block';
+            document.getElementById('budgetVitrineGroup').style.display = 'none';
+            document.getElementById('budgetBoutiqueGroup').style.display = 'block';
+        } else {
+            formVitrine.style.display = 'block';
+            formBoutique.style.display = 'none';
+            document.getElementById('budgetVitrineGroup').style.display = 'block';
+            document.getElementById('budgetBoutiqueGroup').style.display = 'none';
+        }
+        
+        // Reset le champ "Autre"
+        document.getElementById('autreField').style.display = 'none';
+        
+        modal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
+    
+    function toggleAutreField() {
+        const autreCheck = document.querySelector('input[name="objectifs"][value="Autre"]');
+        const autreField = document.getElementById('autreField');
+        if (autreCheck.checked) {
+            autreField.style.display = 'block';
+        } else {
+            autreField.style.display = 'none';
+        }
+    }
+    
+    function closeSiteModal() {
+        document.getElementById('siteModal').classList.remove('active');
+        document.body.style.overflow = '';
+    }
+    
+    document.getElementById('siteModal').addEventListener('click', function(e) {
+        if (e.target === this) closeSiteModal();
+    });
+    
+    function submitSiteForm(e) {
+        e.preventDefault();
+        
+        const form = e.target;
+        const name = form.querySelector('input[name="name"]')?.value || '';
+        const email = form.querySelector('input[name="email"]')?.value || '';
+        const phone = form.querySelector('input[name="phone"]')?.value || '';
+        const siteType = form.querySelector('input[name="site_type"]')?.value || '';
+        
+        let message = '';
+        
+        // Vérifier quel formulaire est affiché
+        const formVitrine = document.getElementById('formVitrine');
+        const formBoutique = document.getElementById('formBoutique');
+        
+        if (formBoutique.style.display !== 'none') {
+            // Formulaire Boutique en ligne
+            const nbProduits = form.querySelector('select[name="nb_produits"]')?.value || '';
+            
+            const typeProduits = [];
+            form.querySelectorAll('input[name="type_produits"]:checked').forEach(cb => {
+                typeProduits.push(cb.value);
+            });
+            
+            const paiement = [];
+            form.querySelectorAll('input[name="paiement"]:checked').forEach(cb => {
+                paiement.push(cb.value);
+            });
+            
+            const livraison = [];
+            form.querySelectorAll('input[name="livraison"]:checked').forEach(cb => {
+                livraison.push(cb.value);
+            });
+            
+            const gestionStocks = form.querySelector('select[name="gestion_stocks"]')?.value || '';
+            const styleBoutique = form.querySelector('select[name="style_boutique"]')?.value || '';
+            const couleurs = form.querySelector('input[name="couleurs"]')?.value || '';
+            const references = form.querySelector('textarea[name="references"]')?.value || '';
+            const budget = form.querySelector('select[name="budget"]')?.value || '';
+            const delai = form.querySelector('select[name="delai"]')?.value || '';
+            const autres = form.querySelector('textarea[name="autres"]')?.value || '';
+            
+            message = `
+Type de site: ${siteType}
+
+--- INFORMATIONS BOUTIQUE ---
+Nombre de produits: ${nbProduits}
+Types de produits: ${typeProduits.join(', ')}
+
+Moyens de paiement: ${paiement.join(', ')}
+Options de livraison: ${livraison.join(', ')}
+
+Style visuel: ${styleBoutique}
+Couleurs préférées: ${couleurs}
+
+Références: ${references}
+
+Budget: ${budget}
+Délai souhaité: ${delai}
+
+Informations complémentaires: ${autres}
+            `.trim();
+        } else {
+            // Formulaire Site Vitrine
+            const objectifs = [];
+            form.querySelectorAll('input[name="objectifs"]:checked').forEach(cb => {
+                if (cb.value === 'Autre') {
+                    const autreText = form.querySelector('input[name="autre_objectifs"]')?.value;
+                    objectifs.push('Autre: ' + (autreText || 'Non spécifié'));
+                } else {
+                    objectifs.push(cb.value);
+                }
+            });
+            
+            const nbPages = form.querySelector('select[name="nb_pages"]')?.value || '';
+            const style = form.querySelector('select[name="style"]')?.value || '';
+            const couleurs = form.querySelector('input[name="couleurs"]')?.value || '';
+            const concurrents = form.querySelector('textarea[name="concurrents"]')?.value || '';
+            const budget = form.querySelector('select[name="budget"]')?.value || '';
+            const delai = form.querySelector('select[name="delai"]')?.value || '';
+            const autres = form.querySelector('textarea[name="autres"]')?.value || '';
+            
+            message = `
+Type de site: ${siteType}
+
+--- INFORMATIONS SITE VITRINE ---
+Objectifs du site: ${objectifs.join(', ')}
+
+Nombre de pages: ${nbPages}
+Style visuel: ${style}
+Couleurs préférées: ${couleurs}
+
+Références: ${concurrents}
+
+Budget: ${budget}
+Délai souhaité: ${delai}
+
+Informations complémentaires: ${autres}
+            `.trim();
+        }
+        
+        const templateParams = {
+            from_name: name,
+            from_email: email,
+            from_phone: phone,
+            service_type: 'Site web - ' + siteType,
+            message: message,
+            to_email: "ton-email@domaine.com"
+        };
+        
+        emailjs.send("TON_SERVICE_ID", "TON_TEMPLATE_ID", templateParams)
+            .then(function() {
+                alert('Merci ! Votre demande a été envoyée. Un expert vous contactera sous 24h pour discuter de votre projet.');
+                closeSiteModal();
+                form.reset();
+            }, function(error) {
+                console.log('Erreur EmailJS:', error);
+                alert('Une erreur est survenue. Veuillez réessayer ou nous contacter directement.');
+            });
+    }
+
+    function submitForm(e) {
+        e.preventDefault();
+        
+        // Récupérer les données du formulaire
+        const form = e.target;
+        const name = form.querySelector('input[name="name"]')?.value || form.querySelector('input[type="text"]')?.value || 'Client';
+        const email = form.querySelector('input[name="email"]')?.value || form.querySelector('input[type="email"]')?.value || '';
+        const phone = form.querySelector('input[name="phone"]')?.value || '';
+        const service = form.querySelector('select[name="service"]')?.value || 'Non spécifié';
+        const message = form.querySelector('textarea[name="message"]')?.value || '';
+        
+        // Envoyer avec EmailJS
+        const templateParams = {
+            from_name: name,
+            from_email: email,
+            from_phone: phone,
+            service_type: service,
+            message: message,
+            to_email: "ton-email@domaine.com" // Remplace par ton email de réception
+        };
+        
+        emailjs.send("TON_SERVICE_ID", "TON_TEMPLATE_ID", templateParams)
+            .then(function() {
+                alert('Merci ! Votre demande a été envoyée. Un expert vous contactera sous 24h.');
+                closeModal();
+                form.reset();
+            }, function(error) {
+                console.log('Erreur EmailJS:', error);
+                alert('Une erreur est survenue. Veuillez réessayer ou nous contacter directement.');
+            });
+    }
+    </script>
+
+    <section class="text-center pt-20 pb-16 px-4 relative">
+        <div class="absolute inset-0 flex items-center justify-center" style="overflow: hidden; z-index: -1; top: -500px;">
+            <svg width="100%" height="100%" viewBox="0 0 1218 299" fill="none" xmlns="http://www.w3.org/2000/svg" style="position: absolute; top: 0; left: 0; min-width: 1000px; min-height: 400px;">
+                <g clip-path="url(#clip0_7937_1429)">
+                    <path d="M666.265 272.181L738.388 147.107L666.265 22.0324H522.019L449.896 147.107L522.019 272.181L666.265 272.181Z" stroke="#D8D8D8" stroke-width="0.845926" stroke-dasharray="10.15 10.15"/>
+                    <path d="M223.188 399.097L476.158 -36.225L403.454 -161.455H258.046L5.07568 273.867L77.7797 399.097L223.188 399.097Z" stroke="#D8D8D8" stroke-width="0.845926" stroke-dasharray="10.15 10.15"/>
+                    <path d="M963.627 398.431L710.656 -36.8909L783.36 -162.24h928.769L1181.74 273.201L1109.03 398.431L963.627 398.431Z" stroke="#D8D8D8" stroke-width="0.845926" stroke-dasharray="10.15 10.15"/>
+                </g>
+                <defs>
+                    <clipPath id="clip0_7937_1429">
+                        <rect width="1218.13" height="589.61" fill="white" transform="matrix(1 0 0 -1 0 589.61)"/>
+                    </clipPath>
+                </defs>
+            </svg>
+        </div>
+        <div class="relative z-20">
+        <h1 class="text-5xl md:text-6xl tracking-tight mb-6 font-medium" style="margin-top: -10px;">
+             Création de sites web <br> sur mesure
+        </h1>
+        <p class="max-w-4xl mx-auto text-gray-500 text-lg mb-10" style="line-height: 1.3;">
+            Des sites web adaptés à chaque étape de votre développement. Attirez plus de clients <br> grâce à une présence en ligne professionnelle dès aujourd’hui.
+        </p>
+        </div>
+        
+        <div class="flex justify-center items-center bg-gray-100 p-1 rounded-lg w-fit mx-auto mb-16 relative z-20">
+            <button class="px-6 py-2 text-sm font-medium rounded-md">Standard</button>
+            <button class="px-6 py-2 text-sm font-medium bg-black text-white rounded-md shadow-sm">Recommandé</button>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto px-6 text-left items-stretch justify-center relative z-20">
+            <div class="pricing-card p-8 flex flex-col">
+                <h3 class="text-lg mb-1">Site vitrine <span class="info-icon" onclick="this.classList.toggle('active')" title="Site pour présenter votre entreprise en ligne.">i</span></h3>
+                <div class="text-2xl mb-1">800€</div>
+                <p class="text-[11px] text-gray-400 mb-6">30€ par ans, sans engagement</p>
+                <ul class="text-sm space-y-3 mb-8 text-gray-600 flex-grow">
+                    <li><i class="fa-solid fa-check mr-2 text-black"></i> Page d’accueil impactante</li>
+                    <li><i class="fa-solid fa-check mr-2 text-black"></i> Ajouts de pages sur demande</li>
+                    <li><i class="fa-solid fa-check mr-2 text-black"></i> Design personnalisé</li>
+                </ul>
+                <button class="w-full border border-gray-200 py-2 rounded-md text-sm font-medium" onclick="openSiteModal('vitrine')">Commencer</button>
+            </div>
+
+            <div class="pricing-card p-8 flex flex-col">
+                <h3 class=" text-lg mb-1">Boutique en ligne</h3>
+                <div class="flex items-center gap-2 mb-1">
+                    <span class="text-2xl">1200€</span>
+                    <span class="bg-gray-100 text-[10px] px-2 py-0.5 rounded">-10%</span>
+                </div>
+                <p class="text-[11px] text-gray-400 mb-6">30€ par ans, sans engagement</p>
+                <ul class="text-sm space-y-3 mb-8 text-gray-600 flex-grow">
+                    <li><i class="fa-solid fa-check mr-2 text-black"></i> Catalogue produits</li>
+                    <li><i class="fa-solid fa-check mr-2 text-black"></i> Paiement en ligne sécurisé</li>
+                    <li><i class="fa-solid fa-check mr-2 text-black"></i> Gestion des commandes</li>
+                    <li><i class="fa-solid fa-check mr-2 text-black"></i> Fiches produits détaillées</li>
+                </ul>
+                <button class="w-full border border-gray-200 py-2 rounded-md text-sm font-medium" onclick="openSiteModal('boutique')">Commencer</button>
+            </div>
+
+
+            <div class="pricing-card p-8 flex flex-col">
+                <h3 class=" text-lg mb-1">Page unique</h3>
+                <div class="text-2xl mb-1">500€</div>
+                <p class="text-[11px] text-gray-400 mb-6">30€ par ans, sans engagement</p>
+                <ul class="text-sm space-y-3 mb-8 text-gray-600 flex-grow">
+                    <li><i class="fa-solid fa-check mr-2 text-black"></i> Présentation de l’offre</li>
+                    <li><i class="fa-solid fa-check mr-2 text-black"></i> Page unique optimisée</li>
+                    <li><i class="fa-solid fa-check mr-2 text-black"></i> Formulaire de contact</li>
+                </ul>
+                <button class="w-full border border-gray-200 py-2 rounded-md text-sm font-medium" onclick="openModal()">Contacter l'équipe</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <div class="flex items-center gap-2">
+                        <div class="logogram">
+                            <svg width="24" height="21" viewBox="0 0 24 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M21.0499 2.33172e-08L23.6857 4.54943L21.0499 9.09886H15.7784L13.1426 4.54943L15.7784 0L21.0499 2.33172e-08Z" fill="black"/>
+                                <path d="M7.90734 2.33172e-08L17.0784 15.8147L14.4426 20.3641H9.17107L0 4.54943L2.63578 0L7.90734 2.33172e-08Z" fill="black"/>
+                            </svg>
+                        </div>
+                        <span class="logo-text">Aureum</span>
+                    </div>
+                    <p>Agence web spécialisée dans la création de sites performants et le référencement SEO.</p>
+                </div>
+                <div>
+                    <h4 class="footer-title">Services</h4>
+                    <div class="footer-links">
+                        <a href="siteweb.html">Création de sites</a>
+                        <a href="referencement.html">Référencement</a>
+                        <a href="maintenance.html">Maintenance</a>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="footer-title">Entreprise</h4>
+                    <div class="footer-links">
+                        <a href="blog.html">Blog</a>
+                        <a href="contact.html">Contact</a>
+    
+                    </div>
+                </div>
+                <div>
+                    <h4 class="footer-title">Légal</h4>
+                    <div class="footer-links">
+                        <a href="#">Mentions légales</a>
+                        <a href="#">Confidentialité</a>
+                        <a href="#">CGV</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <span class="footer-copyright">© 2026 Aureum. Tous droits réservés.</span>
+                <div class="footer-social">
+                    <a href="https://instagram.com/aureumstudio.officiel" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#"></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>

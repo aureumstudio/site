@@ -1,0 +1,1155 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aureum - Expert SEO</title>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <script type="text/javascript">
+        (function() {
+            emailjs.init("TON_PUBLIC_KEY"); // Remplace par ta PUBLIC_KEY EmailJS
+        })();
+    </script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+        
+        body { 
+            font-family: 'Inter', sans-serif; 
+            background-color: #ffffff; 
+            color: #111; 
+        }
+
+        /* Spécifications Logo */
+        .logo-text {
+            font-family: 'Inter', sans-serif;
+            font-weight: 500; /* Medium */
+            font-size: 16.92px;
+            letter-spacing: -0.02em;
+            color: #000;
+            margin-top: 5px;
+        }
+
+        /* Logogram */
+        .logogram {
+            width: 24px;
+            height: 21px;
+            flex: none;
+            order: 0;
+            flex-grow: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Bouton "Passer à l'action" avec triple ombre */
+        .btn-action {
+            margin-top: 2px;
+            background-color: #000;
+            color: #fff;
+            border: none;
+            border-radius: 16px;
+            padding: 8px 20px;
+            font-size: 12px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        .btn-action:hover {
+            background-color: #333;
+        }
+
+        /* Dropdown Services */
+        .dropdown { position: relative; margin-top: -1px; }
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            min-width: 160px;
+            padding: 8px 0;
+            z-index: 50;
+        }
+        .dropdown:hover .dropdown-menu { display: block; }
+        .dropdown-item {
+            display: block;
+            padding: 10px 16px;
+            color: #000;
+            font-size: 14px;
+            text-decoration: none;
+            transition: background 0.2s;
+        }
+        .dropdown-item:hover { background: #f3f4f6; }
+        .dropdown-item:first-child { border-radius: 8px 8px 0 0; }
+        .dropdown-item:last-child { border-radius: 0 0 8px 8px; }
+
+        /* Modal Contact */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.5);
+            z-index: 100;
+            align-items: center;
+            justify-content: center;
+        }
+        .modal-overlay.active { display: flex; }
+        .modal-content {
+            background: white;
+            border-radius: 12px;
+            padding: 24px;
+            max-width: 520px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+            scrollbar-width: none; /* Pour Firefox */
+            -ms-overflow-style: none; /* Pour IE et Edge */
+            position: relative;
+            animation: modalIn 0.3s ease;
+        }
+        .modal-content::-webkit-scrollbar {
+            display: none; /* Pour Chrome, Safari et Opera */
+        }
+        @keyframes modalIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .modal-close {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: #666;
+        }
+        .form-group { margin-bottom: 16px; }
+        .form-group label {
+            display: block;
+            font-size: 14px;
+            font-weight: 500;
+            margin-bottom: 6px;
+            color: #111;
+        }
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            font-size: 14px;
+            font-family: inherit;
+        }
+        .form-group textarea { resize: vertical; min-height: 100px; }
+        .form-submit {
+            width: 100%;
+            background: #000;
+            color: white;
+            border: none;
+            padding: 14px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .form-submit:hover { background: #333; }
+        .modal-note {
+            font-size: 12px;
+            color: #666;
+            margin-top: 12px;
+            text-align: center;
+        }
+
+        /* Menu de navigation */
+        .nav-link { color: #000; font-size: 14px; transition: color 0.2s; }
+        .nav-link.active { color: #000; font-weight: 600; }
+
+        /* Cartes et Tableaux */
+        .pricing-card { border: 1px solid #e5e7eb; border-radius: 12px; background-color: #fff; }
+        .recommended-card { background-color: #000; color: #fff; transform: scale(1.05); z-index: 10; }
+        .table-active-col { background-color: #000; color: #fff; }
+
+        /* Animation de défilement */
+        .scrolling-banner {
+            overflow: hidden;
+            background-color: #fefefe;
+            padding: 40px 0 20px 0;
+            width: 100%;
+        }
+
+        .scrolling-content {
+            display: flex;
+            animation: scroll-left 30s linear infinite;
+            gap: 60px;
+            padding-right: 40px;
+        }
+
+        .scrolling-content:hover {
+            animation-play-state: paused;
+        }
+
+        .tech-item {
+            white-space: nowrap;
+            font-size: 16px;
+            font-weight: 500;
+            color: #666;
+        }
+
+        @keyframes scroll-left {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(-50%);
+            }
+        }
+
+        footer {
+            background: #f9fafb;
+            padding: 60px 0 40px;
+            margin-top: auto;
+        }
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 48px;
+        }
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        .footer-brand p {
+            font-size: 14px;
+            color: #666;
+            margin-top: 12px;
+            max-width: 300px;
+        }
+        .footer-title {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 16px;
+        }
+        .footer-links {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        .footer-links a {
+            font-size: 14px;
+            color: #666;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        .footer-links a:hover { color: #000; }
+        .footer-bottom {
+            border-top: 1px solid #e5e7eb;
+            padding-top: 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .footer-copyright {
+            font-size: 12px;
+            color: #666;
+        }
+        .footer-social {
+            display: flex;
+            gap: 16px;
+        }
+        .footer-social a {
+            color: #666;
+            font-size: 18px;
+            transition: color 0.2s;
+        }
+        .footer-social a:hover { color: #000; }
+    </style>
+</head>
+<body class="antialiased">
+
+    <header class="flex justify-between items-center px-12 py-8 max-w-7xl mx-auto">
+        <div class="flex items-center gap-2">
+            <div class="logogram">
+                <svg width="24" height="21" viewBox="0 0 24 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21.0499 2.33172e-08L23.6857 4.54943L21.0499 9.09886H15.7784L13.1426 4.54943L15.7784 0L21.0499 2.33172e-08Z" fill="black"/>
+                    <path d="M7.90734 2.33172e-08L17.0784 15.8147L14.4426 20.3641H9.17107L0 4.54943L2.63578 0L7.90734 2.33172e-08Z" fill="black"/>
+                </svg>
+            </div>
+            <span class="logo-text">Aureum</span>
+        </div>
+        
+        <nav class="hidden md:flex gap-8">
+            <a href="accueil.html" class="nav-link">Accueil</a>
+            <a href="avantages.html" class="nav-link">Avantages</a>
+            <div class="dropdown">
+                <a href="#" class="nav-link active">Services ▾</a>
+                <div class="dropdown-menu">
+                    <a href="maintenance.html" class="dropdown-item">Maintenance</a>
+                    <a href="siteweb.html" class="dropdown-item">Site web</a>
+                    <a href="referencement.html" class="dropdown-item">Référencement</a>
+                </div>
+            </div>
+            <a href="blog.html" class="nav-link">Blog</a>
+        </nav>
+
+        <button class="btn-action" onclick="openModal()">
+            Passer à l'action
+        </button>
+    </header>
+<feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+<feOffset dy="8.45926"/>
+<feGaussianBlur stdDeviation="5.07556"/>
+<feComposite in2="hardAlpha" operator="arithmetic" k2="-1" k3="1"/>
+<feColorMatrix type="matrix" values="0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.26 0"/>
+<feBlend mode="normal" in2="shape" result="effect1_innerShadow_7935_1415"/>
+</filter>
+<linearGradient id="paint0_linear_7935_1415" x1="56.1511" y1="0" x2="56.1511" y2="31.5348" gradientUnits="userSpaceOnUse">
+<stop stop-color="white" stop-opacity="0.2"/>
+<stop offset="1" stop-color="white" stop-opacity="0.07"/>
+</linearGradient>
+</defs>
+</svg>
+
+
+        </button>
+    </header>
+
+    <!-- Modal Contact -->
+    <div class="modal-overlay" id="contactModal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal()">&times;</button>
+            <h2 style="font-size: 20px; font-weight: 600; margin-bottom: 8px;">Contactez un expert</h2>
+            <p style="font-size: 14px; color: #666; margin-bottom: 24px;">
+                Une réponse sous 24h garantie
+            </p>
+            
+            <div class="contact-options">
+                <a href="https://instagram.com/aureumstudio.officiel" target="_blank" class="contact-option">
+                    <div class="contact-icon"><i class="fa-brands fa-instagram"></i></div>
+                    <div class="contact-info">
+                        <span class="contact-title">Instagram</span>
+                        <span class="contact-desc">Envoyer un message direct</span>
+                    </div>
+                </a>
+                
+                <div class="contact-option" onclick="showWhatsAppForm()">
+                    <div class="contact-icon"><i class="fa-brands fa-whatsapp"></i></div>
+                    <div class="contact-info">
+                        <span class="contact-title">WhatsApp</span>
+                        <span class="contact-desc">Laisser votre numéro</span>
+                    </div>
+                </div>
+                
+                <a href="mailto:contact@aureumstudio.fr" class="contact-option">
+                    <div class="contact-icon"><i class="fa-solid fa-envelope"></i></div>
+                    <div class="contact-info">
+                        <span class="contact-title">Email</span>
+                        <span class="contact-desc">Envoyer un mail</span>
+                    </div>
+                </a>
+                
+                <a href="contact.html" class="contact-option">
+                    <div class="contact-icon"><i class="fa-solid fa-file-lines"></i></div>
+                    <div class="contact-info">
+                        <span class="contact-title">Formulaire</span>
+                        <span class="contact-desc">Parlez-nous de votre projet</span>
+                    </div>
+                </a>
+            </div>
+            
+            <div id="whatsappForm" style="display: none;">
+                <div class="form-group">
+                    <label>Votre numéro WhatsApp</label>
+                    <input type="tel" id="whatsappNumber" placeholder="+33 6 12 34 56 78">
+                </div>
+                <div class="form-group">
+                    <label>Message (optionnel)</label>
+                    <textarea id="whatsappMessage" placeholder="Bonjour, je souhaite être contacté sur WhatsApp..."></textarea>
+                </div>
+                <button type="button" class="form-submit" onclick="sendViaWhatsApp()">Envoyer</button>
+                <button type="button" style="background:none;border:none;color:#666;margin-top:8px;cursor:pointer;" onclick="showContactOptions()">Retour</button>
+            </div>
+            
+            <div id="contactForm" style="display: none;">
+                <form onsubmit="submitForm(event)">
+                    <div class="form-group">
+                        <label>Nom complet</label>
+                        <input type="text" name="name" required placeholder="John Doe">
+                    </div>
+                    <div class="form-group">
+                        <label>Email</label>
+                        <input type="email" name="email" required placeholder="john@exemple.com">
+                    </div>
+                    <div class="form-group">
+                        <label>Message</label>
+                        <textarea name="message" required placeholder="Décrivez votre projet..."></textarea>
+                    </div>
+                    <button type="submit" class="form-submit">Envoyer</button>
+                </form>
+                <button type="button" style="background:none;border:none;color:#666;margin-top:8px;cursor:pointer;" onclick="showContactOptions()">Retour</button>
+            </div>
+            
+            <p class="modal-note"> </p>
+        </div>
+    </div>
+
+    <style>
+    .contact-options { display: flex; flex-direction: column; gap: 12px; }
+    .contact-option {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        padding: 16px;
+        border: 1px solid #e5e7eb;
+        border-radius: 10px;
+        text-decoration: none;
+        color: inherit;
+        cursor: pointer;
+        transition: all 0.2s;
+    }
+    .contact-option:hover { border-color: #000; background: #fafafa; }
+    .contact-icon {
+        width: 44px;
+        height: 44px;
+        background: #f3f4f6;
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 20px;
+    }
+    .contact-info { display: flex; flex-direction: column; }
+    .contact-title { font-weight: 600; font-size: 15px; }
+    .contact-desc { font-size: 13px; color: #666; }
+    </style>
+
+    <script>
+    function openModal() {
+        document.getElementById('contactModal').classList.add('active');
+        document.body.style.overflow = 'hidden';
+        showContactOptions();
+    }
+    function closeModal() {
+        document.getElementById('contactModal').classList.remove('active');
+        document.body.style.overflow = '';
+    }
+    document.getElementById('contactModal').addEventListener('click', function(e) {
+        if (e.target === this) closeModal();
+    });
+    function showContactOptions() {
+        document.getElementById('whatsappForm').style.display = 'none';
+        document.getElementById('contactForm').style.display = 'none';
+        document.querySelector('.contact-options').style.display = 'flex';
+    }
+    function showWhatsAppForm() {
+        document.querySelector('.contact-options').style.display = 'none';
+        document.getElementById('whatsappForm').style.display = 'block';
+    }
+    function showContactForm() {
+        document.querySelector('.contact-options').style.display = 'none';
+        document.getElementById('contactForm').style.display = 'block';
+    }
+    function sendViaWhatsApp() {
+        const phone = document.getElementById('whatsappNumber').value;
+        const msg = document.getElementById('whatsappMessage').value;
+        if (!phone) { alert('Veuillez entrer votre numéro WhatsApp'); return; }
+        const text = encodeURIComponent('Bonjour, je souhaite être contacté sur WhatsApp.' + (msg ? '\n\nMessage: ' + msg : ''));
+        window.open('https://wa.me/33' + phone.replace(/\s/g,'').replace(/^0/,'') + '?text=' + text, '_blank');
+        closeModal();
+    }
+    function submitForm(e) {
+        e.preventDefault();
+        
+        // Récupérer les données du formulaire
+        const form = e.target;
+        const name = form.querySelector('input[name="name"]')?.value || form.querySelector('input[type="text"]')?.value || 'Client';
+        const email = form.querySelector('input[name="email"]')?.value || form.querySelector('input[type="email"]')?.value || '';
+        const phone = form.querySelector('input[name="phone"]')?.value || '';
+        const service = form.querySelector('select[name="service"]')?.value || 'Non spécifié';
+        const message = form.querySelector('textarea[name="message"]')?.value || '';
+        
+        // Envoyer avec EmailJS
+        const templateParams = {
+            from_name: name,
+            from_email: email,
+            from_phone: phone,
+            service_type: service,
+            message: message,
+            to_email: "ton-email@domaine.com" // Remplace par ton email de réception
+        };
+        
+        emailjs.send("TON_SERVICE_ID", "TON_TEMPLATE_ID", templateParams)
+            .then(function() {
+                alert('Merci ! Votre demande a été envoyée. Un expert vous contactera sous 24h.');
+                closeModal();
+                form.reset();
+            }, function(error) {
+                console.log('Erreur EmailJS:', error);
+                alert('Une erreur est survenue. Veuillez réessayer ou nous contacter directement.');
+            });
+    }
+    </script>
+
+    <section class="text-center pt-20 pb-16 px-4 relative">
+        <div class="absolute inset-0 flex items-center justify-center" style="overflow: hidden; z-index: -1; top: -500px;">
+            <svg width="100%" height="100%" viewBox="0 0 1218 299" fill="none" xmlns="http://www.w3.org/2000/svg" style="position: absolute; top: 0; left: 0; min-width: 1000px; min-height: 400px;">
+                <g clip-path="url(#clip0_7937_1429)">
+                    <path d="M666.265 272.181L738.388 147.107L666.265 22.0324H522.019L449.896 147.107L522.019 272.181L666.265 272.181Z" stroke="#D8D8D8" stroke-width="0.845926" stroke-dasharray="10.15 10.15"/>
+                    <path d="M223.188 399.097L476.158 -36.225L403.454 -161.455H258.046L5.07568 273.867L77.7797 399.097L223.188 399.097Z" stroke="#D8D8D8" stroke-width="0.845926" stroke-dasharray="10.15 10.15"/>
+                    <path d="M963.627 398.431L710.656 -36.8909L783.36 -162.24h928.769L1181.74 273.201L1109.03 398.431L963.627 398.431Z" stroke="#D8D8D8" stroke-width="0.845926" stroke-dasharray="10.15 10.15"/>
+                </g>
+                <defs>
+                    <clipPath id="clip0_7937_1429">
+                        <rect width="1218.13" height="589.61" fill="white" transform="matrix(1 0 0 -1 0 589.61)"/>
+                    </clipPath>
+                </defs>
+            </svg>
+        </div>
+        <div class="relative z-20">
+        <h1 class="text-5xl md:text-6xl tracking-tight mb-6 font-medium" style="margin-top: -10px;">
+            Accompagnement et <br> maintenance de votre site
+        </h1>
+        <p class="max-w-4xl mx-auto text-gray-500 text-lg mb-10" style="line-height: 1.3;">
+            Un accompagnement continu pour maintenir votre site sécurisé, performant et toujours <br> à jour en permanence afin de garantir une expérience optimale.
+        </p>
+        </div>
+        
+        <div class="flex justify-center items-center bg-gray-100 p-1 rounded-lg w-fit mx-auto mb-16 relative z-20">
+            <button class="px-6 py-2 text-sm font-medium rounded-md">Standard</button>
+            <button class="px-6 py-2 text-sm font-medium bg-black text-white rounded-md shadow-sm">Recommandé</button>
+        </div>
+
+        <div class="flex justify-center">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 px-6 text-left items-stretch relative z-20">
+            <div class="pricing-card p-8 flex flex-col text-left">
+                <h3 class="text-lg mb-1">Maintenance essentielle</h3>
+                <div class="text-2xl mb-1">40€</div>
+                <p class="text-[11px] text-gray-400 mb-6">par mois, sans engagement</p>
+                <ul class="text-sm space-y-3 mb-8 text-gray-600 flex-grow">
+                    <li><i class="fa-solid fa-check mr-2 text-black"></i> Mises à jour du site</li>
+                    <li><i class="fa-solid fa-check mr-2 text-black"></i> Surveillance du bon fonctionnement</li>
+                    <li><i class="fa-solid fa-check mr-2 text-black"></i> Correction de bugs mineurs</li>
+                </ul>
+                <button class="w-full border border-gray-200 py-2 rounded-md text-sm font-medium" onclick="openMaintenanceModal('essentielle')">Commencer</button>
+            </div>
+
+            <div class="pricing-card p-8 flex flex-col text-left">
+                <h3 class=" text-lg mb-1">Maintenance standard</h3>
+                <div class="flex items-center gap-2 mb-1">
+                    <span class="text-2xl">50€</span>
+                    <span class="bg-gray-100 text-[10px] px-2 py-0.5 rounded">-10%</span>
+                </div>
+                <p class="text-[11px] text-gray-400 mb-6">par mois, sans engagement</p>
+                <ul class="text-sm space-y-3 mb-8 text-gray-600 flex-grow">
+                    <li><i class="fa-solid fa-check mr-2 text-black"></i> Inclus dans l’offre essentielle</li>
+                    <li><i class="fa-solid fa-check mr-2 text-black"></i> Petites modifications sur demande</li>
+                    <li><i class="fa-solid fa-check mr-2 text-black"></i> Vérification régulière du site</li>
+                    <li><i class="fa-solid fa-check mr-2 text-black"></i> Sauvegardes de sécurité</li>
+                </ul>
+                <button class="w-full border border-gray-200 py-2 rounded-md text-sm font-medium" onclick="openMaintenanceModal('standard')">Commencer</button>
+            </div>
+
+            <div class="pricing-card recommended-card p-8 flex flex-col shadow-2xl mt-[9px] text-left">
+                <h3 class="text-lg mb-1 text-white">Maintenance avancée</h3>
+                <div class="flex items-center gap-2 mb-1">
+                    <span class="text-2xl  text-wite">75€</span>
+                    <span class="bg-zinc-800 text-[10px] px-2 py-0.5 rounded text-white">-20%</span>
+                </div>
+                <p class="text-[11px] text-zinc-400 mb-6">par mois, sans engagement</p>
+                <ul class="text-sm space-y-3 mb-8 text-zinc-300 flex-grow">
+                    <li><i class="fa-solid fa-check mr-2 text-white"></i> Inclus dans l’offre avancée</li>
+                    <li><i class="fa-solid fa-check mr-2 text-white"></i> Correction des bugs techniques et erreurs</li>
+                    <li><i class="fa-solid fa-check mr-2 text-white"></i> Optimisation continue des performances</li>
+                    <li><i class="fa-solid fa-check mr-2 text-white"></i> Correction des failles de sécurité</li>
+                </ul>
+                <button class="w-full bg-white text-black py-2 rounded-md text-sm font-bold" onclick="openMaintenanceModal('avancee')">Commencer</button>
+            </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="scrolling-banner">
+        <div class="scrolling-content">
+            <span class="tech-item">Node.js</span>
+            <span class="tech-item">Python</span>
+            <span class="tech-item">MySQL</span>
+            <span class="tech-item">PostgreSQL</span>
+            <span class="tech-item">GitHub</span>
+            <span class="tech-item">VS Code</span>
+            <span class="tech-item">WordPress</span>
+            <span class="tech-item">Docker</span>
+            <span class="tech-item">HTML5</span>
+            <span class="tech-item">JavaScript</span>
+            <span class="tech-item">PHP</span>
+            
+            <span class="tech-item">Node.js</span>
+            <span class="tech-item">Python</span>
+            <span class="tech-item">MySQL</span>
+            <span class="tech-item">PostgreSQL</span>
+            <span class="tech-item">GitHub</span>
+            <span class="tech-item">VS Code</span>
+            <span class="tech-item">WordPress</span>
+            <span class="tech-item">Docker</span>
+            <span class="tech-item">HTML5</span>
+            <span class="tech-item">JavaScript</span>
+            <span class="tech-item">PHP</span>
+        </div>
+    </div>
+
+<section class="pricing-v2__wrapper">
+    
+    <h2 class="pricing-v2__main-title">Comparer les formules</h2>
+
+    <div class="pricing-v2__main-content">
+        <div class="pricing-v2__selector-group">
+            <span class="pricing-v2__selector-label">Les plus populaires</span>
+            <div class="pricing-v2__tabs-container">
+                <button class="pricing-v2__tab-btn">Standard</button>
+                <button class="pricing-v2__tab-btn pricing-v2__tab-btn--active">Recommandé</button>
+            </div>
+        </div>
+
+        <div class="pricing-v2__cards-grid">
+            
+            <div class="pricing-v2__card-item">
+                <div class="pricing-v2__card-top">
+                    <div class="pricing-v2__card-name">De base</div>
+                    <div class="pricing-v2__price-box"><span class="pricing-v2__price-val">‎ ‎ ‎ 40€</span></div>
+                    <div class="pricing-v2__card-sub">par mois, sans engagement</div>
+                </div>
+                <button class="pricing-v2__action-btn" onclick="openMaintenanceModal('essentielle')">Commencer</button>
+            </div>
+
+
+            <div class="pricing-v2__card-item pricing-v2__card-item">
+                <div class="pricing-v2__card-top">
+                    <div class="pricing-v2__card-name">Complet</div>
+                    <div class="pricing-v2__price-box">
+                        <span class="pricing-v2__price-val">‎ ‎ ‎ 50€</span>
+                        <span class="pricing-v2__promo-badge">-10%</span>
+                    </div>
+                    <div class="pricing-v2__card-sub">par mois, sans engagement</div>
+                </div>
+                <button class="pricing-v2__action-btn" onclick="openMaintenanceModal('standard')">Commencer</button>
+            </div>
+
+            <div class="pricing-v2__card-item pricing-v2__card-item--dark">
+                <div class="pricing-v2__card-top">
+                    <div class="pricing-v2__card-name">Avancée</div>
+                    <div class="pricing-v2__price-box"><span class="pricing-v2__price-val">‎ ‎ ‎ 75€</span></div>
+                    <div class="pricing-v2__card-sub">par mois, sans engagement</div>
+                </div>
+                <button class="pricing-v2__action-btn" onclick="openMaintenanceModal('avancee')">Commencer</button>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<style>
+    /* Scope spécifique pour éviter les fuites de style */
+    .pricing-v2__wrapper {
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+        background-color: #ffffff;
+        padding: 60px 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        color: #000;
+    }
+
+    .pricing-v2__main-title {
+        font-size: 38px;
+        font-weight: 500;
+        margin-bottom: 50px;
+        text-align: center;
+        border: none; /* sécurité */
+    }
+
+    .pricing-v2__main-content {
+        display: flex;
+        align-items: flex-end;
+        gap: 35px;
+        max-width: 1200px;
+        margin: 0 auto;
+        transform: translateX(-110px);
+
+
+        font-size: 38px;
+        font-weight: 500;
+        margin-bottom: 50px;
+        text-align: center;
+        border: none; /* sécurité */
+    }
+
+    .pricing-v2__main-content {
+        display: flex;
+        align-items: flex-end;
+        gap: 35px;
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    /* --- Sélecteur --- */
+    .pricing-v2__selector-group {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        margin-bottom: 45px;
+        margin-right: 10px;
+        margin-left: 40px;
+    }
+
+    .pricing-v2__selector-label {
+        font-size: 13px;
+        font-weight: 500;
+        color: #444;
+    }
+
+    .pricing-v2__tabs-container {
+        display: flex;
+        background: #fff;
+        border: 1px solid #e8e8e8;
+        border-radius: 10px;
+        padding: 4px;
+        width: fit-content;
+    }
+    
+
+    .pricing-v2__tab-btn {
+        padding: 8px 18px;
+        font-size: 14px;
+        font-weight: 500;
+        cursor: pointer;
+        border: none;
+        background: transparent;
+        color: #111;
+        outline: none;
+    }
+
+    .pricing-v2__tab-btn--active {
+        background: #000;
+        color: #fff;
+        border-radius: 7px;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    }
+
+    /* --- Cards --- */
+    .pricing-v2__cards-grid {
+        display: flex;
+        gap: 60px;
+        transform: translateX(150px);
+    }
+
+    .pricing-v2__card-item {
+        background: #fff;
+        border: 1px solid #eeeeee;
+        border-radius: 8px;
+        padding: 18px 15px;
+        width: 191px;
+        height: 168px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
+    .pricing-v2__card-item--dark {
+        background: #000;
+        color: #fff;
+        border-color: #000;
+    }
+
+    .pricing-v2__card-name {
+        font-size: 16px;
+        font-weight: 500;
+        margin-bottom: 5px;
+        margin-right: 60px;
+    }
+
+    .pricing-v2__price-box {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+    }
+
+    .pricing-v2__price-val {
+        font-size: 26px;
+        font-weight: 600;
+    }
+
+    .pricing-v2__promo-badge {
+        background: #F3F4F6;
+        color: #2E2D27;
+        font-size: 10px;
+        padding: 2px 5px;
+        border-radius: 4px;
+    }
+
+    .pricing-v2__card-sub {
+        font-size: 9px;
+        color: #666;
+        margin-top: 4px;
+        line-height: 1.2;
+    }
+
+    .pricing-v2__card-item--dark .pricing-v2__card-sub {
+        color: #999;
+    }
+
+    /* Boutons de carte */
+    .pricing-v2__action-btn {
+        width: 100%;
+        padding: 8px;
+        background: #fff;
+        border: 1px solid #d1d1d1;
+        border-radius: 6px;
+        font-size: 12px;
+        font-weight: 500;
+        color: #000;
+        cursor: pointer;
+        transition: background 0.2s;
+    }
+
+    .pricing-v2__card-item--dark .pricing-v2__action-btn {
+        background: #fff;
+        border: none;
+    }
+
+    .pricing-v2__action-btn:hover {
+        background: #f9f9f9;
+    }
+</style>
+
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+.seo-table-v11-container {
+    font-family: 'Inter', sans-serif;
+    max-width: 1200px; /* Élargissement du conteneur global */
+    margin: 40px auto;
+    color: #000;
+}
+
+/* TITRES */
+.seo-table-v11-title {
+    font-size: 22px;
+    font-weight: 600;
+    margin-top: 35px;
+    margin-bottom: 10px;
+    padding-bottom: 5px;
+}
+
+.seo-table-v11-row {
+    display: grid;
+    /* La première colonne prend 1.5 part, les 4 autres prennent chacune 1 part équitable */
+    /* Cela force les icônes à s'écarter les unes des autres */
+    grid-template-columns: 1.5fr repeat(3, 1fr); 
+    align-items: center;
+    padding: 18px 0;
+    border-bottom: 1px solid #eeeeee;
+}
+
+/* TEXTE */
+.seo-table-v11-label {
+    font-size: 15px; /* Légère augmentation pour la lisibilité */
+    color: #333;
+}
+
+/* CHECK */
+.seo-table-v11-check {
+    display: flex;
+    justify-content: center;
+}
+
+/* ICON FIX GLOBAL */
+.seo-table-v11-container svg {
+    width: 20px !important;
+    height: 20px !important;
+}
+
+/* INFO */
+.seo-table-v11-info {
+    width: 14px;
+    height: 14px;
+    border: 1px solid #ccc;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+    margin-left: 8px;
+    color: #999;
+    cursor: pointer;
+    position: relative;
+    transition: all 0.2s;
+}
+
+.seo-table-v11-info:hover {
+    background: #000;
+    color: #fff;
+    border-color: #000;
+}
+
+/* Tooltip popup */
+.seo-table-v11-tooltip {
+    display: none;
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #111;
+    color: #fff;
+    padding: 10px 14px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 400;
+    white-space: nowrap;
+    z-index: 100;
+    margin-bottom: 8px;
+    min-width: 200px;
+    max-width: 280px;
+    white-space: normal;
+    text-align: center;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+.seo-table-v11-tooltip::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    border: 6px solid transparent;
+    border-top-color: #111;
+}
+
+.seo-table-v11-info:hover .seo-table-v11-tooltip {
+    display: block;
+}
+
+/* LABEL WRAP */
+.seo-table-v11-label-wrap {
+    display: flex;
+    align-items: center;
+    font-size: 15px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="seo-table-v11-container">
+
+<svg style="display:none">
+    <symbol id="check" viewBox="0 0 21 21">
+        <path d="M17.13 5.71L8.24 14.59L3.80 10.15" stroke="black" stroke-width="1.5" fill="none"/>
+    </symbol>
+    <symbol id="cross" viewBox="0 0 21 21">
+        <path d="M6 6L15 15M15 6L6 15" stroke="#ccc" stroke-width="1.5"/>
+    </symbol>
+</svg>
+
+<div class="seo-table-v11-title">Surveillance & fonctionnement</div>
+
+<div class="seo-table-v11-row">
+<div class="seo-table-v11-label">Vérification régulière du site</div>
+<div class="seo-table-v11-check"><svg><use href="#check"/></svg></div>
+<div class="seo-table-v11-check"><svg><use href="#check"/></svg></div>
+<div class="seo-table-v11-check"><svg><use href="#check"/></svg></div>
+</div>
+
+<div class="seo-table-v11-row">
+<div class="seo-table-v11-label">Optimisation des textes</div>
+<div class="seo-table-v11-check"><svg><use href="#check"/></svg></div>
+<div class="seo-table-v11-check"><svg><use href="#check"/></svg></div>
+<div class="seo-table-v11-check"><svg><use href="#check"/></svg></div>
+</div>
+
+<div class="seo-table-v11-title">Mises à jour</div>
+
+<div class="seo-table-v11-row">
+<div class="seo-table-v11-label">Mises à jour du site</div>
+<div class="seo-table-v11-check"><svg><use href="#check"/></svg></div>
+<div class="seo-table-v11-check"><svg><use href="#check"/></svg></div>
+<div class="seo-table-v11-check"><svg><use href="#check"/></svg></div>
+</div>
+
+<div class="seo-table-v11-title">Analyse & suivi</div>
+
+<div class="seo-table-v11-row"><div class="seo-table-v11-label-wrap">Optimisation des performances <span class="seo-table-v11-info">i<span class="seo-table-v11-tooltip">Analyse et optimisation continue des performances de votre site pour garantir une vitesse et une fluidité optimales.</span></span></div><div class="seo-table-v11-check"><svg><use href="#cross"/></svg></div><div class="seo-table-v11-check"><svg><use href="#cross"/></svg></div><div class="seo-table-v11-check"><svg><use href="#check"/></svg></div></div>
+
+<div class="seo-table-v11-row"><div class="seo-table-v11-label-wrap">Amélioration de la vitesse du site <span class="seo-table-v11-info">i<span class="seo-table-v11-tooltip">Optimisation du temps de chargement des pages pour améliorer l'expérience utilisateur et le référencement.</span></span></div><div class="seo-table-v11-check"><svg><use href="#cross"/></svg></div><div class="seo-table-v11-check"><svg><use href="#cross"/></svg></div><div class="seo-table-v11-check"><svg><use href="#check"/></svg></div></div>
+
+<div class="seo-table-v11-row"><div class="seo-table-v11-label-wrap">Optimisation technique générale<span class="seo-table-v11-info">i<span class="seo-table-v11-tooltip">Ensemble des interventions techniques pour assurer le bon fonctionnement et la performance globale du site.</span></span></div><div class="seo-table-v11-check"><svg><use href="#check"/></svg></div><div class="seo-table-v11-check"><svg><use href="#check"/></svg></div><div class="seo-table-v11-check"><svg><use href="#check"/></svg></div></div>
+
+<div class="seo-table-v11-row"><div class="seo-table-v11-label-wrap">Amélioration de l’expérience<span class="seo-table-v11-info">i<span class="seo-table-v11-tooltip">Optimisation de l'interface et de la navigation pour offrir une expérience utilisateur fluide et intuitive.</span></span></div><div class="seo-table-v11-check"><svg><use href="#cross"/></svg></div><div class="seo-table-v11-check"><svg><use href="#cross"/></svg></div><div class="seo-table-v11-check"><svg><use href="#check"/></svg></div></div>
+
+<div class="seo-table-v11-row"><div class="seo-table-v11-label-wrap">Maintenance des performances<span class="seo-table-v11-info">i<span class="seo-table-v11-tooltip">Suivi régulier et maintenance continue pour maintenir les performances optimales de votre site.</span></span></div><div class="seo-table-v11-check"><svg><use href="#cross"/></svg></div><div class="seo-table-v11-check"><svg><use href="#check"/></svg></div><div class="seo-table-v11-check"><svg><use href="#check"/></svg></div></div>
+
+<div class="seo-table-v11-title">Sécurité</div>
+
+<div class="seo-table-v11-row"><div class="seo-table-v11-label-wrap">Sauvegardes de sécurité <span class="seo-table-v11-info">i<span class="seo-table-v11-tooltip">Sauvegardes régulières et automatiques de vos données pour protéger votre site contre toute perte de données.</span></span></div><div class="seo-table-v11-check"><svg><use href="#cross"/></svg></div><div class="seo-table-v11-check"><svg><use href="#cross"/></svg></div><div class="seo-table-v11-check"><svg><use href="#check"/></svg></div></div>
+
+<div class="seo-table-v11-row"><div class="seo-table-v11-label-wrap">Sécurisation du site<span class="seo-table-v11-info">i<span class="seo-table-v11-tooltip">Mise en place de mesures de protection pour sécuriser votre site contre les attaques et intrusions.</span></span></div><div class="seo-table-v11-check"><svg><use href="#cross"/></svg></div><div class="seo-table-v11-check"><svg><use href="#check"/></svg></div><div class="seo-table-v11-check"><svg><use href="#check"/></svg></div></div>
+
+<div class="seo-table-v11-row"><div class="seo-table-v11-label-wrap">Correction des failles de sécurité<span class="seo-table-v11-info">i<span class="seo-table-v11-tooltip">Identification et correction des vulnérabilités potentielles pour garantir la sécurité de votre site.</span></span></div><div class="seo-table-v11-check"><svg><use href="#cross"/></svg></div><div class="seo-table-v11-check"><svg><use href="#check"/></svg></div><div class="seo-table-v11-check"><svg><use href="#check"/></svg></div></div>
+
+<div class="seo-table-v11-row"><div class="seo-table-v11-label-wrap">Application des mises à jour<span class="seo-table-v11-info">i<span class="seo-table-v11-tooltip">Installation régulière des mises à jour de sécurité et fonctionnalités pour votre site.</span></span></div><div class="seo-table-v11-check"><svg><use href="#check"/></svg></div><div class="seo-table-v11-check"><svg><use href="#check"/></svg></div><div class="seo-table-v11-check"><svg><use href="#check"/></svg></div></div>
+
+<div class="seo-table-v11-row"><div class="seo-table-v11-label-wrap">Protection globale du site<span class="seo-table-v11-info">i<span class="seo-table-v11-tooltip">Solution complète de protection incluant pare-feu, surveillance et détection des menaces.</span></span></div><div class="seo-table-v11-check"><svg><use href="#cross"/></svg></div><div class="seo-table-v11-check"><svg><use href="#cross"/></svg></div><div class="seo-table-v11-check"><svg><use href="#check"/></svg></div></div>
+
+<div class="seo-table-v11-title">Support & gestion</div>
+
+<div class="seo-table-v11-row">
+<div class="seo-table-v11-label">Support et accompagnement client</div>
+<div class="seo-table-v11-check"><svg><use href="#check"/></svg></div>
+<div class="seo-table-v11-check"><svg><use href="#check"/></svg></div>
+<div class="seo-table-v11-check"><svg><use href="#check"/></svg></div>
+</div>
+
+<div class="seo-table-v11-title">Corrections & bugs</div>
+
+<div class="seo-table-v11-row"><div class="seo-table-v11-label-wrap">Correction de bugs techniques<span class="seo-table-v11-info">i<span class="seo-table-v11-tooltip">Résolution des erreurs techniques critiques qui affectent le fonctionnement du site.</span></span></div><div class="seo-table-v11-check"><svg><use href="#cross"/></svg></div><div class="seo-table-v11-check"><svg><use href="#cross"/></svg></div><div class="seo-table-v11-check"><svg><use href="#check"/></svg></div></div>
+
+<div class="seo-table-v11-row"><div class="seo-table-v11-label-wrap">Correction des bugs mineurs<span class="seo-table-v11-info">i<span class="seo-table-v11-tooltip">Correction des petits bugs et anomalies qui n'affectent pas le fonctionnement global.</span></span></div><div class="seo-table-v11-check"><svg><use href="#cross"/></svg></div><div class="seo-table-v11-check"><svg><use href="#check"/></svg></div><div class="seo-table-v11-check"><svg><use href="#check"/></svg></div></div>
+
+<div class="seo-table-v11-title">Modifications & contenu</div>
+
+<div class="seo-table-v11-row"><div class="seo-table-v11-label-wrap">Modifications de section<span class="seo-table-v11-info">i<span class="seo-table-v11-tooltip">Possibilité de modifier et mettre à jour les sections de votre site selon vos besoins.</span></span></div><div class="seo-table-v11-check"><svg><use href="#cross"/></svg></div><div class="seo-table-v11-check"><svg><use href="#cross"/></svg></div><div class="seo-table-v11-check"><svg><use href="#check"/></svg></div></div>
+
+
+
+
+
+</div>
+
+<!-- Footer -->
+<footer>
+    <div class="footer-content">
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <div class="flex items-center gap-2">
+                    <div class="logogram">
+                        <svg width="24" height="21" viewBox="0 0 24 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M21.0499 2.33172e-08L23.6857 4.54943L21.0499 9.09886H15.7784L13.1426 4.54943L15.7784 0L21.0499 2.33172e-08Z" fill="black"/>
+                            <path d="M7.90734 2.33172e-08L17.0784 15.8147L14.4426 20.3641H9.17107L0 4.54943L2.63578 0L7.90734 2.33172e-08Z" fill="black"/>
+                        </svg>
+                    </div>
+                    <span class="logo-text">Aureum</span>
+                </div>
+                <p>Agence web spécialisée dans la création de sites performants et le référencement SEO.</p>
+            </div>
+            <div>
+                <h4 class="footer-title">Services</h4>
+                <div class="footer-links">
+                    <a href="siteweb.html">Création de sites</a>
+                    <a href="referencement.html">Référencement</a>
+                    <a href="maintenance.html">Maintenance</a>
+                </div>
+            </div>
+            <div>
+                <h4 class="footer-title">Entreprise</h4>
+                <div class="footer-links">
+                    <a href="blog.html">Blog</a>
+                    <a href="contact.html">Contact</a>
+
+                </div>
+            </div>
+            <div>
+                <h4 class="footer-title">Légal</h4>
+                <div class="footer-links">
+                    <a href="#">Mentions légales</a>
+                    <a href="#">Confidentialité</a>
+                    <a href="#">CGV</a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <span class="footer-copyright">© 2026 Aureum. Tous droits réservés.</span>
+            <div class="footer-social">
+                <a href="https://instagram.com/aureumstudio.officiel" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+                <a href="#"></a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- Modal Formulaire Maintenance -->
+<div id="maintenanceModal" class="modal-overlay">
+    <div class="modal-content">
+        <button onclick="closeMaintenanceModal()" class="modal-close">
+            <i class="fa-solid fa-times"></i>
+        </button>
+        <h3 class="text-xl font-bold mb-1">Maintenance <span id="maintenancePlan"></span></h3>
+        <p class="text-sm text-gray-500 mb-4">Remplissez le formulaire ci-dessous</p>
+        <form id="maintenanceForm">
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+                <div class="form-group">
+                    <label class="block text-sm font-medium mb-1">Nom / Prénom *</label>
+                    <input type="text" name="name" required class="w-full border border-gray-300 rounded px-3 py-2 text-sm">
+                </div>
+                <div class="form-group">
+                    <label class="block text-sm font-medium mb-1">Email *</label>
+                    <input type="email" name="email" required class="w-full border border-gray-300 rounded px-3 py-2 text-sm">
+                </div>
+            </div>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+                <div class="form-group">
+                    <label class="block text-sm font-medium mb-1">Téléphone</label>
+                    <input type="tel" name="phone" class="w-full border border-gray-300 rounded px-3 py-2 text-sm">
+                </div>
+                <div class="form-group">
+                    <label class="block text-sm font-medium mb-1">URL de votre site web *</label>
+                    <input type="url" name="website" required placeholder="https://www.votre-site.com" class="w-full border border-gray-300 rounded px-3 py-2 text-sm">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="block text-sm font-medium mb-1">Message libre (optionnel)</label>
+                <textarea name="message" rows="3" class="w-full border border-gray-300 rounded px-3 py-2 text-sm"></textarea>
+            </div>
+            <button type="submit" class="w-full bg-black text-white py-2 rounded font-medium hover:bg-gray-800 transition">Envoyer</button>
+        </form>
+    </div>
+</div>
+
+<script>
+function openMaintenanceModal(plan) {
+    document.getElementById('maintenancePlan').textContent = plan === 'essentielle' ? 'Essentielle' : plan === 'standard' ? 'Standard' : 'Avancée';
+    document.getElementById('maintenanceModal').classList.add('active');
+}
+function closeMaintenanceModal() {
+    document.getElementById('maintenanceModal').classList.remove('active');
+}
+document.getElementById('maintenanceForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const formData = new FormData(this);
+    const templateParams = {
+        from_name: formData.get('name'),
+        from_email: formData.get('email'),
+        phone: formData.get('phone'),
+        website: formData.get('website'),
+        message: formData.get('message'),
+        plan: document.getElementById('maintenancePlan').textContent
+    };
+    emailjs.send('service_default', 'template_maintenance', templateParams)
+        .then(() => { alert('Message envoyé !'); closeMaintenanceModal(); this.reset(); })
+        .catch(() => alert('Erreur lors de l\'envoi'));
+});
+</script>
+
+</body>
+
+</body>
+</html>

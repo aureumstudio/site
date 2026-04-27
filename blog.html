@@ -1,0 +1,873 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aureum - Blog</title>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <script type="text/javascript">
+        (function() {
+            emailjs.init("TON_PUBLIC_KEY");
+        })();
+    </script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+        
+        body { 
+            font-family: 'Inter', sans-serif; 
+            background-color: #ffffff; 
+            color: #111;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        .logo-text {
+            font-family: 'Inter', sans-serif;
+            font-weight: 500;
+            font-size: 16.92px;
+            letter-spacing: -0.02em;
+            color: #000;
+            margin-top: 5px;
+        }
+
+        .logogram {
+            width: 24px;
+            height: 21px;
+            flex: none;
+            order: 0;
+            flex-grow: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .btn-action {
+            margin-top: 2px;
+            background-color: #000;
+            color: #fff;
+            border: none;
+            border-radius: 16px;
+            padding: 8px 20px;
+            font-size: 12px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        .btn-action:hover {
+            background-color: #333;
+        }
+
+        .dropdown { position: relative; margin-top: -1px; }
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            min-width: 160px;
+            padding: 8px 0;
+            z-index: 50;
+        }
+        .dropdown:hover .dropdown-menu { display: block; }
+        .dropdown-item {
+            display: block;
+            padding: 10px 16px;
+            color: #000;
+            font-size: 14px;
+            text-decoration: none;
+            transition: background 0.2s;
+        }
+        .dropdown-item:hover { background: #f3f4f6; }
+        .dropdown-item:first-child { border-radius: 8px 8px 0 0; }
+        .dropdown-item:last-child { border-radius: 0 0 8px 8px; }
+
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.5);
+            z-index: 100;
+            align-items: center;
+            justify-content: center;
+        }
+        .modal-overlay.active { display: flex; }
+        .modal-content {
+            background: white;
+            border-radius: 12px;
+            padding: 24px;
+            max-width: 520px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+            scrollbar-width: none;
+            position: relative;
+            animation: modalIn 0.3s ease;
+        }
+        .modal-content::-webkit-scrollbar { display: none; }
+        @keyframes modalIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .modal-close {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: #666;
+        }
+        .form-group { margin-bottom: 16px; }
+        .form-group label {
+            display: block;
+            font-size: 14px;
+            font-weight: 500;
+            margin-bottom: 6px;
+            color: #111;
+        }
+        .checkbox-group {
+            display: flex !important;
+            flex-direction: column !important;
+            gap: 12px !important;
+        }
+        .checkbox-group label {
+            display: flex !important;
+            align-items: center !important;
+            gap: 12px !important;
+            font-weight: 400 !important;
+            font-size: 14px !important;
+            cursor: pointer !important;
+            margin-bottom: 0 !important;
+        }
+        .checkbox-group input[type="checkbox"] {
+            width: 18px !important;
+            height: 18px !important;
+            margin: 0 !important;
+            cursor: pointer;
+        }
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            font-size: 14px;
+            font-family: inherit;
+        }
+        .form-group textarea { resize: vertical; min-height: 100px; }
+        .form-submit {
+            width: 100%;
+            background: #000;
+            color: white;
+            border: none;
+            padding: 14px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .form-submit:hover { background: #333; }
+        .modal-note {
+            font-size: 12px;
+            color: #666;
+            margin-top: 12px;
+            text-align: center;
+        }
+
+        .nav-link { color: #000; font-size: 14px; transition: color 0.2s; }
+        .nav-link.active { color: #000; font-weight: 600; }
+
+        /* Styles du blog */
+        :root {
+            --bg-body: #f1f3f6;
+            --white: #ffffff;
+            --primary: #6346ff;
+            --text-main: #2d3436;
+            --text-light: #636e72;
+            --shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+            --radius: 20px;
+        }
+
+        .blog-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+
+        .blog-header h1 {
+            font-size: 22px;
+            font-weight: 700;
+        }
+
+        .article-count {
+            padding: 4px 12px;
+            border-radius: 6px;
+            font-size: 13px;
+            font-weight: 600;
+            color: #2d3436;
+        }
+
+        .card {
+            background: var(--white);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.2s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        .card-img {
+            background-color: #ffffff;
+            overflow: hidden;
+        }
+
+        .card-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .card-body {
+            padding: 25px;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+
+        .category {
+            color: var(--primary);
+            font-size: 10px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 5px;
+        }
+
+        .date {
+            font-size: 11px;
+            color: var(--text-light);
+            margin-bottom: 12px;
+            text-align: right;
+        }
+
+        .card-title {
+            font-size: 18px;
+            font-weight: 700;
+            line-height: 1.3;
+            margin-bottom: 12px;
+        }
+
+        .card-text {
+            font-size: 13px;
+            color: var(--text-light);
+            line-height: 1.5;
+            margin-bottom: 20px;
+        }
+
+        .card-footer {
+            margin-top: auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .author {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .author-img {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: #eee;
+        }
+
+        .author-info {
+            font-size: 11px;
+            line-height: 1.2;
+        }
+
+        .author-info strong {
+            display: block;
+            font-size: 12px;
+        }
+
+        .btn-read {
+            border: 1.5px solid var(--primary);
+            background: transparent;
+            color: var(--primary);
+            padding: 6px 20px;
+            border-radius: 25px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .btn-read:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        .featured-card {
+            flex-direction: row;
+            margin-bottom: 30px;
+            height: 280px;
+        }
+
+        .featured-card .card-img {
+            width: 40%;
+        }
+
+        .featured-card .card-img img {
+            object-fit: contain;
+        }
+
+        .featured-card .card-body {
+            width: 60%;
+        }
+
+        .news-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+        }
+
+        @media (max-width: 900px) {
+            .news-grid { grid-template-columns: repeat(2, 1fr); }
+            .featured-card { flex-direction: column; height: auto; }
+            .featured-card .card-img, .featured-card .card-body { width: 100%; }
+        }
+
+        @media (max-width: 600px) {
+            .news-grid { grid-template-columns: 1fr; }
+        }
+
+        footer {
+            background: #f9fafb;
+            padding: 60px 0 40px;
+            margin-top: 60px;
+        }
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 48px;
+        }
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        .footer-brand p {
+            font-size: 14px;
+            color: #666;
+            margin-top: 12px;
+            max-width: 300px;
+        }
+        .footer-title {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 16px;
+        }
+        .footer-links {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        .footer-links a {
+            font-size: 14px;
+            color: #666;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        .footer-links a:hover { color: #000; }
+        .footer-bottom {
+            border-top: 1px solid #e5e7eb;
+            padding-top: 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .footer-copyright {
+            font-size: 12px;
+            color: #666;
+        }
+        .footer-social {
+            display: flex;
+            gap: 16px;
+        }
+        .footer-social a {
+            color: #666;
+            font-size: 18px;
+            transition: color 0.2s;
+        }
+        .footer-social a:hover { color: #000; }
+    </style>
+</head>
+<body class="antialiased">
+
+    <header class="flex justify-between items-center px-12 py-8 max-w-7xl mx-auto w-full">
+        <div class="flex items-center gap-2 w-[113px]">
+            <div class="logogram">
+                <svg width="24" height="21" viewBox="0 0 24 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21.0499 2.33172e-08L23.6857 4.54943L21.0499 9.09886H15.7784L13.1426 4.54943L15.7784 0L21.0499 2.33172e-08Z" fill="black"/>
+                    <path d="M7.90734 2.33172e-08L17.0784 15.8147L14.4426 20.3641H9.17107L0 4.54943L2.63578 0L7.90734 2.33172e-08Z" fill="black"/>
+                </svg>
+            </div>
+            <span class="logo-text">Aureum</span>
+        </div>
+        
+        <nav class="hidden md:flex gap-8">
+            <a href="accueil.html" class="nav-link">Accueil</a>
+            <a href="avantages.html" class="nav-link">Avantages</a>
+            <div class="dropdown">
+                <a href="#" class="nav-link">Services ▾</a>
+                <div class="dropdown-menu">
+                    <a href="maintenance.html" class="dropdown-item">Maintenance</a>
+                    <a href="siteweb.html" class="dropdown-item">Site web</a>
+                    <a href="referencement.html" class="dropdown-item">Référencement</a>
+                </div>
+            </div>
+            <a href="blog.html" class="nav-link active">Blog</a>
+        </nav>
+
+        <button class="btn-action" onclick="openModal()">
+            Passer à l'action
+        </button>
+    </header>
+<feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+<feOffset dy="8.45926"/>
+<feGaussianBlur stdDeviation="5.07556"/>
+<feComposite in2="hardAlpha" operator="arithmetic" k2="-1" k3="1"/>
+<feColorMatrix type="matrix" values="0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.26 0"/>
+<feBlend mode="normal" in2="shape" result="effect1_innerShadow_7935_1415"/>
+</filter>
+<linearGradient id="paint0_linear_7935_1415" x1="56.1511" y1="0" x2="56.1511" y2="31.5348" gradientUnits="userSpaceOnUse">
+<stop stop-color="white" stop-opacity="0.2"/>
+<stop offset="1" stop-color="white" stop-opacity="0.07"/>
+</linearGradient>
+</defs>
+</svg>
+
+
+        </button>
+    </header>
+
+    <div class="container" style="max-width: 1100px; margin: 0 auto; padding: 40px 20px;">
+        <div class="blog-header">
+            <h1>Toutes les actualités</h1>
+            <span class="article-count">4 Articles</span>
+        </div>
+
+    <article class="card featured-card">
+        <div class="card-img">
+            <img src="https://i.ibb.co/0yXKqzK1/Chat-GPT-Image-27-avr-2026-01-05-46.png" alt="SEO">
+        </div>
+        <div class="card-body">
+            <div style="display: flex; justify-content: space-between; align-items: baseline;">
+                <span class="category">SEO</span>
+                <span class="date">28 janvier 2026</span>
+            </div>
+            <h2 class="card-title">Qu’est-ce que le SEO ? : guide pour débutants</h2>
+            <p class="card-text">Découvrez les bases essentielles du référencement naturel (SEO), son fonctionnement sur Google, et les meilleures pratiques pour améliorer la visibilité de votre site, attirer un trafic qualifié et développer votre présence en ligne durablement.</p>
+            <div class="card-footer">
+                    <button class="btn-read" onclick="openArticleModal('article-seo')">Lire</button>
+                </div>
+        </div>
+    </article>
+
+    <div class="news-grid mb-12">
+        
+        <article class="card">
+            <div class="card-img" style="height: 180px;">
+                <img src="https://i.ibb.co/vxKGMsZW/Chat-GPT-Image-27-avr-2026-01-12-08.png" alt="Shopify">
+            </div>
+            <div class="card-body">
+                <div style="display: flex; justify-content: space-between; align-items: baseline;">
+                    <span class="category">Marketing digital</span>
+                    <span class="date">24 octobre 2025</span>
+                </div>
+                <h3 class="card-title">Comment un site peut rapporter de l’argent ?</h3>
+                <p class="card-text">Découvrez comment un site web peut générer des revenus de manière concrète et durable.</p>
+                <div class="card-footer">
+                    <button class="btn-read" onclick="openArticleModal('article-1')">Lire</button>
+                </div>
+            </div>
+        </article>
+
+        <article class="card">
+            <div class="card-img" style="height: 180px;">
+                <img src="https://i.ibb.co/TxkNg46X/be56285a-9d34-492e-9551-d37e3d0bdc5a.png" alt="Web dev">
+            </div>
+            <div class="card-body">
+                <div style="display: flex; justify-content: space-between; align-items: baseline;">
+                    <span class="category">Optimisation web</span>
+                    <span class="date">19 novembre 2025</span>
+                </div>
+                <h3 class="card-title">Pourquoi avoir un site web en 2026 ?</h3>
+                <p class="card-text">Découvrez pourquoi un site web est devenu essentiel pour développer votre présence en ligne.</p>
+                <div class="card-footer">
+                    <button class="btn-read" onclick="openArticleModal('article-2')">Lire</button>
+                </div>
+            </div>
+        </article>
+
+        <article class="card">
+            <div class="card-img" style="height: 180px;">
+                <img src="https://public-images.interaction-design.org/tags/article-what-is-mobile-first-cover.png" alt="Agence">
+            </div>
+            <div class="card-body">
+                <div style="display: flex; justify-content: space-between; align-items: baseline;">
+                    <span class="category">Actualité</span>
+                    <span class="date">18 octobre 2025</span>
+                </div>
+                <h3 class="card-title">Pourquoi un site doit être optimisé mobile ?</h3>
+                <p class="card-text">Découvrez pourquoi un site doit être parfaitement adapté au mobile.</p>
+                <div class="card-footer">
+                    <button class="btn-read" onclick="openArticleModal('article-3')">Lire</button>
+                </div>
+            </div>
+        </article>
+
+    </div>
+</div>
+
+<!-- Footer -->
+<footer>
+    <div class="footer-content">
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <div class="flex items-center gap-2">
+                    <div class="logogram">
+                        <svg width="24" height="21" viewBox="0 0 24 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M21.0499 2.33172e-08L23.6857 4.54943L21.0499 9.09886H15.7784L13.1426 4.54943L15.7784 0L21.0499 2.33172e-08Z" fill="black"/>
+                            <path d="M7.90734 2.33172e-08L17.0784 15.8147L14.4426 20.3641H9.17107L0 4.54943L2.63578 0L7.90734 2.33172e-08Z" fill="black"/>
+                        </svg>
+                    </div>
+                    <span class="logo-text">Aureum</span>
+                </div>
+                <p>Agence web spécialisée dans la création de sites performants et le référencement SEO.</p>
+            </div>
+            <div>
+                <h4 class="footer-title">Services</h4>
+                <div class="footer-links">
+                    <a href="siteweb.html">Création de sites</a>
+                    <a href="referencement.html">Référencement</a>
+                    <a href="maintenance.html">Maintenance</a>
+                </div>
+            </div>
+            <div>
+                <h4 class="footer-title">Entreprise</h4>
+                <div class="footer-links">
+                    <a href="blog.html">Blog</a>
+                    <a href="contact.html">Contact</a>
+
+                </div>
+            </div>
+            <div>
+                <h4 class="footer-title">Légal</h4>
+                <div class="footer-links">
+                    <a href="#">Mentions légales</a>
+                    <a href="#">Confidentialité</a>
+                    <a href="#">CGV</a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <span class="footer-copyright">© 2026 Aureum. Tous droits réservés.</span>
+            <div class="footer-social">
+                <a href="https://instagram.com/aureumstudio.officiel" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+                <a href="#"></a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script>
+    // Données des articles
+    const articlesData = {
+        'article-seo': {
+            title: 'Qu’est-ce que le SEO ? : guide pour débutants',
+            category: 'SEO',
+            date: '28 janvier 2026',
+            content: `
+                <p style="font-size: 14px; line-height: 1.6; margin-bottom: 16px;">Découvrez les bases essentielles du référencement naturel (SEO), son fonctionnement sur Google, et les meilleures pratiques pour améliorer la visibilité de votre site, attirer un trafic qualifié et développer votre présence en ligne durablement.</p>
+                
+                <h2 style="font-size: 16px; font-weight: 700; margin: 24px 0 12px; color: #000;">Le SEO, c’est quoi ?</h2>
+                <p style="font-size: 14px; line-height: 1.6; margin-bottom: 16px;">Le SEO (Search Engine Optimization), ou référencement naturel, regroupe toutes les techniques qui permettent d’améliorer la visibilité d’un site sur les moteurs de recherche comme Google.</p>
+                <p style="font-size: 14px; line-height: 1.6; margin-bottom: 16px;">L’objectif est d’apparaître dans les premiers résultats lorsqu’une personne effectue une recherche liée à votre activité.</p>
+                
+                <h2 style="font-size: 16px; font-weight: 700; margin: 24px 0 12px; color: #000;">Pourquoi le SEO est important</h2>
+                <p style="font-size: 14px; line-height: 1.6; margin-bottom: 16px;">La majorité des utilisateurs cliquent uniquement sur les premiers résultats de recherche. Si votre site n’est pas bien positionné, il reste peu visible, même s’il est de bonne qualité.</p>
+                <p style="font-size: 14px; line-height: 1.6; margin-bottom: 16px;">Le SEO permet donc d’attirer des visiteurs sans payer de publicité.</p>
+                
+                <h2 style="font-size: 16px; font-weight: 700; margin: 24px 0 12px; color: #000;">Comment Google classe les sites</h2>
+                <p style="font-size: 14px; line-height: 1.6; margin-bottom: 12px;">Google analyse plusieurs éléments pour décider du classement d’un site :</p>
+                <ul style="font-size: 14px; line-height: 1.6; margin-bottom: 16px; padding-left: 20px; list-style-type: disc;">
+                    <li>la qualité du contenu</li>
+                    <li>la structure des pages</li>
+                    <li>la rapidité du site</li>
+                    <li>l’expérience utilisateur</li>
+                    <li>la pertinence des mots-clés</li>
+                </ul>
+                <p style="font-size: 14px; line-height: 1.6; margin-bottom: 16px;">Un site bien optimisé a plus de chances d’apparaître en haut des résultats.</p>
+                
+                <h2 style="font-size: 16px; font-weight: 700; margin: 24px 0 12px; color: #000;">Les bases du SEO</h2>
+                <p style="font-size: 14px; line-height: 1.6; margin-bottom: 12px;">Pour bien débuter, il est important de comprendre quelques fondamentaux :</p>
+                <ul style="font-size: 14px; line-height: 1.6; margin-bottom: 16px; padding-left: 20px; list-style-type: disc;">
+                    <li>utiliser des mots-clés pertinents</li>
+                    <li>écrire du contenu clair et utile</li>
+                    <li>structurer correctement les pages</li>
+                    <li>optimiser les titres et descriptions</li>
+                    <li>améliorer la vitesse du site</li>
+                </ul>
+                
+                <h2 style="font-size: 16px; font-weight: 700; margin: 24px 0 12px; color: #000;">SEO et visibilité sur internet</h2>
+                <p style="font-size: 14px; line-height: 1.6; margin-bottom: 16px;">Un bon référencement permet d’obtenir un trafic régulier et qualifié. Cela signifie que les visiteurs sont réellement intéressés par vos services ou produits.</p>
+                <p style="font-size: 14px; line-height: 1.6; margin-bottom: 16px;">C’est un levier important pour développer une activité sur le long terme.</p>
+                
+                <h2 style="font-size: 16px; font-weight: 700; margin: 24px 0 12px; color: #000;">Conclusion</h2>
+                <p style="font-size: 14px; line-height: 1.6; margin-bottom: 16px;">Le SEO est un élément essentiel pour rendre un site visible sur internet.</p>
+                <p style="font-size: 14px; line-height: 1.6;">Comprendre ses bases permet déjà d’améliorer les performances d’un site et d’attirer plus de visiteurs.</p>
+            `
+        },
+        'article-1': {
+            title: 'Comment un site peut rapporter de l\'argent ?',
+            category: 'Marketing digital',
+            date: '24 octobre 2025',
+            content: `
+                <p style="font-size: 14px; line-height: 1.6; margin-bottom: 16px;">Un site internet ne sert pas uniquement à présenter une activité. Lorsqu'il est bien conçu, il devient un véritable outil capable de générer des revenus de façon continue et durable.</p>
+                <p style="font-size: 14px; line-height: 1.6; margin-bottom: 16px;">Il permet de transformer des visiteurs en clients, sans avoir besoin d'être disponible en permanence.</p>
+                
+                <h2 style="font-size: 16px; font-weight: 700; margin: 24px 0 12px; color: #000;">Vendre directement en ligne</h2>
+                <p style="font-size: 14px; line-height: 1.6; margin-bottom: 12px;">Un site peut permettre de vendre différents types de produits ou services :</p>
+                <ul style="font-size: 14px; line-height: 1.6; margin-bottom: 16px; padding-left: 20px; list-style-type: disc;">
+                    <li>des produits physiques</li>
+                    <li>des prestations</li>
+                    <li>des contenus numériques</li>
+                </ul>
+                <p style="font-size: 14px; line-height: 1.6; margin-bottom: 16px;">Avec une structure claire et un parcours d'achat simple, les visiteurs peuvent passer commande de manière autonome.</p>
+                
+                <h2 style="font-size: 16px; font-weight: 700; margin: 24px 0 12px; color: #000;">Générer des demandes de contact</h2>
+                <p style="font-size: 14px; line-height: 1.6; margin-bottom: 16px;">Même sans vente directe, un site peut rapporter de l'argent en captant de nouveaux clients.</p>
+                <p style="font-size: 14px; line-height: 1.6; margin-bottom: 16px;">Un formulaire de contact ou une demande de devis permet de transformer une simple visite en opportunité commerciale. C'est souvent le cas pour les artisans, les indépendants ou les entreprises locales.</p>
+                <h2 style="font-size: 16px; font-weight: 700; margin: 24px 0 12px; color: #000;">Attirer du trafic qualifié</h2>
+                <p style="font-size: 14px; line-height: 1.6; margin-bottom: 16px;">Un site bien référencé sur Google attire des personnes déjà intéressées par vos solutions.</p>
+                <p style="font-size: 14px; line-height: 1.6; margin-bottom: 16px;">Cela permet d'obtenir du trafic régulier sans dépendre uniquement de la publicité. Plus le site est visible, plus les chances de générer des revenus augmentent.</p>
+                
+                <h2 style="font-size: 16px; font-weight: 700; margin: 24px 0 12px; color: #000;">Améliorer la conversion</h2>
+                <p style="font-size: 14px; line-height: 1.6; margin-bottom: 16px;">Avoir des visiteurs ne suffit pas. Le site doit être conçu pour inciter à passer à l'action. Cela passe par :</p>
+                <ul style="font-size: 14px; line-height: 1.6; margin-bottom: 16px; padding-left: 20px; list-style-type: disc;">
+                    <li>une structure claire</li>
+                    <li>des informations rassurantes</li>
+                    <li>des éléments visibles pour contacter ou acheter</li>
+                </ul>
+                <p style="font-size: 14px; line-height: 1.6; margin-bottom: 16px;">Chaque détail compte pour transformer une visite en client.</p>
+                
+                <h2 style="font-size: 16px; font-weight: 700; margin: 24px 0 12px; color: #000;">Automatiser certaines tâches</h2>
+                <p style="font-size: 14px; line-height: 1.6; margin-bottom: 16px;">Un site peut aussi simplifier la gestion quotidienne, par exemple :</p>
+                <ul style="font-size: 14px; line-height: 1.6; margin-bottom: 16px; padding-left: 20px; list-style-type: disc;">
+                    <li>prise de rendez-vous</li>
+                    <li>réception des demandes</li>
+                    <li>envoi d'informations</li>
+                </ul>
+                <p style="font-size: 14px; line-height: 1.6; margin-bottom: 16px;">Cela permet de gagner du temps tout en continuant à générer des opportunités.</p>
+                
+                <h2 style="font-size: 16px; font-weight: 700; margin: 24px 0 12px; color: #000;">Conclusion</h2>
+                <p style="font-size: 14px; line-height: 1.6; margin-bottom: 16px;">Un site web peut générer des revenus de plusieurs façons : en vendant, en attirant des clients ou en facilitant la prise de contact.</p>
+                <p style="font-size: 14px; line-height: 1.6;">Tout dépend de sa conception. Un site bien pensé devient rapidement un levier de croissance indispensable.</p>
+            `
+        },
+        'article-2': {
+            title: 'Pourquoi avoir un site web en 2026 ?',
+            category: 'Optimisation web',
+            date: '19 novembre 2025',
+            content: `
+                <p style="font-size: 14px; line-height: 1.6; margin-bottom: 16px;">Aujourd'hui, la majorité des personnes recherchent des informations sur internet avant de choisir un service ou un produit. Ne pas avoir de site web, c'est risquer de ne pas exister aux yeux de nombreux clients potentiels.</p>
+                
+                <h2 style="font-size: 16px; font-weight: 700; margin: 24px 0 12px; color: #000;">Un outil de crédibilité</h2>
+                <p style="font-size: 14px; line-height: 1.6; margin-bottom: 16px;">Un site web professionnel renforce la confiance. Il montre que votre activité est sérieuse et structurée.</p>
+                <p style="font-size: 14px; line-height: 1.6; margin-bottom: 16px;">Vous pouvez présenter vos services, vos réalisations, vos informations de contact et rassurer les visiteurs.</p>
+                
+                <h2 style="font-size: 16px; font-weight: 700; margin: 24px 0 12px; color: #000;">Une vitrine ouverte 24h/24</h2>
+                <p style="font-size: 14px; line-height: 1.6; margin-bottom: 16px;">Un site permet d'être visible à tout moment, sans contrainte d'horaire. Vos clients peuvent s'informer même quand vous ne travaillez pas.</p>
+                
+                <h2 style="font-size: 16px; font-weight: 700; margin: 24px 0 12px; color: #000;">Centraliser ses informations</h2>
+                <p style="font-size: 14px; line-height: 1.6; margin-bottom: 12px;">Un site web regroupe toutes les informations importantes :</p>                <ul style="font-size: 14px; line-height: 1.6; margin-bottom: 16px; padding-left: 20px; list-style-type: disc;">
+                    <li>vos services détaillés</li>
+                    <li>vos coordonnées exactes</li>
+                    <li>vos horaires et réalisations</li>
+                </ul>
+                
+                <h2 style="font-size: 16px; font-weight: 700; margin: 24px 0 12px; color: #000;">Conclusion</h2>
+                <p style="font-size: 14px; line-height: 1.6; margin-bottom: 16px;">Avoir un site web en 2026 est devenu essentiel pour être visible, crédible et accessible.</p>
+                <p style="font-size: 14px; line-height: 1.6;">C'est un support stable qui vous appartient entièrement, contrairement aux réseaux sociaux.</p>
+            `
+        },
+        'article-3': {
+            title: 'Pourquoi un site doit être optimisé mobile ?',
+            category: 'Actualité',
+            date: '18 octobre 2025',
+            content: `
+                <p style="font-size: 14px; line-height: 1.6; margin-bottom: 16px;"><strong>Le mobile est devenu le premier écran utilisé</strong></p>
+                <p style="font-size: 14px; line-height: 1.6; margin-bottom: 16px;">Aujourd'hui, la majorité des visiteurs naviguent sur internet depuis leur téléphone. Un site qui n'est pas adapté au mobile perd immédiatement une grande partie de son audience.</p>
+                <p style="font-size: 14px; line-height: 1.6; margin-bottom: 16px;">L'expérience mobile est donc devenue essentielle.</p>
+                
+                <h4 style="font-size: 14px; font-weight: 600; margin: 20px 0 12px;">Une meilleure expérience pour les visiteurs</h4>
+                <p style="font-size: 14px; line-height: 1.6; margin-bottom: 12px;">Un site optimisé mobile est plus simple à utiliser :</p>
+                <ul style="font-size: 14px; line-height: 1.6; margin-bottom: 16px; padding-left: 20px; list-style-type: disc;">
+                    <li>texte lisible sans zoom</li>
+                    <li>boutons accessibles</li>
+                    <li>navigation fluide</li>
+                </ul>
+                <p style="font-size: 14px; line-height: 1.6; margin-bottom: 16px;">Cela permet aux visiteurs de trouver rapidement ce qu'ils cherchent.</p>
+                
+                <h4 style="font-size: 14px; font-weight: 600; margin: 20px 0 12px;">Un impact direct sur le référencement</h4>
+                <p style="font-size: 14px; line-height: 1.6; margin-bottom: 16px;">Les moteurs de recherche prennent en compte la version mobile des sites pour le classement.</p>
+                <p style="font-size: 14px; line-height: 1.6; margin-bottom: 16px;">Un site non optimisé peut être pénalisé et apparaître plus bas dans les résultats.</p>
+                
+                <h4 style="font-size: 14px; font-weight: 600; margin: 20px 0 12px;">Plus de conversions</h4>
+                <p style="font-size: 14px; line-height: 1.6; margin-bottom: 12px;">Un site adapté au mobile augmente les chances qu'un visiteur passe à l'action :</p>
+                <ul style="font-size: 14px; line-height: 1.6; margin-bottom: 16px; padding-left: 20px; list-style-type: disc;">
+                    <li>contact</li>
+                    <li>achat</li>
+                    <li>demande de devis</li>
+                </ul>
+                <p style="font-size: 14px; line-height: 1.6; margin-bottom: 16px;">Une navigation compliquée fait souvent perdre des clients.</p>
+                
+                <h4 style="font-size: 14px; font-weight: 600; margin: 20px 0 12px;">Une image plus professionnelle</h4>
+                <p style="font-size: 14px; line-height: 1.6; margin-bottom: 16px;">Un site mobile bien conçu renvoie une image sérieuse et moderne.</p>
+                <p style="font-size: 14px; line-height: 1.6; margin-bottom: 16px;">À l'inverse, un site mal adapté peut donner une impression de manque de professionnalisme.</p>
+                
+                <h4 style="font-size: 14px; font-weight: 600; margin: 20px 0 12px;">Conclusion</h4>
+                <p style="font-size: 14px; line-height: 1.6;">L'optimisation mobile n'est plus une option. C'est une condition essentielle pour offrir une bonne expérience, être visible sur internet et générer des résultats.</p>
+            `
+        }
+    };
+
+    // Fonction pour ouvrir la popup d'article
+    function openArticleModal(articleId) {
+        const article = articlesData[articleId];
+        if (!article) return;
+
+        const modal = document.createElement('div');
+        modal.className = 'article-modal-overlay';
+        modal.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:1000;display:flex;align-items:center;justify-content:center;';
+        
+        modal.innerHTML = `
+            <div class="article-modal-content" style="background:white;border-radius:12px;padding:32px;max-width:700px;width:90%;max-height:80vh;overflow-y:auto;position:relative;animation:modalIn 0.3s ease;scrollbar-width:none;-ms-overflow-style:none;">
+                <button class="article-modal-close" onclick="closeArticleModal()" style="position:absolute;top:16px;right:16px;background:none;border:none;font-size:28px;cursor:pointer;color:#666;">&times;</button>
+                <span class="category" style="color:var(--primary);font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;">${article.category}</span>
+                <span style="font-size:12px;color:#666;margin-left:12px;">${article.date}</span>
+                <h2 style="font-size:24px;font-weight:700;margin:12px 0 20px;line-height:1.3;">${article.title}</h2>
+                <div style="font-size:14px;line-height:1.6;color:#333;">${article.content}</div>
+            </div>
+            <style>
+                .article-modal-content::-webkit-scrollbar { display: none; }
+            </style>
+        `;
+
+        document.body.appendChild(modal);
+        
+        // Fermer en cliquant à l'extérieur
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) closeArticleModal();
+        });
+    }
+
+    function closeArticleModal() {
+        const modal = document.querySelector('.article-modal-overlay');
+        if (modal) modal.remove();
+    }
+
+    // Fonctions pour le Modal de Contact (Passer à l'action)
+    function openModal() {
+        document.getElementById('contactModal').classList.add('active');
+        document.body.style.overflow = 'hidden';
+        showContactOptions(); // Reset à l'ouverture
+    }
+
+    function closeModal() {
+        document.getElementById('contactModal').classList.remove('active');
+        document.body.style.overflow = '';
+    }
+
+    function showContactOptions() {s
+        document.querySelector('#contactModal .contact-options').style.display = 'flex';
+        document.getElementById('whatsappForm').style.display = 'none';
+        document.getElementById('contactForm').style.display = 'none';
+    }
+
+    function showWhatsAppForm() {
+        document.querySelector('#contactModal .contact-options').style.display = 'none';
+        document.getElementById('contactForm').style.display = 'none';
+        document.getElementById('whatsappForm').style.display = 'block';
+    }
+
+    function showContactForm() {
+        document.querySelector('#contactModal .contact-options').style.display = 'none';
+        document.getElementById('whatsappForm').style.display = 'none';
+        document.getElementById('contactForm').style.display = 'block';
+    }
+
+    function sendViaWhatsApp() {
+        const phone = document.getElementById('whatsappNumber').value;
+        const message = document.getElementById('whatsappMessage').value;
+        if (!phone) { alert('Veuillez entrer votre numéro WhatsApp'); return; }
+        const waMessage = encodeURIComponent(message || 'Bonjour, je souhaite être contacté sur WhatsApp.');
+        window.open('https://wa.me/33' + phone.replace(/\D/g, '') + '?text=' + waMessage, '_blank');
+        closeModal();
+    }
+
+    function submitForm(e) {
+        e.preventDefault();
+        
+        const services = [];
+        e.target.querySelectorAll('input[name="service"]:checked').forEach(cb => services.push(cb.value));
+
+        const templateParams = {
+            from_name: e.target.name.value,
+            from_email: e.target.email.value,
+            message: e.target.message.value,
+            service_type: services.join(', ') || 'Non précisé',
+            to_email: "contact@aureumstudio.fr"
+        };
+
+        emailjs.send("service_default", "template_contact", templateParams)
+            .then(function() {
+                alert('Merci ! Votre demande a été envoyée. Un expert vous contactera sous 24h.');
+                closeModal();
+                e.target.reset();
+            })
+            .catch(function(err) {
+                alert('Erreur lors de l\'envoi. Veuillez réessayer.');
+            });
+    }
+
+    document.getElementById('contactModal').addEventListener('click', function(e) {
+        if (e.target === document.getElementById('contactModal')) closeModal();
+    });
+</script>
+
+</body>
+</html>
