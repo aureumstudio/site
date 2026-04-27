@@ -476,7 +476,7 @@
 window.addEventListener("pageshow", function () {
     const loader = document.getElementById("loader-overlay");
 
-    // Vérifie si on a déjà visité accueil.html
+    // Vérifie si on a déjà visité index.html
     if (localStorage.getItem("accueilLoaderShown")) {
         // Cache immédiatement avec fondu
         loader.style.transition = "opacity 0.5s ease";
@@ -490,7 +490,7 @@ window.addEventListener("pageshow", function () {
         return;
     }
 
-    // Première ouverture de accueil.html
+    // Première ouverture de index.html
     localStorage.setItem("accueilLoaderShown", "true");
 
     // Affiche le loader puis le masque
@@ -522,7 +522,7 @@ window.addEventListener("pageshow", function () {
         </div>
         
         <nav class="hidden md:flex gap-8">
-            <a href="accueil.html" class="nav-link active">Accueil</a>
+            <a href="index.html" class="nav-link active">Accueil</a>
             <a href="avantages.html" class="nav-link">Avantages</a>
             <div class="dropdown">
                 <a href="#" class="nav-link">Services ▾</a>
