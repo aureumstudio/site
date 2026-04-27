@@ -13,6 +13,16 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"/>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <script>
+        document.addEventListener('mousemove', function(e) {
+            const svg = document.getElementById('svgPattern');
+            if (svg) {
+                const x = (window.innerWidth / 2 - e.clientX) / 40;
+                const y = (window.innerHeight / 2 - e.clientY) / 40;
+                svg.style.transform = `translate(calc(-50% + ${x}px), ${y}px)`;
+            }
+        });
+    </script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
         
@@ -863,7 +873,21 @@ window.addEventListener("pageshow", function () {
         body { font-family: 'Inter', sans-serif; background-color: #FFFFFF; }
         h2, h3 { font-family: 'Playfair Display', serif; }
     </style>
- <section class="max-w-6xl mx-auto text-center pt-24 pb-8">
+ <section class="max-w-6xl mx-auto text-center pt-24 pb-8" style="position: relative;">
+        <!-- SVG Background Pattern -->
+        <svg id="svgPattern" style="position: absolute; top: 50px;left: 50%; width: 100%; max-width: 1218px; height: auto; opacity: 0.4; z-index: -1;" viewBox="0 0 1218 299" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g clip-path="url(#clip0_8038_245)">
+<path d="M666.265 272.181L738.388 147.107L666.265 22.0324H522.019L449.896 147.107L522.019 272.181L666.265 272.181Z" stroke="#A9A9A9" stroke-width="0.845926" stroke-dasharray="10.15 10.15"/>
+<path d="M223.187 399.097L476.158 -36.225L403.454 -161.455H258.045L5.0752 273.867L77.7792 399.097L223.187 399.097Z" stroke="#A9A9A9" stroke-width="0.845926" stroke-dasharray="10.15 10.15"/>
+<path d="M963.626 398.431L710.656 -36.8909L783.36 -162.12H928.768L1181.74 273.201L1109.03 398.431L963.626 398.431Z" stroke="#A9A9A9" stroke-width="0.845926" stroke-dasharray="10.15 10.15"/>
+</g>
+<defs>
+<clipPath id="clip0_8038_245">
+<rect width="1218.13" height="589.61" fill="white" transform="matrix(1 0 0 -1 0 589.61)"/>
+</clipPath>
+</defs>
+</svg>
+        
         <h2 class="text-4xl md:text-5xl font-bold text-black mb-4">Ce que nous faisons de mieux.</h2>
         <p class="text-gray-500 font-light mb-16 tracking-wide">
             L'alliance parfaite entre esthétique premium, persuasion et technologie.
@@ -1029,8 +1053,6 @@ window.addEventListener("pageshow", function () {
         }
 
         .as-card:hover .as-heart { fill: #ff3b30; }
-
-        .as-viewport:hover .as-track { animation-play-state: paused; }
     </style>
 
     <div class="as-header">
@@ -1790,7 +1812,7 @@ window.addEventListener("pageshow", function () {
                     </div>
                 </a>
                 
-                <div class="contact-option" onclick="showWhatsAppForm()">
+                <a href="https://api.whatsapp.com/send/?phone=33766226733&text&type=phone_number&app_absent=0" target="_blank" class="contact-option">
                     <div class="contact-icon"><i class="fa-brands fa-whatsapp"></i></div>
                     <div class="contact-info">
                         <span class="contact-title">WhatsApp</span>
