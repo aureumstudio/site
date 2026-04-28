@@ -1,0 +1,2060 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aureum - Accueil</title>
+    <!-- Google Tag Manager -->
+<!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-MT5V00RNDY"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+    
+      gtag('config', 'G-MT5V00RNDY');
+    </script>
+    <!-- End Google Tag Manager -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <script type="text/javascript">
+        (function() {
+            emailjs.init("XtRKYh8VCdPh2_kVn");
+        })();
+    </script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="icon" type="image/png" href="logo.png">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <script>
+        document.addEventListener('mousemove', function(e) {
+            const svg = document.getElementById('svgPattern');
+            if (svg) {
+                const x = (window.innerWidth / 2 - e.clientX) / 40;
+                const y = (window.innerHeight / 2 - e.clientY) / 40;
+                svg.style.transform = `translate(calc(-50% + ${x}px), ${y}px)`;
+            }
+        });
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+        
+        body { 
+            font-family: 'Inter', sans-serif; 
+            background-color: #ffffff; 
+            color: #111; 
+        }
+
+        .logo-text {
+            font-family: 'Inter', sans-serif;
+            font-weight: 500;
+            font-size: 16.92px;
+            letter-spacing: -0.02em;
+            color: #000;
+            margin-top: 5px;
+        }
+
+        .logogram {
+            width: 24px;
+            height: 21px;
+            flex: none;
+            order: 0;
+            flex-grow: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .btn-action {
+            margin-top: 2px;
+            background-color: #000;
+            color: #fff;
+            border: none;
+            border-radius: 16px;
+            padding: 8px 20px;
+            font-size: 12px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        .btn-action:hover {
+            background-color: #333;
+        }
+
+        .dropdown { position: relative; margin-top: -1px; }
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            min-width: 160px;
+            padding: 8px 0;
+            z-index: 50;
+        }
+        .dropdown:hover .dropdown-menu { display: block; }
+        .dropdown-item {
+            display: block;
+            padding: 10px 16px;
+            color: #000;
+            font-size: 14px;
+            text-decoration: none;
+            transition: background 0.2s;
+        }
+        .dropdown-item:hover { background: #f3f4f6; }
+        .dropdown-item:first-child { border-radius: 8px 8px 0 0; }
+        .dropdown-item:last-child { border-radius: 0 0 8px 8px; }
+
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.5);
+            z-index: 100;
+            align-items: center;
+            justify-content: center;
+        }
+        .modal-overlay.active { display: flex; }
+        .modal-content {
+            background: white;
+            border-radius: 12px;
+            padding: 24px;
+            max-width: 520px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+            scrollbar-width: none;
+            position: relative;
+            animation: modalIn 0.3s ease;
+        }
+        .modal-content::-webkit-scrollbar { display: none; }
+        @keyframes modalIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .modal-close {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: #666;
+        }
+        .form-group { margin-bottom: 16px; }
+        .form-group label {
+            display: block;
+            font-size: 14px;
+            font-weight: 500;
+            margin-bottom: 6px;
+            color: #111;
+        }
+        .checkbox-group {
+            display: flex !important;
+            flex-direction: column !important;
+            gap: 12px !important;
+        }
+        .checkbox-group label {
+            display: flex !important;
+            align-items: center !important;
+            gap: 12px !important;
+            font-weight: 400 !important;
+            font-size: 14px !important;
+            cursor: pointer !important;
+            margin-bottom: 0 !important;
+        }
+        .checkbox-group input[type="checkbox"] {
+            width: 18px !important;
+            height: 18px !important;
+            margin: 0 !important;
+            cursor: pointer;
+        }
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            font-size: 14px;
+            font-family: inherit;
+        }
+        .form-group textarea { resize: vertical; min-height: 100px; }
+        .form-submit {
+            width: 100%;
+            background: #000;
+            color: white;
+            border: none;
+            padding: 14px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .form-submit:hover { background: #333; }
+        .modal-note {
+            font-size: 12px;
+            color: #666;
+            margin-top: 12px;
+            text-align: center;
+        }
+
+        .nav-link { color: #000; font-size: 14px; transition: color 0.2s; }
+        .nav-link.active { color: #000; font-weight: 500; }
+
+        .contact-options {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-bottom: 24px;
+        }
+        .contact-option {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding: 16px;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.2s;
+            text-decoration: none;
+            color: inherit;
+        }
+        .contact-option:hover { background: #f9fafb; }
+        .contact-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            background: #f3f4f6;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+        }
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+        }
+        .contact-title {
+            font-size: 14px;
+            font-weight: 600;
+        }
+        .contact-desc {
+            font-size: 12px;
+            color: #666;
+        }
+
+        .hero-section {
+            padding: 80px 0;
+            text-align: center;
+        }
+        .hero-title {
+            font-size: 48px;
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 24px;
+        }
+        .hero-subtitle {
+            font-size: 18px;
+            color: #666;
+            max-width: 600px;
+            margin: 0 auto 32px;
+        }
+        .hero-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: #000;
+            color: white;
+            padding: 16px 32px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 500;
+            text-decoration: none;
+            transition: background 0.2s;
+        }
+        .hero-cta:hover { background: #333; }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+            padding: 60px 0;
+        }
+        .feature-card {
+            padding: 32px;
+            border: 1px solid #e5e7eb;
+            border-radius: 12px;
+            text-align: center;
+        }
+        .feature-icon {
+            width: 64px;
+            height: 64px;
+            margin: 0 auto 16px;
+            background: #f3f4f6;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+        }
+        .feature-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+        .feature-desc {
+            font-size: 14px;
+            color: #666;
+        }
+
+        .cta-section {
+            background: #000;
+            color: white;
+            padding: 80px 0;
+            text-align: center;
+        }
+        .cta-title {
+            font-size: 32px;
+            font-weight: 600;
+            margin-bottom: 16px;
+        }
+        .cta-subtitle {
+            font-size: 16px;
+            opacity: 0.8;
+            margin-bottom: 32px;
+        }
+        .cta-button {
+            display: inline-block;
+            background: white;
+            color: #000;
+            padding: 16px 32px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 500;
+            text-decoration: none;
+            transition: background 0.2s;
+        }
+        .cta-button:hover { background: #f3f4f6; }
+
+        footer {
+            background: #f9fafb;
+            padding: 60px 0 40px;
+            margin-top: auto;
+        }
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 48px;
+        }
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        .footer-brand p {
+            font-size: 14px;
+            color: #666;
+            margin-top: 12px;
+            max-width: 300px;
+        }
+        .footer-title {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 16px;
+        }
+        .footer-links {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        .footer-links a {
+            font-size: 14px;
+            color: #666;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        .footer-links a:hover { color: #000; }
+        .footer-bottom {
+            border-top: 1px solid #e5e7eb;
+            padding-top: 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .footer-copyright {
+            font-size: 12px;
+            color: #666;
+        }
+        .footer-social {
+            display: flex;
+            gap: 16px;
+        }
+        .footer-social a {
+            color: #666;
+            font-size: 18px;
+            transition: color 0.2s;
+        }
+        .footer-social a:hover { color: #000; }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <style>
+        /* Ton code CSS avec les variables adaptées pour le navigateur */
+        :root {
+            --w: 96px;
+            --h: 112px;
+            --xspace: 48px; /* 96/2 */
+            --yspace: 27px; /* 112/4 - 1 */
+            --speed: 1.5s;
+        }
+
+        /* Conteneur pour masquer le site pendant le chargement */
+        #loader-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #ffffff; /* Tu peux changer la couleur de fond ici */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease;
+        }
+
+        .tetrominos {
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(calc(-1 * var(--h)), calc(-1 * var(--w)));
+        }
+
+        .tetromino {
+            width: var(--w);
+            height: var(--h);
+            position: absolute;
+            transition: all ease .3s;
+            background: url('data:image/svg+xml;utf-8,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 612 684"%3E%3Cpath fill="%23010101" d="M305.7 0L0 170.9v342.3L305.7 684 612 513.2V170.9L305.7 0z"/%3E%3Cpath fill="%23fff" d="M305.7 80.1l-233.6 131 233.6 131 234.2-131-234.2-131"/%3E%3C/svg%3E') no-repeat top center;
+        }
+
+        .box1 { animation: tetromino1 var(--speed) ease-out infinite; }
+        .box2 { animation: tetromino2 var(--speed) ease-out infinite; }
+        .box3 { animation: tetromino3 var(--speed) ease-out infinite; z-index: 2; }
+        .box4 { animation: tetromino4 var(--speed) ease-out infinite; }
+
+        @keyframes tetromino1 {
+            0%, 40% { transform: translate(0,0); }
+            50% { transform: translate(var(--xspace), calc(-1 * var(--yspace))); }
+            60%, 100% { transform: translate(calc(var(--xspace) * 2), 0); }
+        }
+
+        @keyframes tetromino2 {
+            0%, 20% { transform: translate(calc(var(--xspace) * 2), 0px); }
+            40%, 100% { transform: translate(calc(var(--xspace) * 3), var(--yspace)); }
+        }
+
+        @keyframes tetromino3 {
+            0% { transform: translate(calc(var(--xspace) * 3), var(--yspace)); }
+            20%, 60% { transform: translate(calc(var(--xspace) * 2), calc(var(--yspace) * 2)); }
+            90%, 100% { transform: translate(var(--xspace), var(--yspace)); }
+        }
+
+        @keyframes tetromino4 {
+            0%, 60% { transform: translate(var(--xspace), var(--yspace)); }
+            90%, 100% { transform: translate(0, 0); }
+        }
+
+        /* Classe pour masquer le loader après chargement */
+        .loaded #loader-overlay {
+            opacity: 0;
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="loader-overlay">
+        <div class='tetrominos'>
+            <div class='tetromino box1'></div>
+            <div class='tetromino box2'></div>
+            <div class='tetromino box3'></div>
+            <div class='tetromino box4'></div>
+        </div>
+    </div>
+
+<script>
+window.addEventListener("pageshow", function () {
+    const loader = document.getElementById("loader-overlay");
+
+    // Vérifie si on a déjà visité index.html
+    if (localStorage.getItem("accueilLoaderShown")) {
+        // Cache immédiatement avec fondu
+        loader.style.transition = "opacity 0.5s ease";
+        loader.style.opacity = "0";
+        loader.style.pointerEvents = "none";
+
+        setTimeout(() => {
+            loader.style.display = "none";
+        }, 500);
+
+        return;
+    }
+
+    // Première oue index.html
+    localStorage.setItem("accueilLoaderShown", "true");
+
+    // Affiche le loader puis le masque
+    setTimeout(() => {
+        loader.style.transition = "opacity 0.5s ease";
+        loader.style.opacity = "0";
+        loader.style.pointerEvents = "none";
+
+        setTimeout(() => {
+            loader.style.display = "none";
+        }, 500);
+
+    }, 400);
+});
+</script>
+
+</body>
+</html>
+
+    <header class="flex justify-between items-center px-12 py-8 max-w-7xl mx-auto">
+        <div class="flex items-center gap-2">
+            <div class="logogram">
+                <svg width="24" height="21" viewBox="0 0 24 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21.0499 2.33172e-08L23.6857 4.54943L21.0499 9.09886H15.7784L13.1426 4.54943L15.7784 0L21.0499 2.33172e-08Z" fill="black"/>
+                    <path d="M7.90734 2.33172e-08L17.0784 15.8147L14.4426 20.3641H9.17107L0 4.54943L2.63578 0L7.90734 2.33172e-08Z" fill="black"/>
+                </svg>
+            </div>
+            <span class="logo-text">Aureum</span>
+        </div>
+        
+        <nav class="hidden md:flex gap-8">
+            <a href="index.html" class="nav-link active">Accueil</a>
+            <a href="avantages.html" class="nav-link">Avantages</a>
+            <div class="dropdown">
+                <a href="#" class="nav-link">Services ▾</a>
+                <div class="dropdown-menu">
+                    <a href="maintenance.html" class="dropdown-item">Maintenance</a>
+                    <a href="siteweb.html" class="dropdown-item">Site web</a>
+                    <a href="referencement.html" class="dropdown-item">Référencement</a>
+                </div>
+            </div>
+            <a href="blog.html" class="nav-link">Blog</a>
+        </nav>
+
+        <button class="btn-action" onclick="openModal()">
+            Passer à l'action
+        </button>
+    </header>
+<stop stop-color="white" stop-opacity="0.2"/>
+<stop offset="1" stop-color="white" stop-opacity="0.07"/>
+</linearGradient>
+</defs>
+</svg>
+
+
+        </button>
+    </header>
+
+
+
+    <title>Slider Témoignages - Infini</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #F9FAFB;
+            --text-black: #1D1D1F;
+            --text-card-main: #1a1a1a;
+            --text-card-sub: #777777;
+            --star-color: #ffb400;
+            --card-shadow: 0 10px 40px rgba(0,0,0,0.03);
+            --card-width: 420px;
+            --card-margin: 15px;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Roboto', sans-serif;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .header-section {
+            text-align: center;
+            padding: 80px 20px 40px;
+        }
+
+        .google-header {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 20px;
+            background-color: #FFFFFF;
+            padding: 8px 16px;
+            border-radius: 50px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            border: 1px solid #eee;
+        }
+
+        .google-header img { width: 18px; }
+        .google-header .stars { color: var(--star-color); font-size: 14px; letter-spacing: 1px; }
+        .google-header span { font-size: 12px; font-weight: 500; color: #333; }
+
+        .header-section h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 52px;
+            font-weight: 700;
+            letter-spacing: -1px;
+            margin: 0;
+            color: var(--text-black);
+        }
+
+        .slider-wrapper {
+            width: 100%;
+            overflow: hidden;
+            position: relative;
+            padding: 20px 0 80px;
+        }
+
+        /* Dégradés sur les côtés pour masquer l'apparition/disparition */
+        .slider-wrapper::before, .slider-wrapper::after {
+            content: "";
+            position: absolute;
+            top: 0; width: 15%; height: 100%;
+            z-index: 2;
+            pointer-events: none;
+        }
+        .slider-wrapper::before { left: 0; background: linear-gradient(to right, var(--bg-color), transparent); }
+        .slider-wrapper::after { right: 0; background: linear-gradient(to left, var(--bg-color), transparent); }
+
+        .slider-track {
+            display: flex;
+            width: max-content;
+            /* L'animation fait défiler exactement la moitié de la largeur totale du track */
+            animation: scroll 20s linear infinite;
+        }
+
+        .slider-track:hover { animation-play-state: paused; }
+
+        .card {
+            background: #fff;
+            width: var(--card-width);
+            height: 250px;
+            margin: 0 var(--card-margin);
+            padding: 25px 30px;
+            border-radius: 20px;
+            box-shadow: var(--card-shadow);
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 12px;
+        }
+
+        .profile { display: flex; align-items: center; gap: 15px; }
+
+        .avatar {
+            width: 44px; height: 44px;
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-weight: 500; color: #1D1D1F; font-size: 16px;
+        }
+
+        .bg-blue { background-color: #F3F2F3; }
+        .bg-yellow { background-color: #F3F2F3; }
+        .bg-orange { background-color: #F3F2F3; }
+        .bg-green { background-color: #F3F2F3; }
+
+        .info h4 { margin: 0; font-size: 16px; font-weight: 700; color: var(--text-card-main); }
+        .info p { margin: 2px 0 0; font-size: 13px; color: var(--text-card-sub); font-weight: 400; }
+
+        .google-icon { width: 22px; height: 22px; }
+
+        .card-stars {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            margin-bottom: 10px;
+        }
+
+        .time-ago { color: #bbbbbb; font-size: 12px; margin-left: 8px; }
+
+        .card-content {
+            font-size: 14.5px;
+            line-height: 1.5;
+            color: #555;
+            margin: 0;
+            display: -webkit-box;
+            -webkit-line-clamp: 4;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        /* KEYFRAMES : On recule de 50% de la largeur du track (qui contient 2x les avis) */
+        @keyframes scroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        /* Styles isolés pour la section d'animation */
+        #typo-anim-section {
+            width: 100%;
+            min-height: 400px;
+            height: 60vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #FFFFFF00;
+            font-family: 'Playfair Display', serif;
+            position: relative;
+            overflow: hidden;
+            margin-top: -40px;
+        }
+
+        .typo-anim-wrapper {
+            position: relative;
+            height: 200px;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .typo-anim-slide {
+            position: absolute;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            font-size: clamp(2.5rem, 8vw, 6rem);
+            line-height: 1.1;
+            letter-spacing: -0.04em;
+            white-space: nowrap;
+            margin: 0;
+            
+            /* État par défaut (caché en bas) */
+            opacity: 0;
+            transform: translateY(60px);
+            color: #A0A0A0;
+            transition: transform 1.2s cubic-bezier(0.2, 1, 0.2, 1), 
+                        opacity 1.2s ease, 
+                        color 0.8s ease;
+        }
+
+        .typo-anim-slide.typo-active {
+            opacity: 1;
+            transform: translateY(0);
+            color: #000;
+            z-index: 2;
+        }
+
+        .typo-anim-slide.typo-exit {
+            opacity: 0;
+            transform: translateY(-30px);
+            color: #D0D0D0;
+            z-index: 1;
+            transition: transform 1.5s cubic-bezier(0.2, 1, 0.2, 1), 
+                        opacity 1.5s ease;
+        }
+
+        .typo-anim-slide strong {
+            display: block;
+            font-weight: 900;
+        }
+    </style>
+</head>
+<body>
+</head>
+<body>
+    <section id="typo-anim-section">
+        <div class="typo-anim-wrapper">
+            <div class="typo-anim-slide typo-active">
+                <span>Construisez une image que</span>
+                <strong>vos clients respectent</strong>
+            </div>
+            <div class="typo-anim-slide">
+                <span>L’excellence digitale n’est</span>
+                <strong>pas une option.</strong>
+            </div>
+            <div class="typo-anim-slide">
+                <span>Ne suivez plus le marché.</span>
+                <strong>Définissez-le.</strong>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        const slides = document.querySelectorAll('.typo-anim-slide');
+        let currentIndex = 0;
+
+        function nextSlide() {
+            const current = slides[currentIndex];
+            
+            // On prépare le suivant
+            currentIndex = (currentIndex + 1) % slides.length;
+            const next = slides[currentIndex];
+
+            // 1. L'ancien commence sa sortie
+            current.classList.remove('typo-active');
+            current.classList.add('typo-exit');
+
+            // 2. Le nouveau arrive
+            next.classList.remove('typo-exit');
+            next.classList.add('typo-active');
+
+            // 3. On nettoie l'ancien après la fin de sa longue transition
+            setTimeout(() => {
+                current.classList.remove('typo-exit');
+            }, 1500); 
+        }
+
+        setInterval(nextSlide, 3000);
+    </script>
+      <section>
+    <div class="cardze">
+
+      <!-- Réserver votre appel -->
+      <button class="btn-reserve">
+        <span class="btn-reserve-text">Réserver votre appel</span>
+        <span>↗</span>
+      </button>
+
+      <!-- WhatsApp + E-mail -->
+      <div class="secondary-row">
+        <a href="https://api.whatsapp.com/send/?phone=33766226733&text&type=phone_number&app_absent=0" target="_blank" class="btn-secondary">
+          <svg viewBox="0 0 24 24" fill="currentColor">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+            <path d="M12 0C5.373 0 0 5.373 0 12c0 2.132.558 4.13 1.533 5.862L0 24l6.305-1.507A11.946 11.946 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.855 0-3.596-.5-5.093-1.37l-.364-.217-3.744.895.946-3.644-.237-.376A9.96 9.96 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/>
+          </svg>
+          WhatsApp
+        </a>
+        <a href="mailto:contact@aureumstudio.fr" class="btn-secondary">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="2" y="4" width="20" height="16" rx="2"/>
+            <path d="m22 7-10 7L2 7"/>
+          </svg>
+          E-mail
+        </a>
+      </div>
+
+      <!-- Stats -->
+      <div class="stats-row">
+        <div class="stat">
+          <div class="stat-value" style="text-align: center;">87+</div>
+          <div class="stat-label" style="text-align: center;">Projets livrés</div>
+        </div>
+        <div class="divider"></div>
+        <div class="stat">
+          <div class="stat-value" style="text-align: center;">4,8 ★</div>
+          <div class="stat-label" style="text-align: center;">32 avis Google</div>
+        </div>
+        <div class="divider"></div>
+        <div class="stat">
+          <div class="stat-value" style="text-align: center;">&lt; 24h</div>
+          <div class="stat-label" style="text-align: center;">Délai de réponse</div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+      <style>
+        body { font-family: 'Inter', sans-serif; background-color: #FFFFFF; }
+        h2, h3 { font-family: 'Playfair Display', serif; }
+    </style>
+ <section class="max-w-6xl mx-auto text-center pt-24 pb-8" style="position: relative;">
+        <!-- SVG Background Pattern -->
+        <svg id="svgPattern" style="position: absolute; top: 50px;left: 50%; width: 100%; max-width: 1218px; height: auto; opacity: 0.4; z-index: -1;" viewBox="0 0 1218 299" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g clip-path="url(#clip0_8038_245)">
+<path d="M666.265 272.181L738.388 147.107L666.265 22.0324H522.019L449.896 147.107L522.019 272.181L666.265 272.181Z" stroke="#A9A9A9" stroke-width="0.845926" stroke-dasharray="10.15 10.15"/>
+<path d="M223.187 399.097L476.158 -36.225L403.454 -161.455H258.045L5.0752 273.867L77.7792 399.097L223.187 399.097Z" stroke="#A9A9A9" stroke-width="0.845926" stroke-dasharray="10.15 10.15"/>
+<path d="M963.626 398.431L710.656 -36.8909L783.36 -162.12H928.768L1181.74 273.201L1109.03 398.431L963.626 398.431Z" stroke="#A9A9A9" stroke-width="0.845926" stroke-dasharray="10.15 10.15"/>
+</g>
+<defs>
+<clipPath id="clip0_8038_245">
+<rect width="1218.13" height="589.61" fill="white" transform="matrix(1 0 0 -1 0 589.61)"/>
+</clipPath>
+</defs>
+</svg>
+        
+        <h2 class="text-4xl md:text-5xl font-bold text-black mb-4">Ce que nous faisons de mieux.</h2>
+        <p class="text-gray-500 font-light mb-16 tracking-wide">
+            L'alliance parfaite entre esthétique premium, persuasion et technologie.
+        </p>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+            
+            <div class="bg-white p-10 rounded-[40px] shadow-sm border border-gray-50 text-left">
+                <div class="w-12 h-12 bg-gray-100 rounded-full flex items-center justify-center mb-8">
+                    <svg class="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                </div>
+                <h3 class="text-2xl font-bold mb-4">Landing Pages</h3>
+                <p class="text-gray-500 leading-relaxed text-sm">
+                    Pages pensées pour un seul objectif : transformer un visiteur en client. Design clair, message direct, chargement rapide.
+                </p>
+            </div>
+
+            <div class="bg-white p-10 rounded-[40px] shadow-sm border border-gray-50 text-left">
+                <div class="w-12 h-12 bg-gray-100 rounded-full flex items-center justify-center mb-8">
+                    <svg class="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"></path></svg>
+                </div>
+                <h3 class="text-2xl font-bold mb-4">Sites Vitrines</h3>
+                <p class="text-gray-500 leading-relaxed text-sm">
+                    L'image de marque de votre entreprise. Un design soigné, fluide et adapté au mobile pour marquer vos prospects.
+                </p>
+            </div>
+
+            <div class="bg-white p-10 rounded-[40px] shadow-sm border border-gray-50 text-left">
+                <div class="w-12 h-12 bg-gray-100 rounded-full flex items-center justify-center mb-8">
+                    <svg class="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                </div>
+                <h3 class="text-2xl font-bold mb-4">SEO Stratégique</h3>
+                <p class="text-gray-500 leading-relaxed text-sm">
+                    On structure votre site pour Google. Objectif : un flux continu de trafic qualifié sans dépendre de la publicité.
+                </p>
+            </div>
+
+        </div>
+
+        <a href="#" class="inline-flex items-center text-xs font-bold tracking-[0.2em] text-gray-400 hover:text-black transition-colors uppercase" onclick="openServicesModal(); return false;">
+            Voir tous nos services 
+            <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+        </a>
+    </section>
+
+
+
+    
+<section class="as-slider-section">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@400;600&display=swap');
+
+        .as-slider-section {
+            --as-bg: #ffffff; /* Fond blanc pour les côtés */
+            --as-card-w: 200px;
+            --as-card-h: 350px;
+            --as-gap: 20px;
+            --as-speed: 28s;
+            /* Largeur calculée pour voir 5 cartes environ */
+            --as-max-width: 1100px; 
+            
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 60px 0;
+            background-color: var(--as-bg);
+        }
+
+        .as-slider-section a { text-decoration: none; color: inherit; display: block; }
+
+        .as-header {
+            width: 100%;
+            max-width: var(--as-max-width);
+            margin-bottom: 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            padding: 0 10px;
+        }
+
+        .as-title-group h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 42px;
+            line-height: 0.9;
+            color: #1a1a1a;
+            margin: 0;
+        }
+
+        .as-tag {
+            background: white;
+            border: 1px solid #e0e0e0;
+            padding: 7px 15px;
+            border-radius: 30px;
+            font-size: 13px;
+            color: #333;
+            font-family: 'Inter', sans-serif;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        .as-tag:hover { background: #f0f0f0; }
+
+        /* Viewport limité en largeur pour laisser du blanc autour */
+        .as-viewport {
+            width: 100%;
+            max-width: var(--as-max-width);
+            overflow: hidden;
+            position: relative;
+        }
+
+        .as-track {
+            display: flex;
+            width: calc((var(--as-card-w) + var(--as-gap)) * 20); 
+            animation: as-scroll var(--as-speed) linear infinite;
+        }
+
+        @keyframes as-scroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(calc(-1 * (var(--as-card-w) + var(--as-gap)) * 10)); }
+        }
+
+        .as-card {
+            width: var(--as-card-w);
+            height: var(--as-card-h);
+            background: #000;
+            border-radius: 15px;
+            margin-right: var(--as-gap);
+            flex-shrink: 0;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.06);
+            transition: transform 0.3s ease;
+        }
+
+        .as-card:hover { transform: scale(1.02); }
+
+        .as-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .as-footer {
+            position: absolute;
+            bottom: 12px;
+            left: 12px;
+            color: white;
+            font-family: 'Inter', sans-serif;
+            font-size: 13px;
+            font-weight: 600;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .as-heart {
+            width: 15px;
+            height: 15px;
+            fill: white;
+            transition: fill 0.3s ease;
+        }
+
+        .as-card:hover .as-heart { fill: #ff3b30; }
+    </style>
+
+    <div class="as-header">
+        <div class="as-title-group">
+            <p style="font-size:11px; text-transform:uppercase; color:#999; letter-spacing:2px; margin-bottom:4px; font-weight:600; font-family:'Inter', sans-serif;">Réseaux Sociaux</p>
+            <h1>Nos posts</h1>
+        </div>
+        <a href="https://www.instagram.com/aureumstudio.officiel" target="_blank">
+            <div class="as-tag">@aureumstudio.officiel</div>
+        </a>
+    </div>
+
+    <svg style="display: none;">
+        <symbol id="as-icon-heart" viewBox="0 0 24 24">
+            <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+        </symbol>
+    </svg>
+
+    <div class="as-viewport">
+        <div class="as-track">
+            
+            <a href="https://www.instagram.com/aureumstudio.officiel/p/DWzueGrCOZJ/" target="_blank" class="as-card">
+                <img src="https://i.ibb.co/whVP8mL3/660532670-18041588645600701-5100883713288553653-n.jpg">
+                <div class="as-footer"><svg class="as-heart"><use xlink:href="#as-icon-heart"></use></svg> 206</div>
+            </a>
+            
+            <a href="https://www.instagram.com/aureumstudio.officiel/p/DWwnDnZiDML/" target="_blank" class="as-card">
+                <img src="https://i.ibb.co/VYtwqyD8/90-des-restos-perdent-des-clients-cause-de-leur-site-Transformation-totale-de-l-exp-rience-cl.jpg">
+                <div class="as-footer"><svg class="as-heart"><use xlink:href="#as-icon-heart"></use></svg> 234</div>
+            </a>
+            
+            <a href="https://www.instagram.com/aureumstudio.officiel/p/DWzueGrCOZJ/" target="_blank" class="as-card">
+                <img src="https://i.ibb.co/TqD8d0HP/660143192-18041588654600701-4110368760720877779-n.jpg">
+                <div class="as-footer"><svg class="as-heart"><use xlink:href="#as-icon-heart"></use></svg> 206</div>
+            </a>
+            
+            <a href="https://www.instagram.com/aureumstudio.officiel/p/DWwnDnZiDML/" target="_blank" class="as-card">
+                <img src="https://i.ibb.co/KxxMHQPK/659048528-18041418137600701-7970092905076465483-n.jpg">
+                <div class="as-footer"><svg class="as-heart"><use xlink:href="#as-icon-heart"></use></svg> 234</div>
+            </a>
+            
+            <a href="https://www.instagram.com/aureumstudio.officiel/p/DWzAdnYiJH1/" target="_blank" class="as-card">
+                <img src="https://i.ibb.co/DfYgB4Hy/659649711-18041551400600701-6478071545016059783-n.jpg">
+                <div class="as-footer"><svg class="as-heart"><use xlink:href="#as-icon-heart"></use></svg> 98</div>
+            </a>
+            
+            <a href="https://www.instagram.com/aureumstudio.officiel/p/DWwnDnZiDML/" target="_blank" class="as-card">
+                <img src="https://i.ibb.co/4DbnV9h/658957315-18041418128600701-4526816972121056444-n.jpg">
+                <div class="as-footer"><svg class="as-heart"><use xlink:href="#as-icon-heart"></use></svg> 234</div>
+            </a>
+            
+            <a href="https://www.instagram.com/aureumstudio.officiel/p/DWzueGrCOZJ/" target="_blank" class="as-card">
+                <img src="https://i.ibb.co/3mm12dHB/662335284-18041588663600701-2541040385530904833-n.jpg">
+                <div class="as-footer"><svg class="as-heart"><use xlink:href="#as-icon-heart"></use></svg> 206</div>
+            </a>
+            
+            <a href="https://www.instagram.com/aureumstudio.officiel/p/DXhMKuDCPP_/" target="_blank" class="as-card">
+                <img src="https://i.ibb.co/svq0YL8c/673056311-18044485511600701-4779351554525047661-n.jpg">
+                <div class="as-footer"><svg class="as-heart"><use xlink:href="#as-icon-heart"></use></svg> 215</div>
+            </a>
+            
+            <a href="https://www.instagram.com/aureumstudio.officiel/p/DWzAdnYiJH1/" target="_blank" class="as-card">
+                <img src="https://i.ibb.co/0xGswkc/660158289-18041551427600701-1537285349915849294-n.jpg">
+                <div class="as-footer"><svg class="as-heart"><use xlink:href="#as-icon-heart"></use></svg> 98</div>
+            </a>
+            
+            <a href="https://www.instagram.com/aureumstudio.officiel/p/DXhMKuDCPP_/" target="_blank" class="as-card">
+                <img src="https://i.ibb.co/V6zrDLG/674398370-18044485502600701-3314481406716646218-n.jpg">
+                <div class="as-footer"><svg class="as-heart"><use xlink:href="#as-icon-heart"></use></svg> 215</div>
+            </a>
+
+            <a href="https://www.instagram.com/aureumstudio.officiel/p/DWzueGrCOZJ/" target="_blank" class="as-card">
+                <img src="https://i.ibb.co/whVP8mL3/660532670-18041588645600701-5100883713288553653-n.jpg">
+                <div class="as-footer"><svg class="as-heart"><use xlink:href="#as-icon-heart"></use></svg> 206</div>
+            </a>
+            <a href="https://www.instagram.com/aureumstudio.officiel/p/DWwnDnZiDML/" target="_blank" class="as-card">
+                <img src="https://i.ibb.co/VYtwqyD8/90-des-restos-perdent-des-clients-cause-de-leur-site-Transformation-totale-de-l-exp-rience-cl.jpg">
+                <div class="as-footer"><svg class="as-heart"><use xlink:href="#as-icon-heart"></use></svg> 234</div>
+            </a>
+            <a href="https://www.instagram.com/aureumstudio.officiel/p/DWzueGrCOZJ/" target="_blank" class="as-card">
+                <img src="https://i.ibb.co/TqD8d0HP/660143192-18041588654600701-4110368760720877779-n.jpg">
+                <div class="as-footer"><svg class="as-heart"><use xlink:href="#as-icon-heart"></use></svg> 206</div>
+            </a>
+            <a href="https://www.instagram.com/aureumstudio.officiel/p/DWwnDnZiDML/" target="_blank" class="as-card">
+                <img src="https://i.ibb.co/KxxMHQPK/659048528-18041418137600701-7970092905076465483-n.jpg">
+                <div class="as-footer"><svg class="as-heart"><use xlink:href="#as-icon-heart"></use></svg> 234</div>
+            </a>
+            <a href="https://www.instagram.com/aureumstudio.officiel/p/DWzAdnYiJH1/" target="_blank" class="as-card">
+                <img src="https://i.ibb.co/DfYgB4Hy/659649711-18041551400600701-6478071545016059783-n.jpg">
+                <div class="as-footer"><svg class="as-heart"><use xlink:href="#as-icon-heart"></use></svg> 98</div>
+            </a>
+            <a href="https://www.instagram.com/aureumstudio.officiel/p/DWwnDnZiDML/" target="_blank" class="as-card">
+                <img src="https://i.ibb.co/4DbnV9h/658957315-18041418128600701-4526816972121056444-n.jpg">
+                <div class="as-footer"><svg class="as-heart"><use xlink:href="#as-icon-heart"></use></svg> 234</div>
+            </a>
+            <a href="https://www.instagram.com/aureumstudio.officiel/p/DWzueGrCOZJ/" target="_blank" class="as-card">
+                <img src="https://i.ibb.co/3mm12dHB/662335284-18041588663600701-2541040385530904833-n.jpg">
+                <div class="as-footer"><svg class="as-heart"><use xlink:href="#as-icon-heart"></use></svg> 206</div>
+            </a>
+            <a href="https://www.instagram.com/aureumstudio.officiel/p/DXhMKuDCPP_/" target="_blank" class="as-card">
+                <img src="https://i.ibb.co/svq0YL8c/673056311-18044485511600701-4779351554525047661-n.jpg">
+                <div class="as-footer"><svg class="as-heart"><use xlink:href="#as-icon-heart"></use></svg> 215</div>
+            </a>
+            <a href="https://www.instagram.com/aureumstudio.officiel/p/DWzAdnYiJH1/" target="_blank" class="as-card">
+                <img src="https://i.ibb.co/0xGswkc/660158289-18041551427600701-1537285349915849294-n.jpg">
+                <div class="as-footer"><svg class="as-heart"><use xlink:href="#as-icon-heart"></use></svg> 98</div>
+            </a>
+            <a href="https://www.instagram.com/aureumstudio.officiel/p/DXhMKuDCPP_/" target="_blank" class="as-card">
+                <img src="https://i.ibb.co/V6zrDLG/674398370-18044485502600701-3314481406716646218-n.jpg">
+                <div class="as-footer"><svg class="as-heart"><use xlink:href="#as-icon-heart"></use></svg> 215</div>
+            </a>
+        </div>
+    </div>
+</section>
+
+
+    <section class="header-section">
+        <div class="google-header">
+            <img src="https://i.ibb.co/MxRJS757/google-logo-on-transparent-white-background-free-vector-removebg-preview.png" alt="G">
+            <span class="stars">★★★★★</span>
+            <span>4,8 / 5 • 42 AVIS</span>
+        </div>
+        <h1>La preuve par les résultats.</h1>
+    </section>
+
+
+
+    <div class="slider-wrapper">
+        <div class="slider-track">
+            
+            <div class="card">
+                <div class="card-header">
+                    <div class="profile"><div class="avatar bg-blue">M</div><div class="info"><h4>Marc Larbi</h4><p>Artisan couvreur · Lyon</p></div></div>
+                    <img src="https://i.ibb.co/MxRJS757/google-logo-on-transparent-white-background-free-vector-removebg-preview.png" class="google-icon">
+                </div>
+                <div class="card-stars">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="#FBBC05"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="#FBBC05"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="#FBBC05"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="#FBBC05"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="#FBBC05"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                    <span class="time-ago">il y a 2 mois</span>
+                </div>
+                <p class="card-content">Très satisfait du travail réalisé. Le site est beaucoup plus professionnel qu’avant et j’ai déjà plus de demandes. L’équipe est réactive et à l’écoute.</p>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <div class="profile"><div class="avatar bg-yellow">J</div><div class="info"><h4>Julie Lopes</h4><p>Fleuriste · Bordeaux</p></div></div>
+                    <img src="https://i.ibb.co/MxRJS757/google-logo-on-transparent-white-background-free-vector-removebg-preview.png" class="google-icon">
+                </div>
+                <div class="card-stars">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="#FBBC05"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="#FBBC05"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="#FBBC05"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="#FBBC05"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="#FBBC05"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                    <span class="time-ago">il y a 5 mois</span>
+                </div>
+                <p class="card-content">Super expérience, le rendu est vraiment propre et moderne. J’ai apprécié les conseils pour améliorer mon image en ligne. Tout a été clair du début à la fin.</p>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <div class="profile"><div class="avatar bg-orange">B</div><div class="info"><h4>Benjamin Marotte</h4><p>Coach sportif · Marseille</p></div></div>
+                    <img src="https://i.ibb.co/MxRJS757/google-logo-on-transparent-white-background-free-vector-removebg-preview.png" class="google-icon">
+                </div>
+                <div class="card-stars">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="#FBBC05"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="#FBBC05"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="#FBBC05"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="#FBBC05"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="#FBBC05"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                    <span class="time-ago">il y a 1 mois</span>
+                </div>
+                <p class="card-content">Franchement surpris par la qualité. Le site est rapide, bien structuré et mes clients le trouvent beaucoup plus sérieux. Une vraie réflexion derrière.</p>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <div class="profile"><div class="avatar bg-green">T</div><div class="info"><h4>Thomas Segalen</h4><p>Garage automobile · Lille</p></div></div>
+                    <img src="https://i.ibb.co/MxRJS757/google-logo-on-transparent-white-background-free-vector-removebg-preview.png" class="google-icon">
+                </div>
+                <div class="card-stars">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="#FBBC05"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="#FBBC05"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="#FBBC05"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="#FBBC05"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="#FBBC05"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                    <span class="time-ago">il y a 3 semaines</span>
+                </div>
+                <p class="card-content">Très bon accompagnement du début à la fin. Le site inspire confiance et correspond parfaitement à mon activité. J'ai eu de nombreux retours positifs.</p>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <div class="profile"><div class="avatar bg-blue">M</div><div class="info"><h4>Marc Larbi</h4><p>Artisan couvreur · Lyon</p></div></div>
+                    <img src="https://i.ibb.co/MxRJS757/google-logo-on-transparent-white-background-free-vector-removebg-preview.png" class="google-icon">
+                </div>
+                <div class="card-stars">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="#FBBC05"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="#FBBC05"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="#FBBC05"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="#FBBC05"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="#FBBC05"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                    <span class="time-ago">il y a 2 mois</span>
+                </div>
+                <p class="card-content">Très satisfait du travail réalisé. Le site est beaucoup plus professionnel qu’avant et j’ai déjà plus de demandes. L’équipe est réactive et à l’écoute.</p>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <div class="profile"><div class="avatar bg-yellow">J</div><div class="info"><h4>Julie Lopes</h4><p>Fleuriste · Bordeaux</p></div></div>
+                    <img src="https://i.ibb.co/MxRJS757/google-logo-on-transparent-white-background-free-vector-removebg-preview.png" class="google-icon">
+                </div>
+                <div class="card-stars">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="#FBBC05"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="#FBBC05"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="#FBBC05"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="#FBBC05"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="#FBBC05"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                    <span class="time-ago">il y a 5 mois</span>
+                </div>
+                <p class="card-content">Super expérience, le rendu est vraiment propre et moderne. J’ai apprécié les conseils pour améliorer mon image en ligne. Tout a été clair du début à la fin.</p>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <div class="profile"><div class="avatar bg-orange">B</div><div class="info"><h4>Benjamin Marotte</h4><p>Coach sportif · Marseille</p></div></div>
+                    <img src="https://i.ibb.co/MxRJS757/google-logo-on-transparent-white-background-free-vector-removebg-preview.png" class="google-icon">
+                </div>
+                <div class="card-stars">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="#FBBC05"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="#FBBC05"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="#FBBC05"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="#FBBC05"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="#FBBC05"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                    <span class="time-ago">il y a 1 mois</span>
+                </div>
+                <p class="card-content">Franchement surpris par la qualité. Le site est rapide, bien structuré et mes clients le trouvent beaucoup plus sérieux. Une vraie réflexion derrière.</p>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <div class="profile"><div class="avatar bg-green">T</div><div class="info"><h4>Thomas Segalen</h4><p>Garage automobile · Lille</p></div></div>
+                    <img src="https://i.ibb.co/MxRJS757/google-logo-on-transparent-white-background-free-vector-removebg-preview.png" class="google-icon">
+                </div>
+                <div class="card-stars">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="#FBBC05"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="#FBBC05"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="#FBBC05"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="#FBBC05"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="#FBBC05"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                    <span class="time-ago">il y a 3 semaines</span>
+                </div>
+                <p class="card-content">Très bon accompagnement du début à la fin. Le site inspire confiance et correspond parfaitement à mon activité. J'ai eu de nombreux retours positifs.</p>
+            </div>
+
+        </div>
+    </div>
+
+</body>
+
+
+
+
+
+      <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    .cardze {
+      background: #1F1F21;
+      border-radius: 24px;
+      padding: 20px; 
+      width: 400px;
+      margin: -10px auto 40px auto;
+    }
+
+    /* Bouton principal */
+    .btn-reserve {
+      width: 100%;
+      padding: 15px 20px;
+      border-radius: 18px;
+      border: none;
+      cursor: pointer;
+      background: #fff;
+      color: #0a0a0a;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 15px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 10px;
+      transition: opacity 0.15s ease;
+    }
+    .btn-reserve:hover { opacity: 0.88; }
+
+    .btn-reserve-text {
+      flex: 1;
+      text-align: center;
+    }
+
+    /* Boutons secondaires */
+    .secondary-row {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 18px;
+    }
+
+    .btn-secondary {
+      flex: 1;
+      padding: 13px 10px;
+      border-radius: 18px;
+      border: none;
+      cursor: pointer;
+      background: #2C2C2E;
+      color: #fff;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+      transition: opacity 0.15s ease;
+    }
+    .btn-secondary:hover { opacity: 0.8; }
+
+    .btn-secondary svg {
+      width: 15px;
+      height: 15px;
+      flex-shrink: 0;
+    }
+
+    /* Stats */
+    .stats-row {
+      display: grid;
+      grid-template-columns: 1fr 1px 1fr 1px 1fr;
+      border-top: 1px solid #222;
+      padding-top: 16px;
+    }
+
+    .divider {
+      background: #222;
+      width: 1px;
+    }
+
+    .stat {
+      padding: 0 10px;
+    }
+    .stat:first-child { padding-left: 0; }
+    .stat:last-child  { padding-right: 0; }
+
+    .stat-value {
+      font-size: 20px;
+      font-weight: 500;
+      color: #fff;
+      line-height: 1.15;
+      margin-bottom: 3px;
+    }
+
+    .stat-label {
+      font-size: 8.5px;
+      font-weight: 500;
+      color: #555;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      line-height: 1.4;
+    }
+  </style>
+</head>
+<body>
+
+
+
+
+
+<style>
+  .as-faq-section {
+    padding: 140px 20px;
+    background: #FFFFFF;
+    color: #111;
+    font-family: 'Inter', sans-serif;
+  }
+
+  .as-faq-container {
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .as-faq-header {
+    text-align: center;
+    margin-bottom: 80px;
+  }
+
+  .as-faq-label {
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: #666;
+    margin-bottom: 20px;
+  }
+
+  .as-faq-header h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 42px;
+    line-height: 0.95;
+    font-weight: 600;
+    letter-spacing: -2px;
+    max-width: 1000px;
+    margin: 0 auto 25px;
+  }
+
+  .as-faq-subtitle {
+    max-width: 700px;
+    margin: 0 auto;
+    font-size: 18px;
+    line-height: 1.7;
+    color: #555;
+  }
+
+  .as-faq-list {
+    border-top: 1px solid rgba(0,0,0,0.08);
+  }
+
+  .as-faq-item {
+    border-bottom: 1px solid rgba(0,0,0,0.08);
+    padding: 0;
+  }
+
+  .as-faq-question {
+    width: 100%;
+    background: none;
+    border: none;
+    padding: 34px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    font-size: clamp(1.1rem, 2vw, 1.45rem);
+    font-weight: 600;
+    color: #111;
+    text-align: left;
+    transition: all 0.3s ease;
+  }
+
+  .as-faq-question:hover {
+    opacity: 0.7;
+  }
+
+  .as-faq-icon {
+    width: 42px;
+    height: 42px;
+    min-width: 42px;
+    border-radius: 50%;
+    border: 1px solid rgba(0,0,0,0.12);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 26px;
+    font-weight: 300;
+    transition: all 0.3s ease;
+  }
+
+  .as-faq-answer {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.45s ease;
+  }
+
+  .as-faq-answer p {
+    padding: 0 0 35px;
+    max-width: 850px;
+    font-size: 17px;
+    line-height: 1.9;
+    color: #555;
+  }
+
+  .as-faq-item.as-faq-active .as-faq-answer {
+    max-height: 400px;
+  }
+
+  .as-faq-item.as-faq-active .as-faq-icon {
+    transform: rotate(45deg);
+    background: #F5F5F2;
+    color: #000000;
+    border-color: #D7D7D5;
+  }
+
+  strong {
+    color: #111;
+    font-weight: 600;
+  }
+
+  @media (max-width: 768px) {
+    .as-faq-section {
+      padding: 90px 20px;
+    }
+
+    .as-faq-header {
+      margin-bottom: 50px;
+    }
+
+    .as-faq-question {
+      padding: 24px 0;
+      gap: 20px;
+    }
+
+    .as-faq-answer p {
+      font-size: 16px;
+      line-height: 1.8;
+      padding-bottom: 25px;
+    }
+  }
+</style>
+
+<script>
+  const faqItems = document.querySelectorAll('.as-faq-item');
+
+  faqItems.forEach(item => {
+    const question = item.querySelector('.as-faq-question');
+
+    question.addEventListener('click', () => {
+      const isActive = item.classList.contains('as-faq-active');
+
+      faqItems.forEach(faq => faq.classList.remove('as-faq-active'));
+
+      if (!isActive) {
+        item.classList.add('as-faq-active');
+      }
+    });
+  });
+</script>
+
+
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <div class="flex items-center gap-2">
+                        <div class="logogram">
+                            <svg width="24" height="21" viewBox="0 0 24 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M21.0499 2.33172e-08L23.6857 4.54943L21.0499 9.09886H15.7784L13.1426 4.54943L15.7784 0L21.0499 2.33172e-08Z" fill="black"/>
+                                <path d="M7.90734 2.33172e-08L17.0784 15.8147L14.4426 20.3641H9.17107L0 4.54943L2.63578 0L7.90734 2.33172e-08Z" fill="black"/>
+                            </svg>
+                        </div>
+                        <span class="logo-text">Aureum</span>
+                    </div>
+                    <p>Agence web spécialisée dans la création de sites performants et le référencement SEO.</p>
+                </div>
+                <div>
+                    <h4 class="footer-title">Services</h4>
+                    <div class="footer-links">
+                        <a href="siteweb.html">Création de sites</a>
+                        <a href="referencement.html">Référencement</a>
+                        <a href="maintenance.html">Maintenance</a>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="footer-title">Entreprise</h4>
+                    <div class="footer-links">
+                        <a href="blog.html">Blog</a>
+                        <a href="contact.html">Contact</a>
+    
+                    </div>
+                </div>
+                <div>
+                    <h4 class="footer-title">Légal</h4>
+                    <div class="footer-links">
+                        <a href="#">Mentions légales</a>
+                        <a href="#">Confidentialité</a>
+                        <a href="#">CGV</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <span class="footer-copyright">© 2026 Aureum. Tous droits réservés.</span>
+                <div class="footer-social">
+                    <a href="https://instagram.com/aureumstudio.officiel" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#"></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Modal Contact -->
+    <div class="modal-overlay" id="contactModal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal()">&times;</button>
+            <h2 style="font-size: 20px; font-weight: 600; margin-bottom: 8px;">Contactez un expert</h2>
+            <p style="font-size: 14px; color: #666; margin-bottom: 24px;">
+                Une réponse sous 24h garantie
+            </p>
+            
+            <div class="contact-options">
+                <a href="https://instagram.com/aureumstudio.officiel" target="_blank" class="contact-option">
+                    <div class="contact-icon"><i class="fa-brands fa-instagram"></i></div>
+                    <div class="contact-info">
+                        <span class="contact-title">Instagram</span>
+                        <span class="contact-desc">Envoyer un message direct</span>
+                    </div>
+                </a>
+                
+                <div class="contact-option" onclick="showWhatsAppForm()">
+                    <div class="contact-icon"><i class="fa-brands fa-whatsapp"></i></div>
+                    <div class="contact-info">
+                        <span class="contact-title">WhatsApp</span>
+                        <span class="contact-desc">Laisser votre numéro</span>
+                    </div>
+                </div>
+                
+                <a href="mailto:contact@aureumstudio.fr" class="contact-option">
+                    <div class="contact-icon"><i class="fa-solid fa-envelope"></i></div>
+                    <div class="contact-info">
+                        <span class="contact-title">Email</span>
+                        <span class="contact-desc">Envoyer un mail</span>
+                    </div>
+                </a>
+                
+                <a href="contact.html" class="contact-option">
+                    <div class="contact-icon"><i class="fa-solid fa-file-lines"></i></div>
+                    <div class="contact-info">
+                        <span class="contact-title">Formulaire</span>
+                        <span class="contact-desc">Parlez-nous de votre projet</span>
+                    </div>
+                </a>
+            </div>
+            
+            <div id="whatsappForm" style="display: none;">
+                <div class="form-group">
+                    <label>Votre numéro WhatsApp</label>
+                    <input type="tel" id="whatsappNumber" placeholder="+33 6 12 34 56 78">
+                </div>
+                <div class="form-group">
+                    <label>Message (optionnel)</label>
+                    <textarea id="whatsappMessage" placeholder="Bonjour, je souhaite être contacté sur WhatsApp..."></textarea>
+                </div>
+                <button type="button" class="form-submit" onclick="sendViaWhatsApp()">Envoyer</button>
+                <button type="button" style="background:none;border:none;color:#666;margin-top:8px;cursor:pointer;" onclick="showContactOptions()">Retour</button>
+            </div>
+            
+            <div id="contactForm" style="display: none;">
+                <form onsubmit="submitForm(event)">
+                    <div class="form-group">
+                        <label>Nom complet</label>
+                        <input type="text" name="name" required placeholder="John Doe">
+                    </div>
+                    <div class="form-group">
+                        <label>Email</label>
+                        <input type="email" name="email" required placeholder="john@exemple.com">
+                    </div>
+                    <div class="form-group">
+                        <label>Message</label>
+                        <textarea name="message" required placeholder="Décrivez votre projet..."></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Services souhaités</label>
+                        <div class="checkbox-group">
+                            <label><input type="checkbox" name="service" value="siteweb"> Site web</label>
+                            <label><input type="checkbox" name="service" value="referencement"> Référencement SEO</label>
+                            <label><input type="checkbox" name="service" value="maintenance"> Maintenance</label>
+                        </div>
+                    </div>
+                    <button type="submit" class="form-submit">Envoyer</button>
+                    <button type="button" style="background:none;border:none;color:#666;margin-top:8px;cursor:pointer;" onclick="showContactOptions()">Retour</button>
+                </form>
+            </div>
+            
+            <p class="modal-note"></p>
+        </div>
+    </div>
+
+    <!-- Modal Services -->
+    <div class="modal-overlay" id="servicesModal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeServicesModal()">&times;</button>
+            <h2 style="font-size: 20px; font-weight: 700; margin-bottom: 8px; font-family: 'Inter', sans-serif;">Nos Services</h2>
+            <p style="font-size: 14px; color: #666; margin-bottom: 24px;">
+                Choisissez un service pour en savoir plus
+            </p>
+            
+            <div class="contact-options">
+                <a href="siteweb.html" class="contact-option">
+                    <div class="contact-icon"><i class="fa-solid fa-globe"></i></div>
+                    <div class="contact-info">
+                        <span class="contact-title">Création de sites</span>
+                        <span class="contact-desc">Sites web professionnels</span>
+                    </div>
+                </a>
+                
+                <a href="referencement.html" class="contact-option">
+                    <div class="contact-icon"><i class="fa-solid fa-search"></i></div>
+                    <div class="contact-info">
+                        <span class="contact-title">Référencement</span>
+                        <span class="contact-desc">SEO et visibilité Google</span>
+                    </div>
+                </a>
+                
+                <a href="maintenance.html" class="contact-option">
+                    <div class="contact-icon"><i class="fa-solid fa-wrench"></i></div>
+                    <div class="contact-info">
+                        <span class="contact-title">Maintenance</span>
+                        <span class="contact-desc">Suivi et évolutions</span>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function openModal() {
+            document.getElementById('contactModal').classList.add('active');
+            showContactOptions();
+        }
+        
+        function closeModal() {
+            document.getElementById('contactModal').classList.remove('active');
+        }
+        
+        function showContactOptions() {
+            document.getElementById('contactModal').querySelector('.contact-options').style.display = 'flex';
+            document.getElementById('whatsappForm').style.display = 'none';
+            document.getElementById('contactForm').style.display = 'none';
+        }
+        
+        function showWhatsAppForm() {
+            document.getElementById('contactModal').querySelector('.contact-options').style.display = 'none';
+            document.getElementById('whatsappForm').style.display = 'block';
+            document.getElementById('contactForm').style.display = 'none';
+        }
+        
+        function showContactForm() {
+            document.getElementById('contactModal').querySelector('.contact-options').style.display = 'none';
+            document.getElementById('whatsappForm').style.display = 'none';
+            document.getElementById('contactForm').style.display = 'block';
+        }
+        
+        function sendViaWhatsApp() {
+            const phone = document.getElementById('whatsappNumber').value;
+            const message = document.getElementById('whatsappMessage').value;
+            if (phone) {
+                const waMessage = encodeURIComponent(message || 'Bonjour, je souhaite être contacté sur WhatsApp.');
+                window.open(`https://wa.me/33${phone.replace(/\D/g, '')}?text=${waMessage}`, '_blank');
+                closeModal();
+            }
+        }
+        
+        function submitForm(event) {
+            event.preventDefault();
+            const form = event.target;
+            const services = [];
+            form.querySelectorAll('input[name="service"]:checked').forEach(cb => services.push(cb.value));
+
+            const templateParams = {
+                from_name: form.name.value,
+                from_email: form.email.value,
+                message: form.message.value,
+                service_type: "Modal Accueil - " + (services.join(', ') || 'Non précisé')
+            };
+
+            emailjs.send("service_xg36okr", "template_n7weua9", templateParams)
+                .then(() => {
+                    alert('Merci ! Votre demande a été envoyée.');
+                    closeModal();
+                    form.reset();
+                }, () => alert('Erreur lors de l\'envoi.'));
+        }
+        
+        document.getElementById('contactModal').addEventListener('click', function(e) {
+            if (e.target === this) closeModal();
+        });
+
+        // Modal Services - Voir tous nos services
+        function openServicesModal() {
+            document.getElementById('servicesModal').classList.add('active');
+        }
+
+        function closeServicesModal() {
+            document.getElementById('servicesModal').classList.remove('active');
+        }
+
+        document.getElementById('servicesModal').addEventListener('click', function(e) {
+            if (e.target === this) closeServicesModal();
+        });
+    </script>
+</body>
+
+
+    <!-- Modal Contact -->
+    <div class="modal-overlay" id="contactModal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal()">&times;</button>
+            <h2 style="font-size: 20px; font-weight: 600; margin-bottom: 8px;">Contactez un expert</h2>
+            <p style="font-size: 14px; color: #666; margin-bottom: 24px;">
+                Une réponse sous 24h garantie
+            </p>
+            
+            <div class="contact-options">
+                <a href="https://instagram.com/aureumstudio.officiel" target="_blank" class="contact-option">
+                    <div class="contact-icon"><i class="fa-brands fa-instagram"></i></div>
+                    <div class="contact-info">
+                        <span class="contact-title">Instagram</span>
+                        <span class="contact-desc">Envoyer un message direct</span>
+                    </div>
+                </a>
+                
+                <a href="https://api.whatsapp.com/send/?phone=33766226733&text&type=phone_number&app_absent=0" target="_blank" class="contact-option">
+                    <div class="contact-icon"><i class="fa-brands fa-whatsapp"></i></div>
+                    <div class="contact-info">
+                        <span class="contact-title">WhatsApp</span>
+                        <span class="contact-desc">Laisser votre numéro</span>
+                    </div>
+                </div>
+                
+                <a href="mailto:contact@aureumstudio.fr" class="contact-option">
+                    <div class="contact-icon"><i class="fa-solid fa-envelope"></i></div>
+                    <div class="contact-info">
+                        <span class="contact-title">Email</span>
+                        <span class="contact-desc">Envoyer un mail</span>
+                    </div>
+                </a>
+                
+                <a href="contact.html" class="contact-option">
+                    <div class="contact-icon"><i class="fa-solid fa-file-lines"></i></div>
+                    <div class="contact-info">
+                        <span class="contact-title">Formulaire</span>
+                        <span class="contact-desc">Parlez-nous de votre projet</span>
+                    </div>
+                </a>
+            </div>
+            
+            <div id="whatsappForm" style="display: none;">
+                <div class="form-group">
+                            <label>Votre numéro WhatsApp</label>
+                            <input type="tel" id="whatsappNumber" placeholder="+33 6 12 34 56 78">
+                </div>
+                <div class="form-group">
+                    <label>Message (optionnel)</label>
+                    <textarea id="whatsappMessage" placeholder="Bonjour, je souhaite être contacté sur WhatsApp..."></textarea>
+                </div>
+                <button type="button" class="form-submit" onclick="sendViaWhatsApp()">Envoyer</button>
+                <button type="button" style="background:none;border:none;color:#666;margin-top:8px;cursor:pointer;" onclick="showContactOptions()">Retour</button>
+            </div>
+            
+            <div id="contactForm" style="display: none;">
+                <form onsubmit="submitForm(event)">
+                    <div class="form-group">
+                        <label>Nom complet</label>
+                        <input type="text" name="name" required placeholder="John Doe">
+                    </div>
+                    <div class="form-group">
+                        <label>Email</label>
+                        <input type="email" name="email" required placeholder="john@exemple.com">
+                    </div>
+                    <div class="form-group">
+                        <label>Message</label>
+                        <textarea name="message" required placeholder="Décrivez votre projet..."></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Services souhaités</label>
+                        <div class="checkbox-group">
+                            <label><input type="checkbox" name="service" value="siteweb"> Site web</label>
+                            <label><input type="checkbox" name="service" value="referencement"> Référencement SEO</label>
+                            <label><input type="checkbox" name="service" value="maintenance"> Maintenance</label>
+                        </div>
+                    </div>
+                    <button type="submit" class="form-submit">Envoyer</button>
+                    <button type="button" style="background:none;border:none;color:#666;margin-top:8px;cursor:pointer;" onclick="showContactOptions()">Retour</button>
+                </form>
+            </div>
+            
+            <p class="modal-note"></p>
+        </div>
+    </div>
+
+    <!-- Modal Services -->
+    <div class="modal-overlay" id="servicesModal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeServicesModal()">&times;</button>
+            <h2 style="font-size: 20px; font-weight: 600; margin-bottom: 8px;">Nos Services</h2>
+            <p style="font-size: 14px; color: #666; margin-bottom: 24px;">
+                Choisissez un service pour en savoir plus
+            </p>
+            
+            <div class="contact-options">
+                <a href="siteweb.html" class="contact-option">
+                    <div class="contact-icon"><i class="fa-solid fa-globe"></i></div>
+                    <div class="contact-info">
+                        <span class="contact-title">Création de sites</span>
+                        <span class="contact-desc">Sites web professionnels</span>
+                    </div>
+                </a>
+                
+                <a href="referencement.html" class="contact-option">
+                    <div class="contact-icon"><i class="fa-solid fa-search"></i></div>
+                    <div class="contact-info">
+                        <span class="contact-title">Référencement</span>
+                        <span class="contact-desc">SEO et visibilité Google</span>
+                    </div>
+                </a>
+                
+                <a href="maintenance.html" class="contact-option">
+                    <div class="contact-icon"><i class="fa-solid fa-wrench"></i></div>
+                    <div class="contact-info">
+                        <span class="contact-title">Maintenance</span>
+                        <span class="contact-desc">Suivi et évolutions</span>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function openModal() {
+            document.getElementById('contactModal').classList.add('active');
+            showContactOptions();
+        }
+        
+        function closeModal() {
+            document.getElementById('contactModal').classList.remove('active');
+        }
+        
+        function showContactOptions() {
+            document.getElementById('contactModal').querySelector('.contact-options').style.display = 'flex';
+            document.getElementById('whatsappForm').style.display = 'none';
+            document.getElementById('contactForm').style.display = 'none';
+        }
+        
+        function showWhatsAppForm() {
+            document.getElementById('contactModal').querySelector('.contact-options').style.display = 'none';
+            document.getElementById('whatsappForm').style.display = 'block';
+            document.getElementById('contactForm').style.display = 'none';
+        }
+        
+        function showContactForm() {
+            document.getElementById('contactModal').querySelector('.contact-options').style.display = 'none';
+            document.getElementById('whatsappForm').style.display = 'none';
+            document.getElementById('contactForm').style.display = 'block';
+        }
+        
+        function sendViaWhatsApp() {
+            const phone = document.getElementById('whatsappNumber').value;
+            const message = document.getElementById('whatsappMessage').value;
+            if (phone) {
+                const waMessage = encodeURIComponent(message || 'Bonjour, je souhaite être contacté sur WhatsApp.');
+                window.open(`https://wa.me/33${phone.replace(/\D/g, '')}?text=${waMessage}`, '_blank');
+                closeModal();
+            }
+        }
+        
+        function submitForm(event) {
+            event.preventDefault();
+            const form = event.target;
+            const services = [];
+            form.querySelectorAll('input[name="service"]:checked').forEach(cb => services.push(cb.value));
+
+            const templateParams = {
+                from_name: form.name.value,
+                from_email: form.email.value,
+                message: form.message.value,
+                service_type: "Modal Accueil - " + (services.join(', ') || 'Non précisé')
+            };
+
+            emailjs.send("service_xg36okr", "template_n7weua9", templateParams)
+                .then(() => {
+                    alert('Merci ! Votre demande a été envoyée.');
+                    closeModal();
+                    form.reset();
+                }, () => alert('Erreur lors de l\'envoi.'));
+        }
+        
+        document.getElementById('contactModal').addEventListener('click', function(e) {
+            if (e.target === this) closeModal();
+        });
+
+        // Modal Services - Voir tous nos services
+        function openServicesModal() {
+            document.getElementById('servicesModal').classList.add('active');
+        }
+
+        function closeServicesModal() {
+            document.getElementById('servicesModal').classList.remove('active');
+        }
+
+        document.getElementById('servicesModal').addEventListener('click', function(e) {
+            if (e.target === this) closeServicesModal();
+        });
+    </script>
+</body>
+</html>
