@@ -405,10 +405,6 @@
     </style>
 </head>
 <body class="antialiased">
-    <!-- Google Tag Manager (noscript) -->
-<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KVLKS772"
-height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-<!-- End Google Tag Manager (noscript) -->
 
     <!DOCTYPE html>
 <html lang="fr">
@@ -943,7 +939,7 @@ window.addEventListener("pageshow", function () {
 
         </div>
 
-        <a href="#" class="inline-flex items-center text-xs font-bold tracking-[0.2em] text-gray-400 hover:text-black transition-colors uppercase">
+        <a href="#" class="inline-flex items-center text-xs font-bold tracking-[0.2em] text-gray-400 hover:text-black transition-colors uppercase" onclick="openServicesModal(); return false;">
             Voir tous nos services 
             <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
         </a>
@@ -1744,6 +1740,43 @@ window.addEventListener("pageshow", function () {
         </div>
     </div>
 
+    <!-- Modal Services -->
+    <div class="modal-overlay" id="servicesModal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeServicesModal()">&times;</button>
+            <h2 style="font-size: 20px; font-weight: 700; margin-bottom: 8px; font-family: 'Inter', sans-serif;">Nos Services</h2>
+            <p style="font-size: 14px; color: #666; margin-bottom: 24px;">
+                Choisissez un service pour en savoir plus
+            </p>
+            
+            <div class="contact-options">
+                <a href="siteweb.html" class="contact-option">
+                    <div class="contact-icon"><i class="fa-solid fa-globe"></i></div>
+                    <div class="contact-info">
+                        <span class="contact-title">Création de sites</span>
+                        <span class="contact-desc">Sites web professionnels</span>
+                    </div>
+                </a>
+                
+                <a href="referencement.html" class="contact-option">
+                    <div class="contact-icon"><i class="fa-solid fa-search"></i></div>
+                    <div class="contact-info">
+                        <span class="contact-title">Référencement</span>
+                        <span class="contact-desc">SEO et visibilité Google</span>
+                    </div>
+                </a>
+                
+                <a href="maintenance.html" class="contact-option">
+                    <div class="contact-icon"><i class="fa-solid fa-wrench"></i></div>
+                    <div class="contact-info">
+                        <span class="contact-title">Maintenance</span>
+                        <span class="contact-desc">Suivi et évolutions</span>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+
     <script>
         function openModal() {
             document.getElementById('contactModal').classList.add('active');
@@ -1805,6 +1838,19 @@ window.addEventListener("pageshow", function () {
         
         document.getElementById('contactModal').addEventListener('click', function(e) {
             if (e.target === this) closeModal();
+        });
+
+        // Modal Services - Voir tous nos services
+        function openServicesModal() {
+            document.getElementById('servicesModal').classList.add('active');
+        }
+
+        function closeServicesModal() {
+            document.getElementById('servicesModal').classList.remove('active');
+        }
+
+        document.getElementById('servicesModal').addEventListener('click', function(e) {
+            if (e.target === this) closeServicesModal();
         });
     </script>
 </body>
@@ -1897,6 +1943,43 @@ window.addEventListener("pageshow", function () {
         </div>
     </div>
 
+    <!-- Modal Services -->
+    <div class="modal-overlay" id="servicesModal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeServicesModal()">&times;</button>
+            <h2 style="font-size: 20px; font-weight: 600; margin-bottom: 8px;">Nos Services</h2>
+            <p style="font-size: 14px; color: #666; margin-bottom: 24px;">
+                Choisissez un service pour en savoir plus
+            </p>
+            
+            <div class="contact-options">
+                <a href="siteweb.html" class="contact-option">
+                    <div class="contact-icon"><i class="fa-solid fa-globe"></i></div>
+                    <div class="contact-info">
+                        <span class="contact-title">Création de sites</span>
+                        <span class="contact-desc">Sites web professionnels</span>
+                    </div>
+                </a>
+                
+                <a href="referencement.html" class="contact-option">
+                    <div class="contact-icon"><i class="fa-solid fa-search"></i></div>
+                    <div class="contact-info">
+                        <span class="contact-title">Référencement</span>
+                        <span class="contact-desc">SEO et visibilité Google</span>
+                    </div>
+                </a>
+                
+                <a href="maintenance.html" class="contact-option">
+                    <div class="contact-icon"><i class="fa-solid fa-wrench"></i></div>
+                    <div class="contact-info">
+                        <span class="contact-title">Maintenance</span>
+                        <span class="contact-desc">Suivi et évolutions</span>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+
     <script>
         function openModal() {
             document.getElementById('contactModal').classList.add('active');
@@ -1958,6 +2041,19 @@ window.addEventListener("pageshow", function () {
         
         document.getElementById('contactModal').addEventListener('click', function(e) {
             if (e.target === this) closeModal();
+        });
+
+        // Modal Services - Voir tous nos services
+        function openServicesModal() {
+            document.getElementById('servicesModal').classList.add('active');
+        }
+
+        function closeServicesModal() {
+            document.getElementById('servicesModal').classList.remove('active');
+        }
+
+        document.getElementById('servicesModal').addEventListener('click', function(e) {
+            if (e.target === this) closeServicesModal();
         });
     </script>
 </body>
