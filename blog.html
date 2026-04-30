@@ -185,6 +185,50 @@
             text-align: center;
         }
 
+        /* Contact Options */
+        .contact-options {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        .contact-option {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding: 16px;
+            border: 1px solid #e5e7eb;
+            border-radius: 12px;
+            text-decoration: none;
+            color: #111;
+            transition: all 0.2s;
+        }
+        .contact-option:hover {
+            background: #f9fafb;
+            border-color: #d1d5db;
+        }
+        .contact-icon {
+            width: 44px;
+            height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #f3f4f6;
+            border-radius: 10px;
+            font-size: 20px;
+        }
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+        }
+        .contact-title {
+            font-size: 15px;
+            font-weight: 600;
+        }
+        .contact-desc {
+            font-size: 13px;
+            color: #666;
+        }
+
         .nav-link { color: #000; font-size: 14px; transition: color 0.2s; }
         .nav-link.active { color: #000; font-weight: 600; }
 
@@ -880,20 +924,20 @@
         document.body.style.overflow = '';
     }
 
-    function showContactOptions() {s
-        document.querySelector('#contactModal .contact-options').style.display = 'flex';
+    function showContactOptions() {
+        document.getElementById('contactModal').querySelector('.contact-options').style.display = 'flex';
         document.getElementById('whatsappForm').style.display = 'none';
         document.getElementById('contactForm').style.display = 'none';
     }
 
     function showWhatsAppForm() {
-        document.querySelector('#contactModal .contact-options').style.display = 'none';
+        document.getElementById('contactModal').querySelector('.contact-options').style.display = 'none';
         document.getElementById('contactForm').style.display = 'none';
         document.getElementById('whatsappForm').style.display = 'block';
     }
 
     function showContactForm() {
-        document.querySelector('#contactModal .contact-options').style.display = 'none';
+        document.getElementById('contactModal').querySelector('.contact-options').style.display = 'none';
         document.getElementById('whatsappForm').style.display = 'none';
         document.getElementById('contactForm').style.display = 'block';
     }
@@ -935,6 +979,78 @@
         if (e.target === document.getElementById('contactModal')) closeModal();
     });
 </script>
+
+<!-- Modal Contact -->
+<div class="modal-overlay" id="contactModal">
+    <div class="modal-content">
+        <button class="modal-close" onclick="closeModal()">&times;</button>
+        <h2 style="font-size: 20px; font-weight: 600; margin-bottom: 8px;">Contactez un expert</h2>
+        <p style="font-size: 14px; color: #666; margin-bottom: 24px;">
+            Une réponse sous 24h garantie
+        </p>
+        
+        <div class="contact-options">
+            <a href="https://instagram.com/aureumstudio.officiel" target="_blank" class="contact-option">
+                <div class="contact-icon"><i class="fa-brands fa-instagram"></i></div>
+                <div class="contact-info">
+                    <span class="contact-title">Instagram</span>
+                    <span class="contact-desc">Envoyer un message direct</span>
+                </div>
+            </a>
+            
+            <a href="https://calendar.google.com/calendar/u/0/appointments/schedules/AcZssZ2drwqBksOybMNdaK867gjy4ujJiTec94x_5XyJdkNuA_QX45OsPrVMrf010XHuWfQBozuBLCPE?gv=true" target="_blank" class="contact-option">
+                <div class="contact-icon"><i class="fa-solid fa-calendar-check"></i></div>
+                <div class="contact-info">
+                    <span class="contact-title">Réserver un appel</span>
+                    <span class="contact-desc">Planifier un rendez-vous</span>
+                </div>
+            </a>
+            
+            <a href="mailto:contact@aureumstudio.fr" class="contact-option">
+                <div class="contact-icon"><i class="fa-solid fa-envelope"></i></div>
+                <div class="contact-info">
+                    <span class="contact-title">Email</span>
+                    <span class="contact-desc">Envoyer un mail</span>
+                </div>
+            </a>
+            
+            <a href="contact.html" class="contact-option">
+                <div class="contact-icon"><i class="fa-solid fa-file-lines"></i></div>
+                <div class="contact-info">
+                    <span class="contact-title">Formulaire</span>
+                    <span class="contact-desc">Parlez-nous de votre projet</span>
+                </div>
+            </a>
+        </div>
+        
+        <div id="contactForm" style="display: none;">
+            <form onsubmit="submitForm(event)">
+                <div class="form-group">
+                    <label>Nom complet</label>
+                    <input type="text" name="name" required placeholder="John Doe">
+                </div>
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" name="email" required placeholder="john@exemple.com">
+                </div>
+                <div class="form-group">
+                    <label>Message</label>
+                    <textarea name="message" required placeholder="Décrivez votre projet..."></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Services souhaités</label>
+                    <div class="checkbox-group">
+                        <label><input type="checkbox" name="service" value="siteweb"> Site web</label>
+                        <label><input type="checkbox" name="service" value="referencement"> Référencement SEO</label>
+                        <label><input type="checkbox" name="service" value="maintenance"> Maintenance</label>
+                    </div>
+                </div>
+                <button type="submit" class="form-submit">Envoyer</button>
+                <button type="button" style="background:none;border:none;color:#666;margin-top:8px;cursor:pointer;" onclick="showContactOptions()">Retour</button>
+            </form>
+        </div>
+    </div>
+</div>
 
 </body>
 </html>
