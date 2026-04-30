@@ -123,6 +123,31 @@
             cursor: pointer;
             color: #666;
         }
+                /* Animation de défilement */
+        .scrolling-banner {
+            overflow: hidden;
+            background-color: #fefefe;
+            padding: 40px 0 20px 0;
+            width: 100%;
+        }
+
+        .scrolling-content {
+            display: flex;
+            animation: scroll-left 30s linear infinite;
+            gap: 60px;
+            padding-right: 40px;
+        }
+
+        .scrolling-content:hover {
+            animation-play-state: paused;
+        }
+
+        .tech-item {
+            white-space: nowrap;
+            font-size: 16px;
+            font-weight: 500;
+            color: #666;
+        }
         .form-group { margin-bottom: 16px; }
         .form-group label {
             display: block;
@@ -433,6 +458,41 @@
             font-weight: 600;
             margin-bottom: 16px;
         }
+        
+        /* Animation de défilement */
+        .scrolling-banner {
+            overflow: hidden;
+            background-color: #fefefe;
+            padding: 40px 0 20px 0;
+            width: 100%;
+        }
+
+        .scrolling-content {
+            display: flex;
+            animation: scroll-left 30s linear infinite;
+            gap: 60px;
+            padding-right: 40px;
+        }
+
+        .scrolling-content:hover {
+            animation-play-state: paused;
+        }
+
+        .tech-item {
+            white-space: nowrap;
+            font-size: 16px;
+            font-weight: 500;
+            color: #666;
+        }
+
+        @keyframes scroll-left {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(-50%);
+            }
+        }
         .footer-links {
             display: flex;
             flex-direction: column;
@@ -466,6 +526,126 @@
             transition: color 0.2s;
         }
         .footer-social a:hover { color: #000; }
+    </style>
+    <style>
+        /* Nouveau style de boutons APC */
+        @property --apc-angle-1 { syntax: "<angle>"; inherits: false; initial-value: -75deg; }
+        @property --apc-angle-2 { syntax: "<angle>"; inherits: false; initial-value: -45deg; }
+
+        .apc-container-fixed {
+            width: 273px;
+            height: 130px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            --apc-font-size: 17px;
+            --apc-radius: 30px;
+            --apc-hover-time: 400ms;
+            --apc-hover-ease: cubic-bezier(0.25, 1, 0.5, 1);
+        }
+
+        .apc-button-wrap {
+            position: relative;
+            z-index: 2;
+            border-radius: var(--apc-radius);
+            pointer-events: none;
+            transition: all var(--apc-hover-time) var(--apc-hover-ease);
+        }
+
+        .apc-button-shadow {
+            --apc-shadow-fix: 2em;
+            position: absolute;
+            width: calc(100% + var(--apc-shadow-fix));
+            height: calc(100% + var(--apc-shadow-fix));
+            top: calc(0% - var(--apc-shadow-fix) / 2);
+            left: calc(0% - var(--apc-shadow-fix) / 2);
+            filter: blur(8px);
+            pointer-events: none;
+        }
+
+        .apc-button-shadow::after {
+            content: "";
+            position: absolute;
+            z-index: 0;
+            inset: 0;
+            border-radius: var(--apc-radius);
+            background: linear-gradient(180deg, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.05));
+            width: calc(100% - var(--apc-shadow-fix) - 0.25em);
+            height: calc(100% - var(--apc-shadow-fix) - 0.25em);
+            top: calc(var(--apc-shadow-fix) - 0.4em);
+            left: calc(var(--apc-shadow-fix) - 0.7em);
+            mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+            mask-composite: exclude;
+            -webkit-mask-composite: destination-out;
+        }
+
+        .apc-container-fixed button.apc-btn-main {
+            --apc-border-w: 2px;
+            all: unset;
+            cursor: pointer;
+            position: relative;
+            z-index: 3;
+            pointer-events: auto;
+            background: linear-gradient(-75deg, rgba(255,255,255,0.2), rgba(255,255,255,0.5), rgba(255,255,255,0.2));
+            border-radius: var(--apc-radius);
+            box-shadow: 
+                inset 0 0.1em 0.1em rgba(0, 0, 0, 0.03), 
+                inset 0 -0.1em 0.1em rgba(255, 255, 255, 0.8), 
+                0 0.2em 0.4em rgba(0, 0, 0, 0.05);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            transition: all var(--apc-hover-time) var(--apc-hover-ease);
+            font-family: "Inter", sans-serif;
+            font-size: var(--apc-font-size);
+        }
+
+        .apc-btn-main:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 0.4em 0.8em rgba(0, 0, 0, 0.08);
+        }
+
+        .apc-btn-main span {
+            position: relative;
+            display: block;
+            padding-inline: 50px;
+            padding-block: 45px;
+            color: #222;
+            font-weight: 500;
+            letter-spacing: 0.01em;
+            text-align: center;
+        }
+
+        .apc-btn-main span::after {
+            content: "";
+            position: absolute;
+            inset: var(--apc-border-w);
+            border-radius: calc(var(--apc-radius) - var(--apc-border-w));
+            background: linear-gradient(var(--apc-angle-2), rgba(255,255,255,0) 0%, rgba(255,255,255,0.7) 45%, rgba(255,255,255,0) 60%);
+            z-index: 3;
+            mix-blend-mode: overlay;
+            background-size: 200% 200%;
+            background-position: 0% 50%;
+            transition: background-position 600ms var(--apc-hover-ease);
+        }
+
+        .apc-btn-main:hover span::after { background-position: 40% 50%; }
+
+        .apc-btn-main::after {
+            content: "";
+            position: absolute;
+            inset: calc(var(--apc-border-w) * -1);
+            padding: var(--apc-border-w);
+            border-radius: var(--apc-radius);
+            background: conic-gradient(from var(--apc-angle-1) at 50% 50%, rgba(0,0,0,0.15), rgba(0,0,0,0) 40%, rgba(0,0,0,0.15) 50%, rgba(0,0,0,0) 90%, rgba(0,0,0,0.15)), linear-gradient(180deg, rgba(255,255,255,0.9), rgba(255,255,255,0.4));
+            mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+            mask-composite: exclude;
+            -webkit-mask-composite: destination-out;
+            transition: --apc-angle-1 500ms ease;
+        }
+
+        .apc-btn-main:hover::after { --apc-angle-1: -125deg; }
+        .apc-btn-main:active { transform: scale(0.97) translateY(0); }
     </style>
 </head>
 <body class="antialiased">
@@ -562,80 +742,410 @@
     </header>
 
 
+    <section class="as-features-section">
+  <style>
+    .as-features-section {
+      --as-bg: #ffffff;
+      --as-text-dark: #1a1a2e;
+      --as-text-gray: #6E6E6E;
+      --as-accent: rgba(80, 90, 140, 0.25);
+      
+      background: var(--as-bg);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 60px 24px;
+      font-family: 'DM Sans', sans-serif;
+    }
 
-    <!-- Advantages Section -->
-    <section class="advantages-section">
+    .as-header {
+      text-align: center;
+      margin-bottom: 48px;
+    }
+
+    .as-header h1 {
+      font-family: 'GFS Didot', serif;
+      font-size: 68px;
+      font-weight: 600;
+      color: #000000;
+      line-height: 1.15;
+      margin-bottom: 14px;
+      letter-spacing: -0.5px;
+    }
+
+    .as-header p {
+      font-family: 'Inter', sans-serif;
+      font-size: 20px;
+      font-weight: 400;
+      color: var(--as-text-gray);
+      line-height: 1.6;
+    }
+
+    .as-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      max-width: 860px;
+      width: 100%;
+    }
+
+    
+    .as-bubble {
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      border-radius: 28px;
+      padding: 28px 20px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      height: 130px;
+      box-shadow: 0 2px 16px rgba(0, 0, 0, 0.06), inset 0 1px 0 rgba(255,255,255,0.9);
+      transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+      position: relative;
+      overflow: hidden;
+      animation: asReveal 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
+    }
+
+    @keyframes asReveal {
+      0% { opacity: 0; transform: translateY(25px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+
+    .as-bubble:hover {
+      background: rgba(0, 0, 0, 0.04);
+      transform: translateY(-4px) scale(1.025);
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+    }
+
+    .as-bubble-title {
+      font-size: 15px;
+      font-weight: 500;
+      color: var(--as-text-dark);
+      line-height: 1.4;
+      pointer-events: none;
+    }
+
+    /* Modal / Overlay */
+    .as-overlay {
+      position: fixed;
+      inset: 0;
+      background: var(--as-accent);
+      backdrop-filter: blur(10px) saturate(150%);
+      -webkit-backdrop-filter: blur(10px) saturate(150%);
+      z-index: 9999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.25s ease;
+    }
+
+    .as-overlay.as-active {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    .as-modal {
+      background: rgb(255, 255, 255);
+      backdrop-filter: blur(28px) saturate(180%);
+      -webkit-backdrop-filter: blur(28px) saturate(180%);
+      border: 1px solid rgba(255, 255, 255, 0.65);
+      border-radius: 28px;
+      padding: 48px 44px;
+      max-width: 440px;
+      width: 100%;
+      position: relative;
+      transform: translateY(20px) scale(0.97);
+      transition: transform 0.3s cubic-bezier(0.34,1.4,0.64,1);
+      box-shadow: 0 32px 80px rgba(80, 100, 200, 0.18);
+    }
+
+    .as-overlay.as-active .as-modal {
+      transform: translateY(0) scale(1);
+    }
+
+    .as-modal h2 {
+      font-size: 20px;
+      font-weight: 600;
+      color: #111827;
+      margin-bottom: 14px;
+    }
+
+    .as-modal p {
+      font-size: 15px;
+      line-height: 1.7;
+      color: #374151;
+    }
+
+    .as-modal-close {
+      position: absolute;
+      top: 18px;
+      right: 18px;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.45);
+      border: 1px solid rgba(255,255,255,0.6);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .as-modal-line {
+      width: 36px;
+      height: 3px;
+      background: rgba(150, 160, 200, 0.5);
+      border-radius: 2px;
+      margin-bottom: 20px;
+    }
+
+    @media (max-width: 768px) {
+      .as-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    @media (max-width: 500px) {
+      .as-grid { grid-template-columns: 1fr; }
+      .as-header h1 { font-size: 32px; }
+    }
+  </style>
+
+  <div class="as-header">
+    <h1>Pourquoi choisir AureumStudio ?</h1>
+    <p>Un site conçu pour attirer, convaincre et générer des clients.</p>
+  </div>
+
+  <div class="as-grid" id="as-grid-container">
+    <div class="apc-container-fixed">
+      <div class="apc-button-wrap">
+        <button class="apc-btn-main" onclick="showFeature('Attirez plus de clients')">
+          <span>Attirez plus de clients</span>
+        </button>
+        <div class="apc-button-shadow"></div>
+      </div>
+    </div>
+    <div class="apc-container-fixed">
+      <div class="apc-button-wrap">
+        <button class="apc-btn-main" onclick="showFeature('Soyez visible sur Google')">
+          <span>Soyez visible sur Google</span>
+        </button>
+        <div class="apc-button-shadow"></div>
+      </div>
+    </div>
+    <div class="apc-container-fixed">
+      <div class="apc-button-wrap">
+        <button class="apc-btn-main" onclick="showFeature('Image professionnelle')">
+          <span>Image professionnelle</span>
+        </button>
+        <div class="apc-button-shadow"></div>
+      </div>
+    </div>
+    <div class="apc-container-fixed">
+      <div class="apc-button-wrap">
+        <button class="apc-btn-main" onclick="showFeature('Optimisation web rapide')">
+          <span>Optimisation web rapide</span>
+        </button>
+        <div class="apc-button-shadow"></div>
+      </div>
+    </div>
+    <div class="apc-container-fixed">
+      <div class="apc-button-wrap">
+        <button class="apc-btn-main" onclick="showFeature('Accompagnement complet')">
+          <span>Accompagnement complet</span>
+        </button>
+        <div class="apc-button-shadow"></div>
+      </div>
+    </div>
+    <div class="apc-container-fixed">
+      <div class="apc-button-wrap">
+        <button class="apc-btn-main" onclick="showFeature('Site entièrement à vous')">
+          <span>Site entièrement à vous</span>
+        </button>
+        <div class="apc-button-shadow"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="as-overlay" id="as-modal-overlay">
+    <div class="as-modal">
+      <button class="as-modal-close" id="as-close-btn">✕</button>
+      <div class="as-modal-line"></div>
+      <h2 id="as-modal-title"></h2>
+      <p id="as-modal-desc"></p>
+    </div>
+  </div>
+
+  <script>
+    const featureData = {
+      "Attirez plus de clients": { fullTitle: "Un site optimisé pour convertir", desc: "Votre site ne se contente pas d'exister — il travaille pour vous. Chaque page, chaque bouton, chaque texte est pensé pour transformer vos visiteurs en demandes de devis." },
+      "Soyez visible sur Google": { fullTitle: "Optimisation SEO performante", desc: "Être sur Google, c'est être trouvé au bon moment. Nous intégrons les bonnes pratiques SEO pour que vos futurs clients vous trouvent avant vos concurrents." },
+      "Image professionnelle": { fullTitle: "Un Marketing digital moderne qui inspire confiance", desc: "La première impression se fait en moins de 3 secondes. Un Marketing digital soigné renvoie une image sérieuse et inspire immédiatement la confiance." },
+      "Optimisation web rapide": { fullTitle: "Fluidité et expérience utilisateur", desc: "Un site lent fait fuir. Nous optimisons les Optimisation webs pour que chaque page se charge instantanément sur tous les appareils." },
+      "Accompagnement complet": { fullTitle: "Nous vous guidons à chaque étape", desc: "De la première idée à la mise en ligne, nous sommes à vos côtés. Un suivi clair, réactif et humain à chaque étape du projet." },
+      "Site 100% à vous": { fullTitle: "Propriété totale et liberté", desc: "Votre site vous appartient intégralement — le code, le domaine, le contenu. Aucune dépendance cachée, vous gardez le contrôle total." }
+    };
+
+    function showFeature(title) {
+      const data = featureData[title];
+      if (data) {
+        document.getElementById('as-modal-title').textContent = data.fullTitle;
+        document.getElementById('as-modal-desc').textContent = data.desc;
+        document.getElementById('as-modal-overlay').classList.add('as-active');
+      }
+    }
+
+    const closeAsModal = () => document.getElementById('as-modal-overlay').classList.remove('as-active');
+    
+    document.getElementById('as-close-btn').onclick = closeAsModal;
+    document.getElementById('as-modal-overlay').onclick = (e) => { if (e.target === document.getElementById('as-modal-overlay')) closeAsModal(); };
+    window.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeAsModal(); });
+  </script>
+</section>
+
+    <!-- Processus Simple Section -->
+    <section class="py-20 bg-white-50">
         <div class="max-w-7xl mx-auto px-12">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold mb-4">En 3 étapes simples</h2>
+            </div>
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="step-simple text-center">
+                    <div class="text-6xl font-bold text-gray-200 mb-4">01</div>
+                    <h3 class="font-semibold text-xl mb-3">Contactez-nous</h3>
+                    <p class="text-gray-600">Décrivez votre projet en quelques lignes via le formulaire ou par téléphone.</p>
+                </div>
+                <div class="step-simple text-center">
+                    <div class="text-6xl font-bold text-gray-200 mb-4">02</div>
+                    <h3 class="font-semibold text-xl mb-3">Recevez le devis</h3>
+                    <p class="text-gray-600">Après 24h, un devis détaillé avec délais et tarifs transparents.</p>
+                </div>
+                <div class="step-simple text-center">
+                    <div class="text-6xl font-bold text-gray-200 mb-4">03</div>
+                    <h3 class="font-semibold text-xl mb-3">Lançons le projet</h3>
+                    <p class="text-gray-600">Validation du devis et lançement de votre projet.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+        <!-- Contact Banner Section -->
+        <!-- Blog Preview Section -->
+    <section class="py-20">
+        <div class="max-w-7xl mx-auto px-12">
+            <div class="flex justify-between items-center mb-12">
+                <div>
+                    <h2 class="text-3xl font-bold mb-2">Derniers articles</h2>
+                    <p class="text-gray-600">Conseils et actualités</p>
+                </div>
+                <a href="blog.html" class="text-sm font-medium hover:underline">Voir tout →</a>
+            </div>
+            <div class="grid md:grid-cols-3 gap-6">
+                <article class="blog-card border border-gray-200 rounded-xl overflow-hidden">
+                    <img src="https://i.pinimg.com/1200x/ec/c2/17/ecc217e5986e846f40de88a9b9e5b0f2.jpg" alt="SEO" class="w-full h-40 object-cover">
+                    <div class="p-6">
+                        <span class="text-xs font-semibold text-[#6346FF]">Actualité</span>
+                        <h3 class="font-semibold mt-2 mb-2">Pourquoi un site doit être optimisé ?</h3>
+                        <p class="text-sm text-gray-600 mb-4">Découvrez pourquoi un site doit être parfaitement adapté au mobile.</p>
+                        <a href="blog.html" class="text-sm font-medium">Lire la suite →</a>
+                    </div>
+                </article>
+                <article class="blog-card border border-gray-200 rounded-xl overflow-hidden">
+                    <img src="https://i.pinimg.com/736x/e6/78/19/e67819e9ea5bed97fd7bfbdc1677731e.jpg" alt="Marketing digital" class="w-full h-40 object-cover">
+                    <div class="p-6">
+                        <span class="text-xs font-semibold text-[#6346FF]">Marketing digital</span>
+                        <h3 class="font-semibold mt-2 mb-2">Comment un site peut rapporter ?</h3>
+                        <p class="text-sm text-gray-600 mb-4">Découvrez comment un site web peut générer des revenus de manière concrète et durable.</p>
+                        <a href="blog.html" class="text-sm font-medium">Lire la suite →</a>
+                    </div>
+                </article>
+                <article class="blog-card border border-gray-200 rounded-xl overflow-hidden">
+                    <img src="https://i.pinimg.com/1200x/b8/66/0d/b8660d49d2ca8d1af06589d871d8a1bd.jpg" alt="Optimisation web" class="w-full h-40 object-cover">
+                    <div class="p-6">
+                        <span class="text-xs font-semibold text-[#6346FF]">Optimisation web</span>
+                        <h3 class="font-semibold mt-2 mb-2">Pourquoi avoir un site web en 2026 ?</h3>
+                        <p class="text-sm text-gray-600 mb-4">Découvrez pourquoi un site web est essentiel pour développer votre présence en ligne.</p>
+                        <a href="blog.html" class="text-sm font-medium">Lire la suite →</a>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+    <div class="scrolling-banner">
+        <div class="scrolling-content">
+            <span class="tech-item">Node.js</span>
+            <span class="tech-item">Python</span>
+            <span class="tech-item">MySQL</span>
+            <span class="tech-item">PostgreSQL</span>
+            <span class="tech-item">GitHub</span>
+            <span class="tech-item">VS Code</span>
+            <span class="tech-item">WordPress</span>
+            <span class="tech-item">Docker</span>
+            <span class="tech-item">HTML5</span>
+            <span class="tech-item">JavaScript</span>
+            <span class="tech-item">PHP</span>
             
-            <div class="advantage-row">
-                <div class="advantage-content">
-                    <div class="advantage-number">01</div>
-                    <h2 class="advantage-title">Expertise technique</h2>
-                    <p class="advantage-desc">
-                        Notre équipe maîtrise les dernières technologies web pour garantir des sites performants, sécurisés et évolutifs. Nous utilisons des outils modernes et des bonnes pratiques de développement.
-                    </p>
+            <span class="tech-item">Node.js</span>
+            <span class="tech-item">Python</span>
+            <span class="tech-item">MySQL</span>
+            <span class="tech-item">PostgreSQL</span>
+            <span class="tech-item">GitHub</span>
+            <span class="tech-item">VS Code</span>
+            <span class="tech-item">WordPress</span>
+            <span class="tech-item">Docker</span>
+            <span class="tech-item">HTML5</span>
+            <span class="tech-item">JavaScript</span>
+            <span class="tech-item">PHP</span>
+        </div>
+    </div>
+        <!-- Technologies Section -->
+    <section class="py-20">
+        <div class="max-w-7xl mx-auto px-12">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold mb-4">Technologies que nous maîtrisons</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">Les outils les plus modernes pour des résultats optimaux</p>
+            </div>
+            <div class="grid grid-cols-2 md:grid-cols-5 gap-6">
+                <div class="tech-card text-center p-6 border border-gray-200 rounded-xl">
+                    <i class="fa-brands fa-html5 text-4xl text-orange-500 mb-3"></i>
+                    <div class="font-medium">HTML5</div>
                 </div>
-                <div class="advantage-visual">
-                    <i class="fa-solid fa-code"></i>
+                <div class="tech-card text-center p-6 border border-gray-200 rounded-xl">
+                    <i class="fa-brands fa-css3-alt text-4xl text-blue-500 mb-3"></i>
+                    <div class="font-medium">CSS3</div>
+                </div>
+                <div class="tech-card text-center p-6 border border-gray-200 rounded-xl">
+                    <i class="fa-brands fa-js text-4xl text-yellow-400 mb-3"></i>
+                    <div class="font-medium">JavaScript</div>
+                </div>
+                <div class="tech-card text-center p-6 border border-gray-200 rounded-xl">
+                    <i class="fa-brands fa-react text-4xl text-cyan-500 mb-3"></i>
+                    <div class="font-medium">React</div>
+                </div>
+                <div class="tech-card text-center p-6 border border-gray-200 rounded-xl">
+                    <i class="fa-brands fa-node text-4xl text-green-500 mb-3"></i>
+                    <div class="font-medium">Node.js</div>
                 </div>
             </div>
-
-            <div class="advantage-row">
-                <div class="advantage-content">
-                    <div class="advantage-number">02</div>
-                    <h2 class="advantage-title">Approche personnalisée</h2>
-                    <p class="advantage-desc">
-                        Chaque projet est unique. Nous écoutons vos besoins et adaptons nos solutions pour créer un site qui correspond parfaitement à votre image de marque et vos objectifs commerciaux.
-                    </p>
-                </div>
-                <div class="advantage-visual">
-                    <i class="fa-solid fa-puzzle-piece"></i>
-                </div>
-            </div>
-
-            <div class="advantage-row">
-                <div class="advantage-content">
-                    <div class="advantage-number">03</div>
-                    <h2 class="advantage-title">SEO intégré</h2>
-                    <p class="advantage-desc">
-                        Tous nos sites sont optimisés pour les moteurs de recherche dès la conception. Structure, vitesse, mobile-first : nous mettons toutes les chances de votre côté pour ranker.
-                    </p>
-                </div>
-                <div class="advantage-visual">
-                    <i class="fa-solid fa-chart-line"></i>
-                </div>
-            </div>
-
-            <div class="advantage-row">
-                <div class="advantage-content">
-                    <div class="advantage-number">04</div>
-                    <h2 class="advantage-title">Support réactif</h2>
-                    <p class="advantage-desc">
-                        Besoin d'aide ? Notre équipe vous répond en moins de 24h. Nous accompagnons nos clients sur le long terme avec un support technique disponible et à l'écoute.
-                    </p>
-                </div>
-                <div class="advantage-visual">
-                    <i class="fa-solid fa-headset"></i>
-                </div>
-            </div>
-
-            <div class="advantage-row">
-                <div class="advantage-content">
-                    <div class="advantage-number">05</div>
-                    <h2 class="advantage-title">Transparence totale</h2>
-                    <p class="advantage-desc">
-                        Pas de frais cachés ni de surprises. Nous vous fournissons des devis détaillés et communiquons régulièrement sur l'avancement de votre projet.
-                    </p>
-                </div>
-                <div class="advantage-visual">
-                    <i class="fa-solid fa-file-invoice-dollar"></i>
-                </div>
-            </div>
-
         </div>
     </section>
 
-    
+        <!-- Newsletter Section -->
+    <section class="py-20 bg-white-50">
+        <div class="max-w-3xl mx-auto px-12 text-center -translate-y-5">
+            <h2 class="text-3xl font-bold mb-4">Restez informé</h2>
+            <p class="text-gray-600 mb-8">Inscrivez-vous à notre newsletter pour recevoir nos conseils et actualités.</p>
+            <form class="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
+                <input type="email" placeholder="Votre email" class="flex-1 px-6 py-3 border border-gray-300 rounded-full focus:outline-none focus:border-black">
+                <button type="submit" class="bg-black text-white px-8 py-3 rounded-full font-medium hover:bg-gray-800 transition">S'inscrire</button>
+            </form>
+        </div>
+    </section>
 
     <!-- Footer -->
     <footer>
