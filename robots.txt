@@ -1,0 +1,24 @@
+# Robots.txt - Aureum
+# https://aureumstudio.fr
+
+User-agent: *
+Allow: /
+Disallow: /cdn/
+Disallow: /lib/
+Disallow: /*.js$
+Disallow: /*.css$
+
+# Moteurs spécifiques
+User-agent: Googlebot
+Allow: /
+User-agent: Bingbot
+Allow: /
+User-agent: Slurp
+Allow: /
+
+# Interdiction du suivi
+User-agent: *
+Crawl-delay: 1
+
+Sitemap: https://aureumstudio.fr/sitemap.xml
+Sitemap: https://aureumstudio.fr/sitemap-index.xml

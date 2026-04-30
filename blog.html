@@ -4,6 +4,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Aureum - Blog</title>
+    <meta name="description" content="Blog Aureum - Actualités, conseils et bonnes pratiques sur le web design, le référencement SEO et les tendances digitales.">
+    <link rel="canonical" href="https://aureumstudio.fr/blog.html">
+    <!-- Open Graph -->
+    <meta property="og:title" content="Aureum - Blog">
+    <meta property="og:description" content="Blog Aureum - Actualités, conseils et bonnes pratiques sur le web design et le SEO.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://aureumstudio.fr/blog.html">
+    <meta property="og:site_name" content="Aureum">
+    <!-- Schema.org -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Blog",
+        "name": "Aureum - Blog",
+        "url": "https://aureumstudio.fr/blog.html"
+    }
+    </script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
     <script type="text/javascript">
         (function() {
@@ -25,14 +42,19 @@
             min-height: 100vh;
         }
 
-        .logo-text {
-            font-family: 'Inter', sans-serif;
-            font-weight: 500;
-            font-size: 16.92px;
-            letter-spacing: -0.02em;
-            color: #000;
-            margin-top: 5px;
+        /* H1 caché pour SEO */
+        .seo-h1 {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
         }
+        
 
         .logogram {
             width: 24px;
@@ -491,6 +513,7 @@
         }
         .footer-social a:hover { color: #000; }
     </style>
+    <h1 class="seo-h1">Blog Aureum - Actualités Web Design, SEO et Tendances Digitales</h1>
 </head>
 <body class="antialiased">
 
