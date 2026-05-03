@@ -502,7 +502,18 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             }
             #typo-anim-section,
             .hero-section {
-                padding-bottom: 100px;
+                padding-bottom: 160px;
+            }
+            .stats-row {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 16px;
+            }
+            .stats-row .divider {
+                display: none;
+            }
+            .stats-row .stat {
+                padding: 16px 12px;
             }
             .cardze {
                 width: 100%;
@@ -519,6 +530,25 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                 width: auto;
                 justify-content: center;
                 padding: 13px 18px;
+                font-size: 12px;
+            }
+            .btn-secondary svg {
+                width: 14px;
+                height: 14px;
+            }
+            .as-viewport {
+                max-width: 85%;
+                margin: 0 auto;
+                overflow-x: auto;
+                scroll-snap-type: x mandatory;
+                -webkit-overflow-scrolling: touch;
+            }
+            .as-track {
+                gap: 16px;
+                min-width: max-content;
+            }
+            .as-card {
+                scroll-snap-align: start;
             }
             #mobileMenu nav {
                 align-items: center;
