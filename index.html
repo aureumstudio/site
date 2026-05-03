@@ -487,6 +487,100 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             transition: color 0.2s;
         }
         .footer-social a:hover { color: #000; }
+
+        @media (max-width: 768px) {
+            html, body {
+                overflow-x: hidden;
+            }
+            body {
+                padding-left: 20px;
+                padding-right: 20px;
+            }
+            header {
+                padding-left: 0;
+                padding-right: 0;
+            }
+            #typo-anim-section,
+            .hero-section {
+                padding-bottom: 100px;
+            }
+            .cardze {
+                width: 100%;
+                max-width: 400px;
+                margin: 0 auto 40px;
+            }
+            .secondary-row {
+                flex-wrap: wrap;
+                gap: 12px;
+            }
+            .btn-secondary {
+                flex: 1 1 auto;
+                min-width: 0;
+                width: auto;
+                justify-content: center;
+                padding: 13px 18px;
+            }
+            #mobileMenu nav {
+                align-items: center;
+                gap: 24px;
+            }
+            #mobileMenu nav a {
+                width: 100%;
+                text-align: center;
+                padding: 12px 0;
+            }
+            #svgPattern {
+                left: 50% !important;
+                transform: translateX(-50%) !important;
+                width: calc(100vw - 40px) !important;
+                max-width: calc(100vw - 40px) !important;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1,
+            h2,
+            .hero-title,
+            .typo-anim-slide {
+                font-size: 2rem !important;
+                white-space: normal !important;
+            }
+            .hero-subtitle,
+            p,
+            .feature-desc,
+            .cta-subtitle,
+            .footer-brand p,
+            .as-faq-subtitle,
+            .as-faq-answer p {
+                line-height: 1.8 !important;
+            }
+            .hero-cta,
+            .btn-action,
+            .cta-button {
+                padding-left: 20px;
+                padding-right: 20px;
+            }
+            .features-grid {
+                gap: 16px;
+            }
+            .as-slider-section {
+                padding-left: 0;
+                padding-right: 0;
+            }
+            .footer-content {
+                padding-left: 20px;
+                padding-right: 20px;
+            }
+            #typo-anim-section {
+                padding-bottom: 120px;
+            }
+            .secondary-row {
+                flex-direction: column;
+            }
+            .btn-secondary {
+                width: 100%;
+            }
+        }
     </style>
 </head>
 <body class="antialiased">
