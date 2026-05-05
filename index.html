@@ -617,6 +617,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                 font-size: 2rem !important;
                 white-space: normal !important;
             }
+            h2.text-4xl.mb-4 {
+                font-size: 1.6rem !important;
+                line-height: 1.2 !important;
+            }
             .hero-subtitle,
             p,
             .feature-desc,
@@ -1032,7 +1036,7 @@ window.addEventListener("pageshow", function () {
             display: flex;
             justify-content: center;
             align-items: center;
-            margin-top: -60px;
+            margin-top: -80px;
         }
 
         .typo-anim-slide {
@@ -1076,6 +1080,23 @@ window.addEventListener("pageshow", function () {
         .typo-anim-slide strong {
             display: block;
             font-weight: 900;
+        }
+
+        @media (max-width: 767px) {
+            .typo-anim-wrapper .typo-anim-slide {
+                font-size: clamp(1.4rem, 7vw, 2.2rem) !important;
+                line-height: 1.2 !important;
+                white-space: normal !important;
+                max-width: 90vw !important;
+                padding: 0 1rem !important;
+            }
+
+            .typo-anim-wrapper .typo-anim-slide span,
+            .typo-anim-wrapper .typo-anim-slide strong {
+                font-size: inherit !important;
+                max-width: 100%;
+                word-break: break-word;
+            }
         }
     </style>
 </head>
@@ -1666,6 +1687,7 @@ window.addEventListener("pageshow", function () {
     /* Boutons secondaires */
     .secondary-row {
       display: flex;
+      gap: 10px;
       margin-bottom: 18px;
     }
 
@@ -1701,7 +1723,7 @@ window.addEventListener("pageshow", function () {
         margin: -85px auto -60px auto;
         padding: 16px;
         position: relative;
-        top: -120px;
+        top: -145px;
       }
       section.max-w-6xl.mx-auto.text-center.pt-24.pb-8 {
         padding-top: 0.4rem;
@@ -1714,6 +1736,7 @@ window.addEventListener("pageshow", function () {
       }
       .secondary-row {
         gap: 10px;
+        margin-bottom : 1px;
       }
       .btn-secondary {
         font-size: 12px;
