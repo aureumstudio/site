@@ -326,6 +326,12 @@
             transition: color 0.2s;
         }
         .footer-social a:hover { color: #000; }
+
+        @media (max-width: 767px) {
+            .logo-text { margin-top: 0; }
+            .logogram { margin-left: -20px; }
+            button[aria-label="Menu"] { margin-right: -8px; }
+        }
     </style>
     <h1 class="seo-h1">Maintenance de Sites Web - Support Technique et Optimisation Aureum</h1>
 </head>
@@ -335,8 +341,8 @@
         <div class="flex items-center gap-2">
             <div class="logogram">
                 <svg width="24" height="21" viewBox="0 0 24 21" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M21.0499 2.33172e-08L23.6857 4.54943L21.0499 9.09886H15.7784L13.1426 4.54943L15.7784 0L21.0499 2.33172e-08Z" fill="black"/>
-                    <path d="M7.90734 2.33172e-08L17.0784 15.8147L14.4426 20.3641H9.17107L0 4.54943L2.63578 0L7.90734 2.33172e-08Z" fill="black"/>
+                    <path d="M21.0499 2.33172e-08L23.6857 4.54943L21.0499 9.09886H15.7784L13.1426 4.54943L15.7784 0L21.0499 2.33172e-08Z" fill="black"></path>
+                    <path d="M7.90734 2.33172e-08L17.0784 15.8147L14.4426 20.3641H9.17107L0 4.54943L2.63578 0L7.90734 2.33172e-08Z" fill="black"></path>
                 </svg>
             </div>
             <span class="logo-text">Aureum</span>
@@ -370,19 +376,10 @@
 
     <!-- Mobile Menu Overlay - slides from right -->
     <div id="mobileMenu" class="fixed inset-y-0 right-0 w-80 max-w-full bg-white z-50 hidden transform translate-x-full transition-transform duration-300 flex-col">
-        <div class="flex justify-between items-center px-6 py-6">
-            <div class="flex items-center gap-2">
-                <div class="logogram">
-                    <svg width="24" height="21" viewBox="0 0 24 21" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M21.0499 2.33172e-08L23.6857 4.54943L21.0499 9.09886H15.7784L13.1426 4.54943L15.7784 0L21.0499 2.33172e-08Z" fill="black"/>
-                        <path d="M7.90734 2.33172e-08L17.0784 15.8147L14.4426 20.3641H9.17107L0 4.54943L2.63578 0L7.90734 2.33172e-08Z" fill="black"/>
-                    </svg>
-                </div>
-                <span class="logo-text">Aureum</span>
-            </div>
-            <button onclick="toggleMobileMenu()" aria-label="Fermer le menu" class="w-8 h-8 flex items-center justify-center">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M18 6L6 18M6 6L18 18" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        <div class="flex justify-end items-center px-6 py-6 border-b border-gray-100">
+            <button onclick="toggleMobileMenu()" aria-label="Fermer le menu" class="w-8 h-8 flex items-center justify-center rounded-full bg-white hover:bg-gray-100 transition-colors">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M18 6L6 18M6 6L18 18" stroke="#111827" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
                 </svg>
             </button>
         </div>

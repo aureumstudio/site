@@ -1099,7 +1099,6 @@ window.addEventListener("pageshow", function () {
                 max-width: 100%;
                 word-break: break-word;
             }
-            
             .typo-anim-wrapper {
             margin-top: -130px;
             }
@@ -1816,6 +1815,12 @@ window.addEventListener("pageshow", function () {
       text-transform: uppercase;
       letter-spacing: 0.05em;
       line-height: 1.4;
+    }
+
+    @media (max-width: 767px) {
+      .logo-text { margin-top: 0; }
+      .logogram { margin-left: -20px; }
+      button[aria-label="Menu"] { margin-right: -8px; }
     }
   </style>
   <h1 class="seo-h1">Aureum - Agence Web Créative - Création de Sites Web et Référencement SEO</h1>
