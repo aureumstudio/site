@@ -618,7 +618,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                 white-space: normal !important;
             }
             h2.text-4xl.mb-4 {
-                font-size: 1.6rem !important;
+                font-size: 1.4rem !important;
                 line-height: 1.2 !important;
             }
             .hero-subtitle,
@@ -1220,9 +1220,20 @@ window.addEventListener("pageshow", function () {
 </svg>
         
         <h2 class="text-4xl md:text-5xl font-bold text-black mb-4">Ce que nous faisons de mieux.</h2>
-        <p class="text-gray-500 font-light mb-16 tracking-wide">
-            L'alliance parfaite entre esthétique premium, persuasion et technologie.
+        <p class="text-gray-500 font-light mb-16 tracking-wide subtitle-alliance">
+            L'alliance parfaite entre esthétique premium,<br> persuasion et technologie.
         </p>
+
+        <style>
+            .subtitle-alliance {
+                font-size: 13px;
+            }
+            @media (min-width: 768px) {
+                .subtitle-alliance {
+                    font-size: 18px;
+                }
+            }
+        </style>
 
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
             
