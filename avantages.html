@@ -939,11 +939,31 @@
 
     @media (max-width: 768px) {
       .as-grid { grid-template-columns: repeat(2, 1fr); }
+      .apc-container-fixed {
+        width: 200px;
+        height: 100px;
+        --apc-font-size: 14px;
+        --apc-radius: 20px;
+      }
+      .apc-btn-main span {
+        padding-inline: 30px;
+        padding-block: 30px;
+      }
     }
 
     @media (max-width: 500px) {
-      .as-grid { grid-template-columns: 1fr; }
+      .as-grid { grid-template-columns: repeat(3, 1fr); }
       .as-header h1 { font-size: 32px; }
+      .apc-container-fixed {
+        width: 100px;
+        height: 60px;
+        --apc-font-size: 10px;
+        --apc-radius: 12px;
+      }
+      .apc-btn-main span {
+        padding-inline: 15px;
+        padding-block: 15px;
+      }
     }
   </style>
 
