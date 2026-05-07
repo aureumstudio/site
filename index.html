@@ -260,8 +260,19 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             text-align: center;
         }
 
-        .nav-link { color: #000; font-size: 14px; transition: color 0.2s; }
-        .nav-link.active { color: #000; font-weight: 500; }
+        .nav-link { color: #000; font-size: 14px; transition: color 0.2s, transform 0.2s; }
+        .nav-link:hover { color: #111827; transform: translateX(2px); }
+        .nav-link.active { color: #000; font-weight: 600; }
+
+        #mobileMenuBackdrop { display: none; pointer-events: none; }
+        #mobileMenuBackdrop:not(.hidden) { display: block; pointer-events: auto; }
+
+        #mobileMenu .nav-link { width: 100%; padding: 12px 0; color: #111827; font-weight: 500; }
+        #mobileMenu .nav-link.active { color: #000; }
+        #mobileMenu .nav-link:hover { color: #111827; }
+
+        .btn-action { transition: transform 0.2s, box-shadow 0.2s; }
+        .btn-action:hover { transform: translateY(-1px); box-shadow: 0 10px 30px rgba(0,0,0,0.12); }
 
         .contact-options {
             display: flex;
@@ -784,9 +795,6 @@ window.addEventListener("pageshow", function () {
 });
 </script>
 
-</body>
-</html>
-
     <header class="flex justify-between items-center px-12 py-8 max-w-7xl mx-auto">
         <div class="flex items-center gap-2">
             <div class="logogram">
@@ -826,19 +834,10 @@ window.addEventListener("pageshow", function () {
 
     <!-- Mobile Menu Overlay - slides from right -->
     <div id="mobileMenu" class="fixed inset-y-0 right-0 w-80 max-w-full bg-white z-50 hidden transform translate-x-full transition-transform duration-300 flex-col">
-        <div class="flex justify-between items-center px-6 py-6">
-            <div class="flex items-center gap-2">
-                <div class="logogram">
-                    <svg width="24" height="21" viewBox="0 0 24 21" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M21.0499 2.33172e-08L23.6857 4.54943L21.0499 9.09886H15.7784L13.1426 4.54943L15.7784 0L21.0499 2.33172e-08Z" fill="black"/>
-                        <path d="M7.90734 2.33172e-08L17.0784 15.8147L14.4426 20.3641H9.17107L0 4.54943L2.63578 0L7.90734 2.33172e-08Z" fill="black"/>
-                    </svg>
-                </div>
-                <span class="logo-text">Aureum</span>
-            </div>
-            <button onclick="toggleMobileMenu()" aria-label="Fermer le menu" class="w-8 h-8 flex items-center justify-center">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M18 6L6 18M6 6L18 18" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        <div class="flex justify-end items-center px-6 py-6 border-b border-gray-100">
+            <button onclick="toggleMobileMenu()" aria-label="Fermer le menu" class="w-8 h-8 flex items-center justify-center rounded-full bg-white hover:bg-gray-100 transition-colors">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M18 6L6 18M6 6L18 18" stroke="#111827" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
             </button>
         </div>
@@ -1029,7 +1028,7 @@ window.addEventListener("pageshow", function () {
             font-family: 'Playfair Display', serif;
             position: relative;
             overflow: hidden;
-            margin-top: -40px;
+            margin-top: -10px;
         }
 
         .typo-anim-wrapper {
@@ -1099,6 +1098,10 @@ window.addEventListener("pageshow", function () {
                 font-size: inherit !important;
                 max-width: 100%;
                 word-break: break-word;
+            }
+            
+            .typo-anim-wrapper {
+            margin-top: -130px;
             }
         }
     </style>
