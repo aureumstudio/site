@@ -42,16 +42,6 @@
             min-height: 100vh;
         }
 
-        @media (max-width: 767px) {
-            html {
-                overflow-x: hidden;
-            }
-            body {
-                min-height: 100vh;
-                overflow-x: hidden;
-            }
-        }
-
         /* H1 caché pour SEO */
         .seo-h1 {
             position: absolute;
@@ -154,9 +144,6 @@
             .logogram { margin-left: -20px; }
             button[aria-label="Menu"] { margin-right: -8px; }
         }
-
-        footer .logogram { margin-left: 0; }
-
         .modal-close {
             position: absolute;
             top: 16px;
@@ -536,7 +523,7 @@
 </head>
 <body class="antialiased">
 
-    <header class="flex justify-between items-center px-12 py-8 max-w-7xl mx-auto w-full flex-shrink-0">
+    <header class="flex justify-between items-center px-12 py-8 max-w-7xl mx-auto w-full">
         <div class="flex items-center gap-2 w-[113px]">
             <div class="logogram">
                 <svg width="24" height="21" viewBox="0 0 24 21" fill="none" xmlns="http://www.w3.org/2000/svg">
