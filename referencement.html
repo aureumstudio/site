@@ -33,26 +33,10 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
         
-        @media (max-width: 767px) {
-            html {
-                overflow-x: hidden;
-            }
-        }
-        
         body { 
             font-family: 'Inter', sans-serif; 
             background-color: #ffffff; 
-            color: #111;
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
-        }
-
-        @media (max-width: 767px) {
-            body {
-                min-height: auto;
-                overflow-x: hidden;
-            }
+            color: #111; 
         }
 
         /* H1 caché pour SEO */
@@ -260,25 +244,6 @@
             }
         }
 
-        @media (max-width: 767px) {
-            .scrolling-content {
-                animation: none !important;
-                gap: 20px;
-                padding-right: 0;
-                width: 100%;
-                overflow: hidden;
-            }
-            .scrolling-banner {
-                overflow: hidden;
-                width: 100vw;
-                position: relative;
-                left: 50%;
-                right: 50%;
-                margin-left: -50vw;
-                margin-right: -50vw;
-            }
-        }
-
         footer {
             background: #f9fafb;
             padding: 60px 0 40px;
@@ -374,7 +339,7 @@
 </head>
 <body class="antialiased">
 
-    <header class="flex justify-between items-center px-12 py-8 max-w-7xl mx-auto w-full flex-shrink-0">
+    <header class="flex justify-between items-center px-12 py-8 max-w-7xl mx-auto">
         <div class="flex items-center gap-2">
             <div class="logogram">
                 <svg width="24" height="21" viewBox="0 0 24 21" fill="none" xmlns="http://www.w3.org/2000/svg">
