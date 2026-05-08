@@ -813,6 +813,15 @@
         </div>
     </div>
 
+    <!-- Modal Info -->
+    <div id="infoModal" class="modal-overlay">
+        <div class="modal-content" style="max-width: 400px;">
+            <button onclick="closeInfoModal()" class="modal-close">&times;</button>
+            <h3 class="text-lg font-bold mb-3">Information</h3>
+            <p id="infoModalText" class="text-sm text-gray-700"></p>
+        </div>
+    </div>
+
     <style>
     .contact-options { display: flex; flex-direction: column; gap: 12px; }
     .contact-option {
@@ -936,8 +945,17 @@
         document.body.style.overflow = '';
     }
     
+    function closeInfoModal() {
+        document.getElementById('infoModal').classList.remove('active');
+        document.body.style.overflow = '';
+    }
+    
     document.getElementById('siteModal').addEventListener('click', function(e) {
         if (e.target === this) closeSiteModal();
+    });
+    
+    document.getElementById('infoModal').addEventListener('click', function(e) {
+        if (e.target === this) closeInfoModal();
     });
     
     function submitSiteForm(e) {
@@ -1088,6 +1106,28 @@ Informations complémentaires: ${autres}
                 alert('Une erreur est survenue. Veuillez réessayer ou nous contacter directement.');
             });
     }
+
+    // Gestion des icônes info sur mobile/clic
+    document.querySelectorAll('.info-icon').forEach(icon => {
+        icon.addEventListener('click', function(e) {
+            e.stopPropagation();
+            if (window.innerWidth <= 768) {
+                // Mobile: open modal
+                const title = this.getAttribute('title');
+                if (title) {
+                    document.getElementById('infoModalText').textContent = title;
+                    document.getElementById('infoModal').classList.add('active');
+                    document.body.style.overflow = 'hidden';
+                }
+            } else {
+                // Desktop: toggle tooltip
+                this.classList.toggle('active');
+            }
+        });
+    });
+    document.addEventListener('click', () => {
+        document.querySelectorAll('.info-icon').forEach(i => i.classList.remove('active'));
+    });
     </script>
 
     <section class="text-center pt-20 pb-16 px-4 relative">
@@ -1121,7 +1161,6 @@ Informations complémentaires: ${autres}
 
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto px-6 text-left items-stretch justify-center relative z-20">
             <div class="pricing-card p-8 flex flex-col">
-                <h3 class="text-lg mb-1">Site vitrine <span class="info-icon" onclick="this.classList.toggle('active')" title="Site pour présenter votre entreprise en ligne.">i</span></h3>
                 <div class="text-2xl mb-1">800€</div>
                 <p class="text-[11px] text-gray-400 mb-6">30€ par ans, sans engagement</p>
                 <ul class="text-sm space-y-3 mb-8 text-gray-600 flex-grow">
