@@ -36,7 +36,16 @@
         body { 
             font-family: 'Inter', sans-serif; 
             background-color: #ffffff; 
-            color: #111; 
+            color: #111;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        @media (max-width: 767px) {
+            body {
+                min-height: auto;
+            }
         }
 
         /* H1 caché pour SEO */
@@ -707,7 +716,7 @@
 </head>
 <body class="antialiased">
 
-    <header class="flex justify-between items-center px-12 py-8 max-w-7xl mx-auto">
+    <header class="flex justify-between items-center px-12 py-8 max-w-7xl mx-auto w-full flex-shrink-0">
         <div class="flex items-center gap-2">
             <div class="logogram">
                 <svg width="24" height="21" viewBox="0 0 24 21" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -1032,7 +1041,7 @@
     <div class="apc-container-fixed">
       <div class="apc-button-wrap">
         <button class="apc-btn-main" onclick="showFeature('Site 100% à vous')">
-          <span>Site entièrement à vous</span>
+          <span>Site 100% à vous</span>
         </button>
         <div class="apc-button-shadow"></div>
       </div>
