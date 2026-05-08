@@ -33,6 +33,12 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
         
+        @media (max-width: 767px) {
+            html {
+                overflow-x: hidden;
+            }
+        }
+        
         body { 
             font-family: 'Inter', sans-serif; 
             background-color: #ffffff; 
@@ -45,6 +51,7 @@
         @media (max-width: 767px) {
             body {
                 min-height: auto;
+                overflow-x: hidden;
             }
         }
 
@@ -250,6 +257,25 @@
             }
             100% {
                 transform: translateX(-50%);
+            }
+        }
+
+        @media (max-width: 767px) {
+            .scrolling-content {
+                animation: none !important;
+                gap: 20px;
+                padding-right: 0;
+                width: 100%;
+                overflow: hidden;
+            }
+            .scrolling-banner {
+                overflow: hidden;
+                width: 100vw;
+                position: relative;
+                left: 50%;
+                right: 50%;
+                margin-left: -50vw;
+                margin-right: -50vw;
             }
         }
 
