@@ -36,7 +36,19 @@
         body { 
             font-family: 'Inter', sans-serif; 
             background-color: #ffffff; 
-            color: #111; 
+            color: #111;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        @media (max-width: 767px) {
+            body {
+                min-height: auto;
+            }
+            .hero-title {
+                margin-top: -30px;
+            }
         }
 
         /* H1 caché pour SEO */
@@ -404,7 +416,7 @@
 </head>
 <body class="antialiased">
 
-    <header class="flex justify-between items-center px-12 py-8 max-w-7xl mx-auto">
+    <header class="flex justify-between items-center px-12 py-8 max-w-7xl mx-auto w-full flex-shrink-0">
         <div class="flex items-center gap-2">
             <div class="logogram">
                 <svg width="24" height="21" viewBox="0 0 24 21" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -1094,11 +1106,11 @@ Informations complémentaires: ${autres}
             </svg>
         </div>
         <div class="relative z-20">
-        <h1 class="text-5xl md:text-6xl tracking-tight mb-6 font-medium" style="margin-top: -10px;">
+        <h1 class="hero-title text-3xl md:text-6xl tracking-tight mb-6 font-medium">
              Création de sites web <br> sur mesure
         </h1>
-        <p class="max-w-4xl mx-auto text-gray-500 text-lg mb-10" style="line-height: 1.3;">
-            Des sites web adaptés à chaque étape de votre développement. Attirez plus de clients <br> grâce à une présence en ligne professionnelle dès aujourd’hui.
+        <p class="max-w-4xl mx-auto text-gray-500 text-sm md:text-lg mb-10" style="line-height: 1.4;">
+            Des sites web adaptés à chaque étape de votre développement. Attirez plus de clients grâce <br>à une présence en ligne professionnelle<br class="md:hidden">  dès aujourd’hui.
         </p>
         </div>
         
