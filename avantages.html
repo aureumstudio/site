@@ -561,6 +561,24 @@
             .logo-text { margin-top: 0; }
             .logogram { margin-left: -20px; }
             button[aria-label="Menu"] { margin-right: -8px; }
+
+            .tech-row {
+                display: flex !important;
+                flex-wrap: nowrap;
+                gap: 1rem;
+                overflow-x: auto;
+                padding-bottom: 1rem;
+                scroll-snap-type: x mandatory;
+                -webkit-overflow-scrolling: touch;
+            }
+            .tech-row .tech-card {
+                width: calc((100vw - 2rem - 4rem) / 5);
+                min-width: 140px;
+                max-width: 160px;
+                flex: 0 0 auto;
+                scroll-snap-align: start;
+            }
+            .tech-row::-webkit-scrollbar { display: none; }
         }
 
         footer .logogram { margin-left: 0; }
@@ -1159,7 +1177,7 @@
                 <h2 class="text-4xl font-bold mb-4">Technologies que nous maîtrisons</h2>
                 <p class="text-gray-600 max-w-2xl mx-auto">Les outils les plus modernes pour des résultats optimaux</p>
             </div>
-            <div class="grid grid-cols-2 md:grid-cols-5 gap-6">
+            <div class="grid grid-cols-2 md:grid-cols-5 gap-6 tech-row">
                 <div class="tech-card text-center p-6 border border-gray-200 rounded-xl">
                     <i class="fa-brands fa-html5 text-4xl text-orange-500 mb-3"></i>
                     <div class="font-medium">HTML5</div>
