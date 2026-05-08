@@ -42,6 +42,12 @@
             min-height: 100vh;
         }
 
+        @media (max-width: 767px) {
+            body {
+                min-height: auto;
+            }
+        }
+
         /* H1 caché pour SEO */
         .seo-h1 {
             position: absolute;
@@ -526,7 +532,7 @@
 </head>
 <body class="antialiased">
 
-    <header class="flex justify-between items-center px-12 py-8 max-w-7xl mx-auto w-full">
+    <header class="flex justify-between items-center px-12 py-8 max-w-7xl mx-auto w-full flex-shrink-0">
         <div class="flex items-center gap-2 w-[113px]">
             <div class="logogram">
                 <svg width="24" height="21" viewBox="0 0 24 21" fill="none" xmlns="http://www.w3.org/2000/svg">
