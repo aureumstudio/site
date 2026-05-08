@@ -1024,7 +1024,8 @@
     border-top-color: #111;
 }
 
-.seo-table-v11-info:hover .seo-table-v11-tooltip {
+.seo-table-v11-info:hover .seo-table-v11-tooltip,
+.seo-table-v11-info.active .seo-table-v11-tooltip {
     display: block;
 }
 
@@ -1213,6 +1214,17 @@
     </div>
 </div>
 
+<!-- Modal Info -->
+<div id="infoModal" class="modal-overlay">
+    <div class="modal-content" style="max-width: 400px;">
+        <button onclick="closeInfoModal()" class="modal-close">
+            <i class="fa-solid fa-times"></i>
+        </button>
+        <h3 class="text-lg font-bold mb-3">Information</h3>
+        <p id="infoModalText" class="text-sm text-gray-700"></p>
+    </div>
+</div>
+
 <script>
 function openMaintenanceModal(plan) {
     document.getElementById('maintenancePlan').textContent = plan === 'essentielle' ? 'Essentielle' : plan === 'standard' ? 'Standard' : 'Avancée';
@@ -1220,6 +1232,12 @@ function openMaintenanceModal(plan) {
 }
 function closeMaintenanceModal() {
     document.getElementById('maintenanceModal').classList.remove('active');
+}
+function closeInfoModal() {
+    document.getElementById('infoModal').classList.remove('active');
+}
+function closeInfoModal() {
+    document.getElementById('infoModal').classList.remove('active');
 }
 document.getElementById('maintenanceForm').addEventListener('submit', function(e) {
     e.preventDefault();
@@ -1233,7 +1251,32 @@ document.getElementById('maintenanceForm').addEventListener('submit', function(e
     emailjs.send('service_xg36okr', 'template_n7weua9', templateParams)
         .then(() => { alert('Message envoyé !'); closeMaintenanceModal(); this.reset(); })
         .catch(() => alert('Erreur lors de l\'envoi'));
-});
+    });
+
+    document.getElementById('infoModal').addEventListener('click', function(e) {
+        if (e.target === this) closeInfoModal();
+    });
+
+    // Gestion des infobulles sur mobile/clic
+    document.querySelectorAll('.seo-table-v11-info').forEach(info => {
+        info.addEventListener('click', function(e) {
+            e.stopPropagation();
+            if (window.innerWidth <= 767) {
+                // Mobile: open modal
+                const tooltip = this.querySelector('.seo-table-v11-tooltip');
+                if (tooltip) {
+                    document.getElementById('infoModalText').textContent = tooltip.textContent;
+                    document.getElementById('infoModal').classList.add('active');
+                }
+            } else {
+                // Desktop: toggle tooltip
+                this.classList.toggle('active');
+            }
+        });
+    });
+    document.addEventListener('click', () => {
+        document.querySelectorAll('.seo-table-v11-info').forEach(i => i.classList.remove('active'));
+    });
 </script>
 
 </body>
