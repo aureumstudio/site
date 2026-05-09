@@ -1378,9 +1378,13 @@ document.getElementById('maintenanceForm').addEventListener('submit', function(e
         service_type: "Maintenance - " + document.getElementById('maintenancePlan').textContent
     };
     emailjs.send('service_xg36okr', 'template_n7weua9', templateParams)
-        .then(() => { alert('Message envoyé !'); closeMaintenanceModal(); this.reset(); })
+        .then(() => { closeMaintenanceModal(); this.reset(); })
         .catch(() => alert('Erreur lors de l\'envoi'));
-    });
+    
+    // Open the upsell modal with relevant suggestions
+    openUpsellModal(
+        { url: 'siteweb.html', icon: 'fa-globe', title: 'Création de Site', desc: 'Donnez vie à votre projet web' },
+        { url: 'referencement.html', icon: 'fa-search', title: 'Référencement SEO', desc: 'Améliorez votre visibilité' });});
 
     document.getElementById('infoModal').addEventListener('click', function(e) {
         if (e.target === this) closeInfoModal();
@@ -1406,6 +1410,31 @@ document.getElementById('maintenanceForm').addEventListener('submit', function(e
     document.addEventListener('click', () => {
         document.querySelectorAll('.seo-table-v11-info').forEach(i => i.classList.remove('active'));
     });
+
+    // Fonctions pour la pop-up d'Upsell
+    function openUpsellModal(service1, service2) {
+        const modal = document.getElementById('upsellModal');
+        const s1 = document.getElementById('upsellService1');
+        const s2 = document.getElementById('upsellService2');
+
+        s1.href = service1.url;
+        s1.querySelector('i').className = `fa-solid ${service1.icon}`;
+        s1.querySelector('.contact-title').textContent = service1.title;
+        s1.querySelector('.contact-desc').textContent = service1.desc;
+
+        s2.href = service2.url;
+        s2.querySelector('i').className = `fa-solid ${service2.icon}`;
+        s2.querySelector('.contact-title').textContent = service2.title;
+        s2.querySelector('.contact-desc').textContent = service2.desc;
+
+        modal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function dismissUpsellModal() {
+        document.getElementById('upsellModal').classList.remove('active');
+        document.body.style.overflow = '';
+    }
 </script>
 
 </body>

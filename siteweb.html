@@ -814,6 +814,33 @@
     </div>
 
     <!-- Modal Info -->
+    <!-- Upsell Modal -->
+    <div class="modal-overlay" id="upsellModal">
+        <div class="modal-content" style="max-width: 480px; text-align: center;">
+            <h2 style="font-size: 20px; font-weight: 600; margin-bottom: 8px;">Votre demande a été envoyée !</h2>
+            <p style="font-size: 14px; color: #666; margin-bottom: 24px;">
+                Un expert vous contactera sous 24h. En attendant, découvrez nos services complémentaires :
+            </p>
+            <div class="contact-options mb-6">
+                <a href="#" id="upsellService1" class="contact-option">
+                    <div class="contact-icon"><i class="fa-solid"></i></div>
+                    <div class="contact-info" style="text-align: left;">
+                        <span class="contact-title"></span>
+                        <span class="contact-desc"></span>
+                    </div>
+                </a>
+                <a href="#" id="upsellService2" class="contact-option">
+                    <div class="contact-icon"><i class="fa-solid"></i></div>
+                    <div class="contact-info" style="text-align: left;">
+                        <span class="contact-title"></span>
+                        <span class="contact-desc"></span>
+                    </div>
+                </a>
+            </div>
+            <button type="button" class="text-xs text-gray-400 hover:text-black transition-colors underline" onclick="dismissUpsellModal()">Non merci, fermer</button>
+        </div>
+    </div>
+
     <div id="infoModal" class="modal-overlay">
         <div class="modal-content" style="max-width: 400px;">
             <button onclick="closeInfoModal()" class="modal-close">&times;</button>
@@ -1069,8 +1096,12 @@ Informations complémentaires: ${autres}
         
         emailjs.send("service_xg36okr", "template_n7weua9", templateParams)
             .then(function() {
-                alert('Merci ! Votre demande a été envoyée. Un expert vous contactera sous 24h pour discuter de votre projet.');
-                closeSiteModal();
+                closeSiteModal(); // Close the current form modal
+                // Open the upsell modal with relevant suggestions
+                openUpsellModal(
+                    { url: 'maintenance.html', icon: 'fa-wrench', title: 'Maintenance de site', desc: 'Gardez votre site à jour' },
+                    { url: 'referencement.html', icon: 'fa-search', title: 'Référencement SEO', desc: 'Améliorez votre visibilité' }
+                );
                 form.reset();
             }, function(error) {
                 console.log('Erreur EmailJS:', error);
@@ -1128,6 +1159,31 @@ Informations complémentaires: ${autres}
     document.addEventListener('click', () => {
         document.querySelectorAll('.info-icon').forEach(i => i.classList.remove('active'));
     });
+
+    // Fonctions pour la pop-up d'Upsell
+    function openUpsellModal(service1, service2) {
+        const modal = document.getElementById('upsellModal');
+        const s1 = document.getElementById('upsellService1');
+        const s2 = document.getElementById('upsellService2');
+
+        s1.href = service1.url;
+        s1.querySelector('i').className = `fa-solid ${service1.icon}`;
+        s1.querySelector('.contact-title').textContent = service1.title;
+        s1.querySelector('.contact-desc').textContent = service1.desc;
+
+        s2.href = service2.url;
+        s2.querySelector('i').className = `fa-solid ${service2.icon}`;
+        s2.querySelector('.contact-title').textContent = service2.title;
+        s2.querySelector('.contact-desc').textContent = service2.desc;
+
+        modal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function dismissUpsellModal() {
+        document.getElementById('upsellModal').classList.remove('active');
+        document.body.style.overflow = '';
+    }
     </script>
 
     <section class="text-center pt-20 pb-16 px-4 relative">
