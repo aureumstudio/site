@@ -666,7 +666,7 @@
                     <li><i class="fa-solid fa-check mr-2 text-black"></i> Search Console</li>
                     <li><i class="fa-solid fa-check mr-2 text-black"></i> Suivi du trafic mensuel</li>
                 </ul>
-                <button class="w-full border border-gray-200 py-2 rounded-md text-sm font-medium" onclick="openModal()">Contacter l'équipe</button>
+                <button class="w-full border border-gray-200 py-2 rounded-md text-sm font-medium" onclick="openSEOModal('Outils d\'analyse')">Commencer</button>
             </div>
         </div>
     </section>
@@ -750,7 +750,7 @@
                     <div class="pricing-v2__price-box"><span class="pricing-v2__price-val">280€</span></div>
                     <div class="pricing-v2__card-sub">par mois, sans engagement</div>
                 </div>
-                <button class="pricing-v2__action-btn" onclick="openModal()">Contacter nous</button>
+                <button class="pricing-v2__action-btn" onclick="openSEOModal('Outils SEO')">Commencer</button>
             </div>
 
         </div>
@@ -1385,7 +1385,7 @@ document.getElementById('seoForm').addEventListener('submit', function(e) {
         
         document.getElementById('detailActionBtn').onclick = () => {
             closeCardDetailModal();
-            if(planId === 'outils') openModal(); else openSEOModal(data.title);
+            openSEOModal(data.title);
         };
         
         document.getElementById('cardDetailModal').classList.add('active');
