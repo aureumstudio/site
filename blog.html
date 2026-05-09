@@ -354,6 +354,8 @@
             margin-bottom: 20px;
         }
 
+        .mobile-text { display: none; }
+
         .card-footer {
             margin-top: auto;
             display: flex;
@@ -416,6 +418,12 @@
             border-radius: 12px;
         }
 
+        @media (min-width: 769px) {
+            .featured-card .card-img img {
+                border-radius: 12px 0 0 12px;
+            }
+        }
+
         .featured-card .card-body {
             width: 60%;
         }
@@ -437,6 +445,10 @@
             .news-grid { grid-template-columns: repeat(2, 1fr); }
             .featured-card { flex-direction: column; height: auto; }
             .featured-card .card-img, .featured-card .card-body { width: 100%; }
+            .featured-card .card-img { height: 180px; }
+            .featured-card .card-img img { border-radius: 12px 12px 0 0; }
+            .mobile-text { display: inline; }
+            .desktop-text { display: none; }
         }
 
         @media (max-width: 600px) {
@@ -628,7 +640,10 @@
                 <span class="date">28 janvier 2026</span>
             </div>
             <h2 class="card-title">Qu’est-ce que le SEO ? : guide pour débutants</h2>
-            <p class="card-text">Découvrez les bases essentielles du référencement naturel (SEO), son fonctionnement sur Google, et les meilleures pratiques pour améliorer la visibilité de votre site, attirer un trafic qualifié et développer votre présence en ligne durablement.</p>
+            <p class="card-text">
+                <span class="mobile-text">Découvrez les bases essentielles du référencement naturel (SEO).</span>
+                <span class="desktop-text">Découvrez les bases essentielles du référencement naturel (SEO), son fonctionnement sur Google, et les meilleures pratiques pour améliorer la visibilité de votre site, attirer un trafic qualifié et développer votre présence en ligne durablement.</span>
+            </p>
             <div class="card-footer">
                     <button class="btn-read" onclick="openArticleModal('article-seo')">Lire</button>
                 </div>
