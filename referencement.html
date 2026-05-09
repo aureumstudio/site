@@ -715,7 +715,7 @@
         <div class="pricing-v2__cards-grid">
             
             <div class="pricing-v2__card-item">
-                <div class="pricing-v2__card-top">
+                <div class="pricing-v2__card-top" data-card-id="base">
                     <div class="pricing-v2__card-name">De base</div>
                     <div class="pricing-v2__price-box"><span class="pricing-v2__price-val">80€</span></div>
                     <div class="pricing-v2__card-sub">par mois, sans engagement</div>
@@ -723,7 +723,7 @@
                 <button class="pricing-v2__action-btn" onclick="openSEOModal('Optimisation de base')">Commencer</button>
             </div>
 
-            <div class="pricing-v2__card-item">
+            <div class="pricing-v2__card-item" data-card-id="avancee">
                 <div class="pricing-v2__card-top">
                     <div class="pricing-v2__card-name">Avancée</div>
                     <div class="pricing-v2__price-box"><span class="pricing-v2__price-val">280€</span></div>
@@ -732,7 +732,7 @@
                 <button class="pricing-v2__action-btn" onclick="openSEOModal('Optimisation avancée')">Commencer</button>
             </div>
 
-            <div class="pricing-v2__card-item pricing-v2__card-item--dark">
+            <div class="pricing-v2__card-item pricing-v2__card-item--dark" data-card-id="complet">
                 <div class="pricing-v2__card-top">
                     <div class="pricing-v2__card-name">Complet</div>
                     <div class="pricing-v2__price-box">
@@ -744,7 +744,7 @@
                 <button class="pricing-v2__action-btn" onclick="openSEOModal('SEO Complet')">Commencer</button>
             </div>
 
-            <div class="pricing-v2__card-item">
+            <div class="pricing-v2__card-item" data-card-id="outils">
                 <div class="pricing-v2__card-top">
                     <div class="pricing-v2__card-name">Outils SEO</div>
                     <div class="pricing-v2__price-box"><span class="pricing-v2__price-val">280€</span></div>
@@ -844,9 +844,9 @@
         background: #fff;
         border: 1px solid #eeeeee;
         border-radius: 8px;
-        padding: 18px 15px;
-        width: 191px;
-        height: 168px;
+        padding: 15px 12px; /* Padding ajusté */
+        width: 175px; /* Largeur réduite sur desktop */
+        height: 150px; /* Hauteur réduite sur desktop */
         display: flex;
         flex-direction: column;
         justify-content: space-between;
@@ -868,7 +868,7 @@
     .pricing-v2__card-name {
         font-size: 16px;
         font-weight: 500;
-        margin-bottom: 5px;
+        margin-bottom: 4px;
     }
 
     .pricing-v2__price-box {
@@ -878,7 +878,7 @@
     }
 
     .pricing-v2__price-val {
-        font-size: 26px;
+        font-size: 22px; /* Taille de police du prix légèrement réduite */
         font-weight: 600;
     }
 
@@ -1040,6 +1040,42 @@
         display: none !important;
     }
 }
+
+    @media (max-width: 767px) {
+        .pricing-v2__main-content {
+            transform: none !important;
+            margin: 0 auto !important;
+            padding: 0 !important;
+        }
+        .pricing-v2__cards-grid {
+            transform: none !important;
+            display: flex !important; /* Affichage en flex pour le défilement horizontal */
+            flex-wrap: nowrap; /* Empêche le retour à la ligne */
+            gap: 16px !important; /* Ajuste l'espacement entre les cartes */
+            width: 100% !important;
+            overflow-x: auto; /* Active le défilement horizontal */
+            padding-bottom: 10px; /* Ajoute un peu d'espace en bas pour le scrollbar */
+            -webkit-overflow-scrolling: touch; /* Améliore le défilement sur iOS */
+        }
+        .pricing-v2__card-item {
+            flex: 0 0 auto !important; /* Empêche les cartes de rétrécir et leur donne une largeur fixe */
+            max-width: 80px !important; /* Largeur réduite sur mobile */
+            height: 40px !important; /* Hauteur réduite sur mobile */
+            padding: 10px !important;
+            justify-content: center !important;
+            cursor: pointer !important;
+        }
+        .pricing-v2__card-item .pricing-v2__price-box,
+        .pricing-v2__card-item .pricing-v2__card-sub,
+        .pricing-v2__card-item .pricing-v2__action-btn {
+            display: none !important;
+        }
+        .pricing-v2__card-name {
+            margin: 0 !important;
+            font-size: 10px !important;
+            text-align: center !important;
+        }
+    }
 
 /* LABEL WRAP */
 .seo-table-v11-label-wrap {
@@ -1233,6 +1269,20 @@
     </div>
 </div>
 
+<!-- Modal Détail de l'offre (Mobile) -->
+<div id="cardDetailModal" class="modal-overlay">
+    <div class="modal-content" style="max-width: 400px;">
+        <button onclick="closeCardDetailModal()" class="modal-close">&times;</button>
+        <h3 class="text-xl font-bold mb-2" id="detailTitle"></h3>
+        <div class="flex items-baseline gap-2 mb-1">
+            <span class="text-2xl font-bold" id="detailPrice"></span>
+            <span class="text-sm text-gray-500" id="detailSub"></span>
+        </div>
+        <ul class="text-sm space-y-3 mt-6 mb-8 text-gray-600" id="detailFeatures"></ul>
+        <button class="w-full bg-black text-white py-3 rounded-lg font-bold" id="detailActionBtn">Choisir cette formule</button>
+    </div>
+</div>
+
 <script>
 function openSEOModal(plan) {
     document.getElementById('seoPlan').textContent = plan;
@@ -1262,6 +1312,69 @@ document.getElementById('seoForm').addEventListener('submit', function(e) {
             closeSEOModal();
             this.reset();
         }, () => alert('Erreur lors de l\'envoi.'));
+    });
+
+    // Gestion des détails des cartes sur mobile
+    const seoPlanData = {
+        "base": {
+            title: "Optimisation de base",
+            price: "80€",
+            sub: "/mois",
+            features: ["Structure du site optimale", "Balises SEO essentielles", "Amélioration de l'accessibilité"]
+        },
+        "avancee": {
+            title: "Optimisation avancée",
+            price: "180€",
+            sub: "/mois",
+            features: ["Inclus dans l'offre de base", "Robots.txt configuré", "Images optimisées"]
+        },
+        "complet": {
+            title: "SEO complet",
+            price: "350€",
+            sub: "/mois",
+            features: ["Installation outils d'analyse", "Optimisation technique", "Recherche mots-clés"]
+        },
+        "outils": {
+            title: "Outils SEO",
+            price: "280€",
+            sub: "/mois",
+            features: ["Google Analytics", "Search Console", "Suivi du trafic mensuel"]
+        }
+    };
+
+    function openCardDetailModal(planId) {
+        const data = seoPlanData[planId];
+        if(!data) return;
+        
+        document.getElementById('detailTitle').textContent = data.title;
+        document.getElementById('detailPrice').textContent = data.price;
+        document.getElementById('detailSub').textContent = data.sub;
+        
+        const list = document.getElementById('detailFeatures');
+        list.innerHTML = data.features.map(f => `<li><i class="fa-solid fa-check mr-2 text-black"></i> ${f}</li>`).join('');
+        
+        document.getElementById('detailActionBtn').onclick = () => {
+            closeCardDetailModal();
+            if(planId === 'outils') openModal(); else openSEOModal(data.title);
+        };
+        
+        document.getElementById('cardDetailModal').classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeCardDetailModal() {
+        document.getElementById('cardDetailModal').classList.remove('active');
+        document.body.style.overflow = '';
+    }
+
+    // Attacher les événements aux cartes
+    document.querySelectorAll('.pricing-v2__card-item').forEach(card => {
+        card.addEventListener('click', function() {
+            if (window.innerWidth <= 767) {
+                const planId = this.dataset.cardId || this.querySelector('.pricing-v2__card-top').dataset.cardId;
+                openCardDetailModal(planId);
+            }
+        });
     });
 
     document.getElementById('infoModal').addEventListener('click', function(e) {
