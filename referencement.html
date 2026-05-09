@@ -1049,6 +1049,7 @@
     @media (max-width: 767px) {
         .pricing-v2__main-title {
             font-size: 30px !important;
+            margin-bottom: 0px;
         }
         .pricing-v2__main-content {
             transform: none !important;
@@ -1057,17 +1058,17 @@
         }
         .pricing-v2__cards-grid {
             transform: none !important;
+            margin-top: 30px;
             display: flex !important; /* Affichage en flex pour le défilement horizontal */
-            flex-wrap: nowrap; /* Empêche le retour à la ligne */
-            gap: 16px !important; /* Ajuste l'espacement entre les cartes */
+            flex-wrap: nowrap; /* Empêche le retour à la ligne *//* Ajuste l'espacement entre les cartes */
             width: 100% !important;
             overflow-x: auto; /* Active le défilement horizontal */
-            padding-bottom: 10px; /* Ajoute un peu d'espace en bas pour le scrollbar */
+            margin-bottom: -60px; /* Ajoute un peu d'espace en bas pour le scrollbar */
             -webkit-overflow-scrolling: touch; /* Améliore le défilement sur iOS */
         }
         .pricing-v2__card-item {
             flex: 0 0 auto !important; /* Empêche les cartes de rétrécir et leur donne une largeur fixe */
-            max-width: 80px !important; /* Largeur réduite sur mobile */
+            max-width: 75px !important; /* Largeur réduite sur mobile */
             height: 40px !important; /* Hauteur réduite sur mobile */
             padding: 10px !important;
             justify-content: center !important;
@@ -1080,7 +1081,7 @@
         }
         .pricing-v2__card-name {
             margin: 0 !important;
-            font-size: 10px !important;
+            font-size: 9px !important;
             text-align: center !important;
         }
     }
