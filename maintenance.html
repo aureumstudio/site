@@ -513,6 +513,12 @@
     .contact-info { display: flex; flex-direction: column; }
     .contact-title { font-weight: 600; font-size: 15px; }
     .contact-desc { font-size: 13px; color: #666; }
+    .maintenance-url-label .desktop-label { display: inline; }
+    .maintenance-url-label .mobile-label { display: none; }
+    @media (max-width: 767px) {
+        .maintenance-url-label .desktop-label { display: none !important; }
+        .maintenance-url-label .mobile-label { display: inline !important; }
+    }
     </style>
 
     <script>
@@ -1261,7 +1267,10 @@
                     <input type="tel" name="phone" class="w-full border border-gray-300 rounded px-3 py-2 text-sm">
                 </div>
                 <div class="form-group">
-                    <label class="block text-sm font-medium mb-1">URL de votre site web *</label>
+                    <label class="block text-sm font-medium mb-1 maintenance-url-label">
+                        <span class="desktop-label">URL de votre site web *</span>
+                        <span class="mobile-label">URL de votre site *</span>
+                    </label>
                     <input type="url" name="website" required placeholder="https://www.votre-site.com" class="w-full border border-gray-300 rounded px-3 py-2 text-sm">
                 </div>
             </div>
