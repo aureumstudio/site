@@ -605,7 +605,7 @@
             justify-content: center;
             position: relative;
             --apc-font-size: 17px;
-            --apc-radius: 30px;
+            --apc-radius: 40px;
             --apc-hover-time: 400ms;
             --apc-hover-ease: cubic-bezier(0.25, 1, 0.5, 1);
         }
@@ -670,7 +670,7 @@
             box-shadow: 0 0.4em 0.8em rgba(0, 0, 0, 0.08);
         }
 
-        .apc-btn-main span {
+        .apc-btn-main > span {
             position: relative;
             display: block;
             padding-inline: 50px;
@@ -681,7 +681,7 @@
             text-align: center;
         }
 
-        .apc-btn-main span::after {
+        .apc-btn-main > span::after {
             content: "";
             position: absolute;
             inset: var(--apc-border-w);
@@ -694,7 +694,7 @@
             transition: background-position 600ms var(--apc-hover-ease);
         }
 
-        .apc-btn-main:hover span::after { background-position: 40% 50%; }
+        .apc-btn-main:hover > span::after { background-position: 40% 50%; }
 
         .apc-btn-main::after {
             content: "";
@@ -702,7 +702,7 @@
             inset: calc(var(--apc-border-w) * -1);
             padding: var(--apc-border-w);
             border-radius: var(--apc-radius);
-            background: conic-gradient(from var(--apc-angle-1) at 50% 50%, rgba(0,0,0,0.15), rgba(0,0,0,0) 40%, rgba(0,0,0,0.15) 50%, rgba(0,0,0,0) 90%, rgba(0,0,0,0.15)), linear-gradient(180deg, rgba(255,255,255,0.9), rgba(255,255,255,0.4));
+            background: #f9fafb;
             mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
             mask-composite: exclude;
             -webkit-mask-composite: destination-out;
@@ -970,7 +970,7 @@
         --apc-font-size: 14px;
         --apc-radius: 20px;
       }
-      .apc-btn-main span {
+      .apc-btn-main > span {
         padding-inline: 30px;
         padding-block: 30px;
       }
@@ -987,7 +987,7 @@
         --apc-font-size: 10px;
         --apc-radius: 12px;
       }
-      .apc-btn-main span {
+      .apc-btn-main > span {
         padding-inline: 15px;
         padding-block: 15px;
       }
@@ -1042,7 +1042,7 @@
     <div class="apc-container-fixed">
       <div class="apc-button-wrap">
         <button class="apc-btn-main" onclick="showFeature('Site 100% à vous')">
-          <span>Site 100% à vous</span>
+          <span><span class="hidden md:inline">Site entièrement à vous</span><span class="md:hidden">Site 100% à vous</span></span>
         </button>
         <div class="apc-button-shadow"></div>
       </div>
@@ -1126,7 +1126,7 @@
                 <article class="blog-card border border-gray-200 rounded-xl overflow-hidden">
                     <img src="https://i.pinimg.com/1200x/ec/c2/17/ecc217e5986e846f40de88a9b9e5b0f2.jpg" alt="SEO" class="w-full h-40 object-cover">
                     <div class="p-6">
-                        <span class="text-xs font-semibold text-[#6346FF]">Actualité</span>
+                        <span class="text-xs font-semibold text-[#485563]">Actualité</span>
                         <h3 class="font-semibold mt-2 mb-2">Pourquoi un site doit être optimisé ?</h3>
                         <p class="text-sm text-gray-600 mb-4">Découvrez pourquoi un site doit être parfaitement adapté au mobile.</p>
                         <a href="blog.html" class="text-sm font-medium">Lire la suite →</a>
@@ -1135,7 +1135,7 @@
                 <article class="blog-card border border-gray-200 rounded-xl overflow-hidden">
                     <img src="https://i.pinimg.com/736x/e6/78/19/e67819e9ea5bed97fd7bfbdc1677731e.jpg" alt="Marketing digital" class="w-full h-40 object-cover">
                     <div class="p-6">
-                        <span class="text-xs font-semibold text-[#6346FF]">Marketing digital</span>
+                        <span class="text-xs font-semibold text-[#485563]">Marketing digital</span>
                         <h3 class="font-semibold mt-2 mb-2">Comment un site peut rapporter ?</h3>
                         <p class="text-sm text-gray-600 mb-4">Découvrez comment un site web peut générer des revenus de manière concrète et durable.</p>
                         <a href="blog.html" class="text-sm font-medium">Lire la suite →</a>
@@ -1144,7 +1144,7 @@
                 <article class="blog-card border border-gray-200 rounded-xl overflow-hidden">
                     <img src="https://i.pinimg.com/1200x/b8/66/0d/b8660d49d2ca8d1af06589d871d8a1bd.jpg" alt="Optimisation web" class="w-full h-40 object-cover">
                     <div class="p-6">
-                        <span class="text-xs font-semibold text-[#6346FF]">Optimisation web</span>
+                        <span class="text-xs font-semibold text-[#485563]">Optimisation web</span>
                         <h3 class="font-semibold mt-2 mb-2">Pourquoi avoir un site web en 2026 ?</h3>
                         <p class="text-sm text-gray-600 mb-4">Découvrez pourquoi un site web est essentiel pour développer votre présence en ligne.</p>
                         <a href="blog.html" class="text-sm font-medium">Lire la suite →</a>

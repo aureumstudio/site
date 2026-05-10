@@ -612,15 +612,15 @@
         </p>
         </div>
         
-        <div class="flex justify-center items-center bg-gray-100 p-1 rounded-lg w-fit mx-auto mb-16 relative z-20">
-            <button class="px-6 py-2 text-sm font-medium rounded-md">Standard</button>
-            <button class="px-6 py-2 text-sm font-medium bg-black text-white rounded-md shadow-sm">Recommandé</button>
+        <div class="flex justify-center items-center bg-gray-100 p-1 rounded-lg w-fit mx-auto mb-16 relative z-20" id="pricing-toggle-1">
+            <button class="px-6 py-2 text-sm font-medium rounded-md transition-all duration-200" onclick="switchPricing('standard')">Standard</button>
+            <button class="px-6 py-2 text-sm font-medium bg-black text-white rounded-md shadow-sm transition-all duration-200" onclick="switchPricing('recommended')">Recommandé</button>
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-4 gap-6 max-w-7xl mx-auto px-6 text-left items-stretch relative z-20">
             <div class="pricing-card p-8 flex flex-col">
                 <h3 class="text-lg mb-1">Optimisation de base</h3>
-                <div class="text-2xl mb-1">80€</div>
+                <div class="text-2xl mb-1">80€ <span class="text-sm text-gray-400">TTC</span></div>
                 <p class="text-[11px] text-gray-400 mb-6">par mois, sans engagement</p>
                 <ul class="text-sm space-y-3 mb-8 text-gray-600 flex-grow">
                     <li><i class="fa-solid fa-check mr-2 text-black"></i> Structure du site optimale</li>
@@ -633,8 +633,7 @@
             <div class="pricing-card p-8 flex flex-col">
                 <h3 class=" text-lg mb-1">Optimisation avancée</h3>
                 <div class="flex items-center gap-2 mb-1">
-                    <span class="text-2xl">180€</span>
-                    <span class="bg-gray-100 text-[10px] px-2 py-0.5 rounded">-10%</span>
+                    <span class="text-2xl">180€ <span class="text-sm text-gray-400">TTC</span></span>
                 </div>
                 <p class="text-[11px] text-gray-400 mb-6">par mois, sans engagement</p>
                 <ul class="text-sm space-y-3 mb-8 text-gray-600 flex-grow">
@@ -646,11 +645,10 @@
                 <button class="w-full border border-gray-200 py-2 rounded-md text-sm font-medium" onclick="openSEOModal('Optimisation avancée')">Commencer</button>
             </div>
 
-            <div class="pricing-card recommended-card p-8 flex flex-col shadow-2xl mt-[9px]">
+            <div id="card-advanced-1" class="pricing-card recommended-card p-8 flex flex-col shadow-2xl mt-[9px] transition-all duration-300">
                 <h3 class="text-lg mb-1 text-white">Seo complet</h3>
                 <div class="flex items-center gap-2 mb-1">
-                    <span class="text-2xl  text-wite">350€</span>
-                    <span class="bg-zinc-800 text-[10px] px-2 py-0.5 rounded text-white">-20%</span>
+                    <span class="text-2xl  text-wite">350€ <span class="text-sm text-zinc-300">TTC</span></span>
                 </div>
                 <p class="text-[11px] text-zinc-400 mb-6">par mois, sans engagement</p>
                 <ul class="text-sm space-y-3 mb-8 text-zinc-300 flex-grow">
@@ -664,7 +662,7 @@
 
             <div class="pricing-card p-8 flex flex-col">
                 <h3 class=" text-lg mb-1">Outils d'analyse</h3>
-                <div class="text-2xl mb-1">280€</div>
+                <div class="text-2xl mb-1">280€ <span class="text-sm text-gray-400">TTC</span></div>
                 <p class="text-[11px] text-gray-400 mb-6">par mois, sans engagement</p>
                 <ul class="text-sm space-y-3 mb-8 text-gray-600 flex-grow">
                     <li><i class="fa-solid fa-check mr-2 text-black"></i> Google Analytics</li>
@@ -711,9 +709,9 @@
     <div class="pricing-v2__main-content">
         <div class="pricing-v2__selector-group">
             <span class="pricing-v2__selector-label">Les plus populaires</span>
-            <div class="pricing-v2__tabs-container">
-                <button class="pricing-v2__tab-btn">Standard</button>
-                <button class="pricing-v2__tab-btn pricing-v2__tab-btn--active">Recommandé</button>
+            <div class="pricing-v2__tabs-container" id="pricing-toggle-2">
+                <button class="pricing-v2__tab-btn" onclick="switchPricing('standard')">Standard</button>
+                <button class="pricing-v2__tab-btn pricing-v2__tab-btn--active" onclick="switchPricing('recommended')">Recommandé</button>
             </div>
         </div>
 
@@ -722,7 +720,7 @@
             <div class="pricing-v2__card-item">
                 <div class="pricing-v2__card-top" data-card-id="base">
                     <div class="pricing-v2__card-name">De base</div>
-                    <div class="pricing-v2__price-box"><span class="pricing-v2__price-val">80€</span></div>
+                    <div class="pricing-v2__price-box"><span class="pricing-v2__price-val">80€ <span class="text-[10px]">TTC</span></span></div>
                     <div class="pricing-v2__card-sub">par mois, sans engagement</div>
                 </div>
                 <button class="pricing-v2__action-btn" onclick="openSEOModal('Optimisation de base')">Commencer</button>
@@ -731,18 +729,17 @@
             <div class="pricing-v2__card-item" data-card-id="avancee">
                 <div class="pricing-v2__card-top">
                     <div class="pricing-v2__card-name">Avancée</div>
-                    <div class="pricing-v2__price-box"><span class="pricing-v2__price-val">280€</span></div>
+                    <div class="pricing-v2__price-box"><span class="pricing-v2__price-val">280€ <span class="text-[10px]">TTC</span></span></div>
                     <div class="pricing-v2__card-sub">par mois, sans engagement</div>
                 </div>
                 <button class="pricing-v2__action-btn" onclick="openSEOModal('Optimisation avancée')">Commencer</button>
             </div>
 
-            <div class="pricing-v2__card-item pricing-v2__card-item--dark" data-card-id="complet">
+            <div id="card-advanced-2" class="pricing-v2__card-item pricing-v2__card-item--dark" data-card-id="complet">
                 <div class="pricing-v2__card-top">
                     <div class="pricing-v2__card-name">Complet</div>
                     <div class="pricing-v2__price-box">
-                        <span class="pricing-v2__price-val">350€</span>
-                        <span class="pricing-v2__promo-badge">-10%</span>
+                        <span class="pricing-v2__price-val">350€ <span class="text-[10px]">TTC</span></span>
                     </div>
                     <div class="pricing-v2__card-sub">par mois, sans engagement</div>
                 </div>
@@ -752,7 +749,7 @@
             <div class="pricing-v2__card-item" data-card-id="outils">
                 <div class="pricing-v2__card-top">
                     <div class="pricing-v2__card-name">Outils SEO</div>
-                    <div class="pricing-v2__price-box"><span class="pricing-v2__price-val">280€</span></div>
+                    <div class="pricing-v2__price-box"><span class="pricing-v2__price-val">280€ <span class="text-[10px]">TTC</span></span></div>
                     <div class="pricing-v2__card-sub">par mois, sans engagement</div>
                 </div>
                 <button class="pricing-v2__action-btn" onclick="openSEOModal('Outils SEO')">Commencer</button>
@@ -884,7 +881,7 @@
 
     .pricing-v2__price-val {
         font-size: 22px; /* Taille de police du prix légèrement réduite */
-        font-weight: 600;
+        font-weight: 00;
     }
 
     .pricing-v2__promo-badge {
@@ -1362,25 +1359,25 @@ document.getElementById('seoForm').addEventListener('submit', function(e) {
     const seoPlanData = {
         "base": {
             title: "Optimisation de base",
-            price: "80€",
+            price: "80€ TTC",
             sub: "/mois",
             features: ["Structure du site optimale", "Balises SEO essentielles", "Amélioration de l'accessibilité"]
         },
         "avancee": {
             title: "Optimisation avancée",
-            price: "180€",
+            price: "180€ TTC",
             sub: "/mois",
             features: ["Inclus dans l'offre de base", "Robots.txt configuré", "Images optimisées"]
         },
         "complet": {
             title: "SEO complet",
-            price: "350€",
+            price: "350€ TTC",
             sub: "/mois",
             features: ["Installation outils d'analyse", "Optimisation technique", "Recherche mots-clés"]
         },
         "outils": {
             title: "Outils SEO",
-            price: "280€",
+            price: "280€ TTC",
             sub: "/mois",
             features: ["Google Analytics", "Search Console", "Suivi du trafic mensuel"]
         }
@@ -1469,6 +1466,54 @@ document.getElementById('seoForm').addEventListener('submit', function(e) {
     function dismissUpsellModal() {
         document.getElementById('upsellModal').classList.remove('active');
         document.body.style.overflow = '';
+    }
+
+    function switchPricing(mode) {
+        const btns1 = document.getElementById('pricing-toggle-1').querySelectorAll('button');
+        const btns2 = document.getElementById('pricing-toggle-2').querySelectorAll('button');
+        const card1 = document.getElementById('card-advanced-1');
+        const card2 = document.getElementById('card-advanced-2');
+
+        if (mode === 'recommended') {
+            btns1[0].className = "px-6 py-2 text-sm font-medium rounded-md transition-all duration-200";
+            btns1[1].className = "px-6 py-2 text-sm font-medium bg-black text-white rounded-md shadow-sm transition-all duration-200";
+            btns2[0].classList.remove('pricing-v2__tab-btn--active');
+            btns2[1].classList.add('pricing-v2__tab-btn--active');
+            
+            card1.classList.add('recommended-card', 'shadow-2xl', 'mt-[9px]');
+            card1.querySelector('h3').classList.replace('text-black', 'text-white');
+
+            const priceVal = card1.querySelector('.text-2xl');
+            priceVal.classList.remove('text-black');
+            priceVal.classList.add('text-white');
+            priceVal.querySelector('.text-sm').classList.replace('text-gray-400', 'text-zinc-300');
+            card1.querySelector('p').classList.replace('text-gray-400', 'text-zinc-400');
+
+            card1.querySelector('ul').className = "text-sm space-y-3 mb-8 text-zinc-300 flex-grow";
+            card1.querySelectorAll('ul li i').forEach(i => i.classList.replace('text-black', 'text-white'));
+            card1.querySelector('button').className = "w-full bg-white text-black py-2 rounded-md text-sm font-bold";
+            card2.classList.add('pricing-v2__card-item--dark');
+        } else {
+            btns1[0].className = "px-6 py-2 text-sm font-medium bg-black text-white rounded-md shadow-sm transition-all duration-200";
+            btns1[1].className = "px-6 py-2 text-sm font-medium rounded-md transition-all duration-200";
+            btns2[0].classList.add('pricing-v2__tab-btn--active');
+            btns2[1].classList.remove('pricing-v2__tab-btn--active');
+
+            card1.classList.remove('recommended-card', 'shadow-2xl', 'mt-[9px]');
+            card1.querySelector('h3').classList.replace('text-white', 'text-black');
+
+            const priceVal = card1.querySelector('.text-2xl');
+            priceVal.classList.remove('text-white', 'text-wite');
+            priceVal.classList.add('text-black');
+            priceVal.querySelector('.text-sm').classList.replace('text-zinc-300', 'text-gray-400');
+            card1.querySelector('p').classList.replace('text-zinc-400', 'text-gray-400');
+
+            card1.querySelector('ul').className = "text-sm space-y-3 mb-8 text-gray-600 flex-grow";
+            card1.querySelector('ul').className = "text-sm space-y-3 mb-8 text-gray-400 flex-grow";
+            card1.querySelectorAll('ul li i').forEach(i => i.classList.replace('text-white', 'text-black'));
+            card1.querySelector('button').className = "w-full border border-gray-200 py-2 rounded-md text-sm font-medium";
+            card2.classList.remove('pricing-v2__card-item--dark');
+        }
     }
 </script>
 
