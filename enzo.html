@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dashboard Enzo</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:Inter,Arial,sans-serif;}
+body{background:#ffffff;color:#111827;padding:40px;max-width:1400px;margin:auto;}
+.topbar{display:flex;justify-content:space-between;align-items:center;margin-bottom:30px;}
+h1{font-size:32px;}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px;margin-bottom:35px;}
+.card{background:#fff;border:1px solid #ececec;border-radius:18px;padding:24px;box-shadow:0 4px 18px rgba(0,0,0,.04);}
+.card h3{font-size:14px;color:#6b7280;margin-bottom:10px;}
+.value{font-size:30px;font-weight:700;}
+.chartBox{background:#fff;border:1px solid #ececec;border-radius:18px;padding:24px;margin-bottom:35px;}
+.desktop-grid {display:grid;grid-template-columns:repeat(auto-fill,minmax(110px,1fr));gap:20px;padding:20px;background:rgba(255,255,255,0.5);border-radius:18px;border:1px solid #e5e7eb;}
+.file-item {display:flex;flex-direction:column;align-items:center;text-align:center;padding:10px;}
+.file-icon {width: 60px;height: 60px;background: #fbbf24;border-radius: 8px;position: relative;margin-bottom: 8px;}
+.file-icon::after {content: "";position: absolute;top: 0; right: 0;width: 0; height: 0;border-style: solid;border-width: 0 15px 15px 0;border-color: transparent transparent #f59e0b transparent;}
+.file-name {font-size: 13px;font-weight: 500;color: #374151;}
+.tax-info { font-size: 12px; color: #ef4444; font-weight: 600; margin-top: 5px; }
+/* Sidebar */
+.sidebar{position:fixed;right:0;top:0;width:280px;height:100%;background:#fff;box-shadow:-2px 0 15px rgba(0,0,0,0.1);transform:translateX(100%);transition:transform 0.3s ease;z-index:2000;padding:30px;display:flex;flex-direction:column;gap:15px;}
+.sidebar.open{transform:translateX(0);}
+.sidebar-btn{position:fixed;top:20px;right:20px;z-index:2100;background:#ffffff;color:#000000;border:1px solid #ececec;width:45px;height:45px;border-radius:12px;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 12px rgba(0,0,0,0.08);padding:0;}
+.sidebar-btn svg{width:24px;height:24px;}
+.sidebar a{text-decoration:none;color:#374151;padding:12px;border-radius:8px;font-weight:500;transition:0.2s;}.sidebar a:hover{background:#f3f4f6;}
+.sidebar-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.3);display:none;z-index:1999;}.sidebar-overlay.show{display:block;}
+
+@media (max-width: 768px) {
+    body { padding: 20px; }
+    .topbar { flex-direction: column; align-items: flex-start; gap: 10px; margin-top: 40px; }
+    .stats { grid-template-columns: 1fr; }
+    .desktop-grid { grid-template-columns: repeat(auto-fill, minmax(90px, 1fr)); padding: 10px; }
+}
+</style>
+</head>
+<body>
+<div class="topbar">
+    <h1>Dashboard Enzo <small style="font-size:14px; color:#6b7280;">(48%)</small></h1> <!-- Le texte sera mis à jour par JS -->
+</div>
+<div class="stats">
+    <div class="card"><h3>Clients</h3><div class="value" id="clients">0</div></div>
+    <div class="card"><h3>Unique</h3><div class="value" id="once">0€</div></div>
+    <div class="card"><h3>Mensuel</h3><div class="value" id="monthly">0€</div></div>
+    <div class="card"><h3>Annuel estimé</h3> <!-- Le texte sera mis à jour par JS --> <div class="value" id="yearly">0€</div></div>
+</div>
+<div class="chartBox"><canvas id="chart"></canvas></div>
+<div class="desktop-grid" id="desktop"></div>
+
+<div class="sidebar-overlay" id="sidebarOverlay" onclick="toggleSidebar()"></div>
+<div class="sidebar" id="sidebar">
+    <h2 style="margin-bottom:10px;">Navigation</h2>
+    <a href="#" onclick="toggleSubNav(); return false;">Dashboard Ventes ▾</a>
+    <div id="subNav" style="display:none; flex-direction:column; padding-left:15px; gap:5px;">
+        <a href="dashboard.html">Général (100%)</a>
+        <a href="enzo.html" style="background:#f3f4f6;">Enzo (48%)</a>
+        <a href="partenaire.html">Ethan (32%)</a>
+    </div>
+    <a href="clients.html">Clients</a>
+    <a href="solde.html">Solde</a>
+    <a href="factures.html">Factures</a>
+    <hr style="border:0; border-top:1px solid #eee; margin:10px 0;">
+    <a href="settings.html">Paramètres</a>
+</div>
+<button class="sidebar-btn" onclick="toggleSidebar()">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M10 4v4"/><path d="M2 8h20"/><path d="M6 4v4"/></svg>
+</button>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-app.js";
+import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-firestore.js";
+import { getAuth } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-auth.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyAnPbeuwRSgQkoEK3f1OVlSCkLEWFdafrQ",
+  authDomain: "dashboard-8ef0f.firebaseapp.com",
+  projectId: "dashboard-8ef0f",
+  storageBucket: "dashboard-8ef0f.firebasestorage.app",
+  messagingSenderId: "406245674018",
+  appId: "1:406245674018:web:7a1fb47cfd8ac70d41ce7b"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+const auth = getAuth(app);
+
+let clients = [];
+let chart;
+let userUid = null;
+let ENZO_SHARE = 48;
+let TAX_RATE = 0;
+let CURRENCY_SYMBOL = "€";
+let NET_FACTOR = 0;
+
+function toggleSidebar() {
+    document.getElementById('sidebar').classList.toggle('open');
+    document.getElementById('sidebarOverlay').classList.toggle('show');
+}
+
+function toggleSubNav() {
+    const subNav = document.getElementById('subNav');
+    subNav.style.display = (subNav.style.display === 'flex') ? 'none' : 'flex';
+}
+
+async function loadUserData() {
+    userUid = localStorage.getItem('userUid');
+    if (!userUid) {
+        alert("Veuillez vous connecter d'abord.");
+        window.location.href = "index.html";
+        return;
+    }
+
+    const userDocRef = doc(db, "users", userUid);
+    const docSnap = await getDoc(userDocRef);
+
+    if (docSnap.exists()) {
+        const data = docSnap.data();
+        clients = data.clients || [];
+        CURRENCY_SYMBOL = data.settings?.currencySymbol || "€";
+        TAX_RATE = (data.settings?.taxRate || 0) / 100;
+        ENZO_SHARE = (data.settings?.enzoShare || 48) / 100;
+        NET_FACTOR = ENZO_SHARE * (1 - TAX_RATE);
+    }
+    render();
+}
+
+function render(){
+    let once=0; let monthly=0; let yearly=0;
+    const desktop = document.getElementById("desktop");
+    desktop.innerHTML = "";
+    clients.forEach((c,i)=>{
+        once += (c.once * NET_FACTOR); // Adjusted for Enzo's share and tax
+        monthly += (c.monthly * NET_FACTOR); // Adjusted for Enzo's share and tax
+        yearly += (c.yearly * NET_FACTOR); // Adjusted for Enzo's share and tax
+        desktop.innerHTML += `<div class="file-item"><div class="file-icon"></div><div class="file-name">${c.name}</div></div>`;
+    });
+
+    let estimatedAnnualCurrentYear = 0;
+    const currentYear = new Date().getFullYear();
+    clients.forEach(c => {
+        const addDate = new Date(c.dateAdded);
+        const addYear = addDate.getFullYear();
+        let months = 0;
+        if (addYear < currentYear) months = 12;
+        else if (addYear === currentYear) months = 12 - addDate.getMonth();
+
+        let contribution = (c.monthly * months) + (addYear <= currentYear ? c.yearly : 0);
+        if (addYear === currentYear) contribution += c.once;
+        estimatedAnnualCurrentYear += (contribution * NET_FACTOR);
+    });
+    document.getElementById("clients").textContent = clients.length;
+    document.getElementById("once").textContent = once.toFixed(2) + CURRENCY_SYMBOL;
+    document.getElementById("monthly").textContent = monthly.toFixed(2) + CURRENCY_SYMBOL;
+    document.getElementById("yearly").textContent = estimatedAnnualCurrentYear.toFixed(2) + CURRENCY_SYMBOL;
+    document.querySelector('.card:nth-child(4) h3').textContent = `Annuel estimé ${currentYear}`;
+    drawChart(); // Le graphique utilise toujours le cumulatif total
+}
+
+function drawChart(){
+    const sortedClients = [...clients].sort((a, b) => new Date(a.dateAdded) - new Date(b.dateAdded));
+    let cumulativeTotal = 0; // This should also be adjusted by Enzo's share and tax
+    const labels = []; const dataPoints = [];
+    sortedClients.forEach(c => {
+        const clientShare = (c.once + (c.monthly * 12) + c.yearly) * NET_FACTOR; // Adjusted for Enzo's share and tax
+        cumulativeTotal += clientShare;
+        labels.push(new Date(c.dateAdded).toLocaleDateString("fr-FR", {day:'numeric', month:'short'}));
+        dataPoints.push(cumulativeTotal);
+    });
+    const ctx = document.getElementById("chart");
+    if(chart) chart.destroy();
+    chart = new Chart(ctx,{
+        type:"line",
+        data:{ labels: labels.length ? labels : ["En attente"], datasets:[{ data: dataPoints.length ? dataPoints : [0], borderColor:"#2563eb", backgroundColor:"rgba(37,99,235,0.05)", fill:true, tension:.35 }] },
+        options:{ plugins:{ legend:{display:false} }, responsive:true }
+    }); // Le graphique utilise toujours le cumulatif total
+}
+
+// Exposer les fonctions au scope global
+window.toggleSidebar = toggleSidebar;
+window.toggleSubNav = toggleSubNav;
+
+loadUserData();
+</script>
+</body>
+</html>

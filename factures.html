@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Gestion Factures</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:Inter,Arial,sans-serif;}
+body{background:#ffffff;color:#111827;padding:40px;max-width:1400px;margin:auto;}
+.topbar{display:flex;justify-content:space-between;align-items:center;margin-bottom:30px;}
+h1{font-size:32px;}
+
+.btn-new {
+    background: #111827;
+    color: #ffffff;
+    font-weight: 600;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+.btn-new:hover { background: #000000; }
+
+.desktop-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+    gap: 20px;
+    margin-bottom: 35px;
+    padding: 20px;
+    background: rgba(255,255,255,0.02);
+    border-radius: 18px;
+    border: 1px solid #e5e7eb;
+    min-height: 200px;
+}
+
+.file-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    cursor: pointer;
+    padding: 10px;
+    border-radius: 12px;
+    transition: 0.2s;
+}
+.file-item:hover { background: rgba(37, 99, 235, 0.05); }
+
+.file-icon {
+    width: 60px; height: 60px;
+    background: #3b82f6; /* Bleu pour différencier des dossiers clients */
+    border-radius: 8px;
+    position: relative; margin-bottom: 8px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+}
+.file-icon::after { 
+    content: ""; position: absolute; top: 0; right: 0; width: 0; height: 0; 
+    border-style: solid; border-width: 0 15px 15px 0; 
+    border-color: transparent transparent #2563eb transparent; 
+}
+
+.file-name { 
+    font-size: 13px; font-weight: 600; color: #374151; 
+    word-break: break-all; display: -webkit-box; -webkit-line-clamp: 2; 
+    -webkit-box-orient: vertical; overflow: hidden;
+}
+
+.sidebar{position:fixed;right:0;top:0;width:280px;height:100%;background:#fff;box-shadow:-2px 0 15px rgba(0,0,0,0.1);transform:translateX(100%);transition:transform 0.3s ease;z-index:2000;padding:30px;display:flex;flex-direction:column;gap:15px;}
+.sidebar.open{transform:translateX(0);}
+.sidebar-btn{position:fixed;top:20px;right:20px;z-index:2100;background:#ffffff;color:#000000;border:1px solid #ececec;width:45px;height:45px;border-radius:12px;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 12px rgba(0,0,0,0.08);padding:0;}
+.sidebar-btn svg{width:24px;height:24px;}
+.sidebar a{text-decoration:none;color:#374151;padding:12px;border-radius:8px;font-weight:500;transition:0.2s;}.sidebar a:hover{background:#f3f4f6;}
+.sidebar-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.3);display:none;z-index:1999;}.sidebar-overlay.show{display:block;}
+
+/* Preview Modal */
+.preview-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.7); display: none; align-items: center; justify-content: center; z-index: 3000; padding: 20px; }
+.preview-content { background: #fff; width: 100%; max-width: 1000px; height: 90vh; border-radius: 16px; overflow: hidden; display: flex; flex-direction: column; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25); }
+.preview-header { padding: 15px 25px; border-bottom: 1px solid #eee; display: flex; justify-content: space-between; align-items: center; background: #f9fafb; }
+.preview-header h2 { font-size: 18px; color: #111827; }
+.preview-body { flex: 1; background: #f3f4f6; position: relative; }
+.preview-body iframe { width: 100%; height: 100%; border: none; }
+.preview-footer { padding: 15px 25px; background: #f9fafb; border-top: 1px solid #eee; display: flex; justify-content: flex-end; gap: 12px; }
+.btn-dl { background: #2563eb; color: #fff; }
+.btn-dl:hover { background: #1d4ed8; }
+.btn-cancel { background: #e5e7eb; color: #374151; font-weight: 600; border: none; padding: 12px 20px; border-radius: 12px; cursor: pointer; transition: 0.2s; }
+.btn-cancel:hover { background: #d1d5db; }
+
+@media (max-width: 768px) {
+    body { padding: 20px; }
+    .topbar { flex-direction: column; align-items: flex-start; gap: 15px; margin-top: 40px; }
+    .preview-content { height: 95vh; }
+}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+    <h1>Factures</h1>
+    <div>
+        <input type="file" id="factureFile" style="display: none;" onchange="uploadFacture()">
+        <button class="btn-new" onclick="document.getElementById('factureFile').click()">+ Importer une facture</button>
+    </div>
+</div>
+
+<div class="desktop-grid" id="files"></div>
+
+<!-- Modal de Preview -->
+<div class="preview-overlay" id="previewOverlay">
+    <div class="preview-content">
+        <div class="preview-header"><h2 id="previewTitle">Aperçu</h2><button onclick="closePreview()" style="background:none; border:none; cursor:pointer; font-size:24px; color:#6b7280;">&times;</button></div>
+        <div class="preview-body"><iframe id="previewFrame" src=""></iframe></div>
+        <div class="preview-footer">
+            <button class="btn-cancel" onclick="closePreview()">Fermer</button>
+            <button class="btn-new btn-dl" id="downloadBtn">Télécharger la facture</button>
+        </div>
+    </div>
+</div>
+
+<div class="sidebar-overlay" id="sidebarOverlay" onclick="toggleSidebar()"></div>
+<div class="sidebar" id="sidebar">
+    <h2 style="margin-bottom:10px;">Navigation</h2>
+    <a href="#" onclick="toggleSubNav(); return false;">Dashboard Ventes ▾</a>
+    <div id="subNav" style="display:none; flex-direction:column; padding-left:15px; gap:5px;">
+        <a href="dashboard.html">Général (100%)</a>
+        <a href="enzo.html">Enzo (48%)</a>
+        <a href="partenaire.html">Ethan (32%)</a>
+    </div>
+    <a href="clients.html">Clients</a>
+    <a href="solde.html">Solde</a>
+    <a href="factures.html" style="background:#f3f4f6;">Factures</a>
+    <hr style="border:0; border-top:1px solid #eee; margin:10px 0;">
+    <a href="settings.html">Paramètres</a>
+</div>
+<button class="sidebar-btn" onclick="toggleSidebar()">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M10 4v4"/><path d="M2 8h20"/><path d="M6 4v4"/></svg>
+</button>
+
+<script type="module">
+import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm'
+
+const supabase = createClient('https://bbpsuzovrmuiikdgqnrd.supabase.co', 'sb_publishable_YRH_3vsASV_R6DEb6-KvLQ_0qPV9KIQ')
+const filesDiv = document.getElementById('files')
+
+let currentFileUrl = null;
+let currentFileName = "";
+
+function openPreview(url, fileName) {
+    currentFileUrl = url;
+    currentFileName = fileName;
+    document.getElementById('previewTitle').textContent = fileName;
+    document.getElementById('previewFrame').src = url;
+    document.getElementById('previewOverlay').style.display = 'flex';
+}
+
+function closePreview() {
+    document.getElementById('previewOverlay').style.display = 'none';
+    document.getElementById('previewFrame').src = "";
+}
+
+function toggleSidebar() { document.getElementById('sidebar').classList.toggle('open'); document.getElementById('sidebarOverlay').classList.toggle('show'); }
+function toggleSubNav() { const subNav = document.getElementById('subNav'); subNav.style.display = (subNav.style.display === 'flex') ? 'none' : 'flex'; }
+
+async function loadFiles(){
+    filesDiv.innerHTML = '<div style="grid-column: 1/-1; text-align:center; padding:40px;">Chargement...</div>'
+    const { data, error } = await supabase.storage.from('factures').list()
+    if(error){ filesDiv.innerHTML = '<div style="grid-column: 1/-1; text-align:center; padding:40px; color:#ef4444;">Erreur : ' + error.message + '</div>'; return; }
+    
+    // On filtre pour ignorer le fichier système de Supabase
+    const filteredData = data.filter(file => file.name !== '.emptyFolderPlaceholder');
+    filesDiv.innerHTML = ''
+    if (!filteredData.length) filesDiv.innerHTML = '<div style="grid-column: 1/-1; text-align:center; padding:40px; color:#6b7280;">Aucune facture trouvée.</div>'
+    
+    filteredData.forEach(file => {
+        const item = document.createElement('div'); item.className = 'file-item';
+        item.innerHTML = `<div class="file-icon"></div><div class="file-name">${file.name}</div>`;
+        item.onclick = async () => {
+            const { data, error } = await supabase.storage.from('factures').download(file.name)
+            if(error){ alert(error.message); return; }
+            const url = URL.createObjectURL(data);
+            openPreview(url, file.name);
+        }
+        filesDiv.appendChild(item)
+    })
+}
+
+window.uploadFacture = async () => {
+    const fileInput = document.getElementById('factureFile');
+    const file = fileInput.files[0]; if(!file) return;
+
+    // Nettoyage du nom de fichier : on enlève les accents et on remplace les caractères spéciaux par "_"
+    const safeName = file.name.normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[^a-z0-9.]/gi, '_').replace(/_{2,}/g, '_');
+    const path = safeName; 
+
+    const { error } = await supabase.storage.from('factures').upload(path, file);
+    if(error) alert(error.message); else await loadFiles();
+    fileInput.value = '';
+}
+
+document.getElementById('downloadBtn').onclick = () => {
+    if(!currentFileUrl) return;
+    const a = document.createElement('a');
+    a.href = currentFileUrl;
+    a.download = currentFileName;
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+}
+
+window.toggleSidebar = toggleSidebar; 
+window.toggleSubNav = toggleSubNav; 
+window.closePreview = closePreview;
+loadFiles();
+</script>
+</body>
+</html>
