@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Notre outil d’analyse</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+    font-family:Inter,Arial,sans-serif;
+    background:#fff;
+    color:#111827;
+    line-height:1.6;
+}
+.container{
+    max-width:1100px;
+    margin:auto;
+    padding:70px 25px;
+}
+.hero{
+    text-align:center;
+    margin-bottom:70px;
+}
+.hero h1{
+    font-size:clamp(32px,5vw,58px);
+    margin-bottom:18px;
+    letter-spacing:-1.5px;
+}
+.hero p{
+    max-width:750px;
+    margin:auto;
+    color:#667085;
+    font-size:18px;
+}
+.grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:25px;
+}
+.card{
+    border:1px solid #e5e7eb;
+    border-radius:22px;
+    padding:30px;
+    background:#fff;
+    transition:.25s;
+    opacity:0;
+    transform:translateY(20px);
+}
+.card.show{
+    opacity:1;
+    transform:translateY(0);
+}
+.card:hover{
+    transform:translateY(-5px);
+    box-shadow:0 18px 40px rgba(0,0,0,.08);
+}
+.icon{
+    width:48px;
+    height:48px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border-radius:14px;
+    background:#f3f4f6;
+    margin-bottom:20px;
+    font-size:20px;
+}
+h2{
+    font-size:22px;
+    margin-bottom:12px;
+}
+ul{
+    list-style:none;
+    color:#4b5563;
+}
+li{
+    margin:8px 0;
+}
+li:before{
+    content:"✓";
+    margin-right:10px;
+    color:#111827;
+    font-weight:bold;
+}
+.example{
+    margin-top:60px;
+    background:#fff;
+    color:#111827;
+    padding:35px;
+    border-radius:25px;
+}
+.example h2{
+    color:#111827;
+}
+footer{
+    text-align:center;
+    color:#6b7280;
+    margin-top:60px;
+}
+@media(max-width:800px){
+    .grid{grid-template-columns:1fr}
+    .container{padding:45px 18px}
+    .hero-subtext,
+    .example{
+        display:none;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<section class="hero">
+<h1>Notre outil d’analyse</h1>
+<p>
+Comprenez vos visiteurs. Optimisez votre site. Développez votre activité.
+</p>
+<p class="hero-subtext">
+Grâce à nos outils d'analyse, nous suivons le comportement de vos visiteurs afin d'identifier ce qui fonctionne, ce qui freine vos prospects et les améliorations à apporter pour augmenter vos demandes de contact et vos ventes.
+</p>
+</section>
+
+
+<div class="grid">
+
+<div class="card">
+<div class="icon"><i class="fa-solid fa-chart-line"></i></div>
+<h2>Statistiques de fréquentation</h2>
+<ul>
+<li>Nombre de visiteurs</li>
+<li>Temps passé sur le site</li>
+<li>Pages les plus consultées</li>
+<li>Parcours de navigation</li>
+<li>Taux d'engagement</li>
+</ul>
+</div>
+
+
+<div class="card">
+<div class="icon"><i class="fa-solid fa-globe"></i></div>
+<h2>Provenance des visiteurs</h2>
+<ul>
+<li>Google (SEO)</li>
+<li>Réseaux sociaux</li>
+<li>Publicités</li>
+<li>Sites partenaires</li>
+</ul>
+<p style="margin-top:15px;color:#667085">
+Identifiez les canaux qui apportent réellement vos prospects.
+</p>
+</div>
+
+
+<div class="card">
+<div class="icon"><i class="fa-solid fa-eye"></i></div>
+<h2>Analyse du comportement</h2>
+<ul>
+<li>Pages consultées</li>
+<li>Clics effectués</li>
+<li>Zones d'intérêt</li>
+<li>Abandons de navigation</li>
+<li>Points de blocage</li>
+</ul>
+</div>
+
+
+<div class="card">
+<div class="icon"><i class="fa-solid fa-fire"></i></div>
+<h2>Cartes de chaleur</h2>
+<ul>
+<li>Éléments les plus consultés</li>
+<li>Boutons les plus utilisés</li>
+<li>Zones ignorées</li>
+<li>Profondeur de défilement</li>
+</ul>
+</div>
+
+
+<div class="card">
+<div class="icon"><i class="fa-solid fa-brain"></i></div>
+<h2>Analyse des intentions</h2>
+<p>
+Le parcours des visiteurs permet d'identifier les services qui génèrent le plus d'intérêt et d'optimiser le site pour faciliter le passage à l'action.
+</p>
+
+</div>
+
+
+<div class="card">
+<div class="icon"><i class="fa-solid fa-triangle-exclamation"></i></div>
+<h2>Détection des points de friction</h2>
+<ul>
+<li>Pages qui font quitter les visiteurs</li>
+<li>Formulaires abandonnés</li>
+<li>Éléments générant de la frustration</li>
+</ul>
+</div>
+
+</div>
+
+
+<section class="card example">
+<h2>Exemple d’analyse</h2>
+<p>
+Un visiteur consulte plusieurs fois votre page "Prestations", passe plusieurs minutes sur vos tarifs puis ouvre votre formulaire de contact. Ces données permettent d'améliorer votre site afin d'augmenter vos conversions.
+</p>
+</section>
+
+
+<footer>
+Analyse, suivi et optimisation continue de votre site internet.
+</footer>
+
+</div>
+
+
+<script>
+const cards=document.querySelectorAll(".card");
+
+const observer=new IntersectionObserver(entries=>{
+entries.forEach(e=>{
+if(e.isIntersecting){
+e.target.classList.add("show");
+}
+});
+},{threshold:.15});
+
+cards.forEach(c=>observer.observe(c));
+</script>
+
+</body>
+</html>
