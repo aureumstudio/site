@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Notre outil d’analyse</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+    font-family:Inter,Arial,sans-serif;
+    background:#fff;
+    color:#111827;
+    line-height:1.6;
+}
+.container{
+    max-width:1100px;
+    margin:auto;
+    padding:70px 25px;
+}
+.hero{
+    text-align:center;
+    margin-bottom:70px;
+}
+.hero-image{
+    max-width:620px;
+    width:100%;
+    border-radius:20px;
+    margin-top:24px;
+    margin-bottom:24px;
+    box-shadow:0 16px 35px rgba(0,0,0,.08);
+}
+.hero h1{
+    font-size:clamp(32px,5vw,58px);
+    margin-bottom:18px;
+    letter-spacing:-1.5px;
+}
+.hero p{
+    max-width:750px;
+    margin:auto;
+    color:#667085;
+    font-size:18px;
+}
+.grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:25px;
+}
+.card{
+    border:1px solid #e5e7eb;
+    border-radius:22px;
+    padding:30px;
+    background:#fff;
+    transition:.25s;
+    opacity:0;
+    transform:translateY(20px);
+}
+.card.show{
+    opacity:1;
+    transform:translateY(0);
+}
+.card:hover{
+    transform:translateY(-5px);
+    box-shadow:0 18px 40px rgba(0,0,0,.08);
+}
+.icon{
+    width:48px;
+    height:48px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border-radius:14px;
+    background:#f3f4f6;
+    margin-bottom:20px;
+    font-size:20px;
+}
+h2{
+    font-size:22px;
+    margin-bottom:12px;
+}
+ul{
+    list-style:none;
+    color:#4b5563;
+}
+li{
+    margin:8px 0;
+}
+li:before{
+    content:"✓";
+    margin-right:10px;
+    color:#111827;
+    font-weight:bold;
+}
+.example{
+    margin-top:60px;
+    background:#fff;
+    color:#111827;
+    padding:35px;
+    border-radius:25px;
+}
+.example h2{
+    color:#111827;
+}
+footer{
+    text-align:center;
+    color:#6b7280;
+    margin-top:60px;
+}
+@media(max-width:800px){
+    .grid{grid-template-columns:1fr}
+    .container{padding:45px 18px}
+    .hero-subtext,
+    .example{
+        display:none;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<section class="hero">
+<h1>Référencement : faire apparaître votre activité sur Google</h1>
+<p>
+Nous vous accompagnons pour rendre votre site plus visible, attirer des prospects qualifiés et transformer votre présence en ligne en véritable levier de développement.
+</p>
+<p class="hero-subtext">
+Le référencement consiste à aider Google à comprendre votre site et à le proposer aux bonnes personnes lorsqu’elles recherchent vos services. L’objectif est simple : être trouvé au bon moment par les bonnes personnes.
+</p>
+<img src="https://i.ibb.co/CL03xN9/test.png" alt="Illustration SEO" class="hero-image">
+</section>
+
+<div class="grid">
+
+<div class="card">
+<div class="icon"><i class="fa-solid fa-screwdriver-wrench"></i></div>
+<h2>Audit technique du site</h2>
+<ul>
+<li>Analyse de la structure du site</li>
+<li>Amélioration de la vitesse de chargement</li>
+<li>Correction des éléments bloquants</li>
+</ul>
+</div>
+
+<div class="card">
+<div class="icon"><i class="fa-solid fa-magnifying-glass"></i></div>
+<h2>Mots-clés et intentions de recherche</h2>
+<ul>
+<li>Identification des requêtes utiles</li>
+<li>Analyse des besoins des clients</li>
+<li>Meilleure compréhension de votre clientèle</li>
+</ul>
+</div>
+
+<div class="card">
+<div class="icon"><i class="fa-solid fa-file-lines"></i></div>
+<h2>Contenu optimisé</h2>
+<ul>
+<li>Structuration des pages de services</li>
+<li>Balises titres et descriptions adaptées</li>
+<li>Amélioration de la qualité du contenu</li>
+</ul>
+</div>
+
+<div class="card">
+<div class="icon"><i class="fa-solid fa-location-dot"></i></div>
+<h2>Visibilité locale et Google</h2>
+<ul>
+<li>Optimisation de votre présence locale</li>
+<li>Ajout d’éléments utiles pour les recherches locales</li>
+<li>Renforcement de votre crédibilité</li>
+</ul>
+</div>
+
+<div class="card">
+<div class="icon"><i class="fa-solid fa-shield-halved"></i></div>
+<h2>Confiance et notoriété</h2>
+<p>
+Nous travaillons aussi sur la qualité de votre image en ligne, avec des actions qui aident Google à mieux comprendre votre activité et à vous considérer comme un acteur sérieux dans votre domaine.
+</p>
+</div>
+
+<div class="card">
+<div class="icon"><i class="fa-solid fa-chart-line"></i></div>
+<h2>Suivi et progression</h2>
+<ul>
+<li>Suivi du trafic qualifié</li>
+<li>Évaluation des résultats obtenus</li>
+<li>Priorisation des actions à poursuivre</li>
+</ul>
+</div>
+
+</div>
+
+<section class="card example">
+<h2>Exemple concret</h2>
+<p>
+Si une personne cherche un service proche de chez elle, notre travail consiste à aider votre site à apparaître plus souvent dans les résultats, à le rendre plus clair et à montrer que vous êtes le bon choix pour répondre à sa demande.
+</p>
+</section>
+
+<footer>
+Un référencement clair, progressif et pensé pour vous aider à gagner en visibilité et en clients.
+</footer>
+
+</div>
+
+
+<script>
+const cards=document.querySelectorAll(".card");
+
+const observer=new IntersectionObserver(entries=>{
+entries.forEach(e=>{
+if(e.isIntersecting){
+e.target.classList.add("show");
+}
+});
+},{threshold:.15});
+
+cards.forEach(c=>observer.observe(c));
+</script>
+
+</body>
+</html>
